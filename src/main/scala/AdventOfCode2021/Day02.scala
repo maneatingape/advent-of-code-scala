@@ -1,8 +1,6 @@
 package AdventOfCode2021
 
 object Day02 {
-  val sample = Seq("forward 5", "down 5", "forward 8", "up 3", "down 8", "forward 2")
-
   val data = io.Source.fromResource("AdventOfCode2021/Day02.txt").getLines.toSeq
 
   case class Command(prefix: String) {
@@ -38,8 +36,6 @@ object Day02 {
   }
 
   def main(args: Array[String]) = {
-    println(part1(sample))
-    println(part2(sample))
     println(part1(data))
     println(part2(data))
   }

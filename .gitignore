@@ -1,10 +1,9 @@
 # IntelliJ
-.bsp
+.bsp/
 .idea/
 
 # macOS
 .DS_Store
 
 # SBT
-project/
 target/
