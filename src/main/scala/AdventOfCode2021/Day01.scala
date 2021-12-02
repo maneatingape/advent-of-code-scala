@@ -1,9 +1,9 @@
 package AdventOfCode2021
 
-object Day1 {
+object Day01 {
   val sample = Seq(199, 200, 208, 210, 200, 207, 240, 269, 260, 263)
 
-  val data = io.Source.fromResource("AdventOfCode2021/Day1.txt").getLines.map(_.toInt).toSeq
+  val data = io.Source.fromResource("AdventOfCode2021/Day01.txt").getLines.map(_.toInt).toSeq
 
   def part1(input: Seq[Int]) = input.sliding(2).count { case Seq(x, y) => y > x }
 
