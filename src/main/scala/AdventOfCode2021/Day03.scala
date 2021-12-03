@@ -11,7 +11,7 @@ object Day03:
       }
     gammaRate * epsilonRate
 
-  def part2(input: Seq[String]): Int =
+  def part2(input: Seq[String])(using ordering: Ordering[Int]): Int =
     def findRating(seq: Seq[String], index: Int, predicate: (Int, Int) => Boolean): Int =
       if seq.length == 1 then
         Integer.parseInt(seq.head, 2)
@@ -21,8 +21,8 @@ object Day03:
         val digit = if predicate(count, threshold) then '1' else '0'
         findRating(seq.filter(_.charAt(index) == digit), index + 1, predicate)
 
-    val generatorRating = findRating(input, 0, Ordering[Int].gteq)
-    val scrubberRating = findRating(input, 0, Ordering[Int].lt)
+    val generatorRating = findRating(input, 0, ordering.gteq)
+    val scrubberRating = findRating(input, 0, ordering.lt)
     generatorRating * scrubberRating
   end part2
 
