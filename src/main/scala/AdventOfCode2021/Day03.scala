@@ -12,18 +12,17 @@ object Day03:
     gammaRate * epsilonRate
 
   def part2(input: Seq[String]): Int =
-    def findRating(predicate: (Int, Int) => Boolean) =
-      (0 until input.head.length).foldLeft(input) { (seq, index) =>
+    def findRating(seq: Seq[String], index: Int, predicate: (Int, Int) => Boolean): Int =
+      if seq.length == 1 then
+        Integer.parseInt(seq.head, 2)
+      else
         val count = seq.count(_.charAt(index) == '1')
         val threshold = (seq.length + 1) / 2
         val digit = if (predicate(count, threshold)) '1' else '0'
-        if (seq.length > 1) seq.filter(_.charAt(index) == digit) else seq
-      }
+        findRating(seq.filter(_.charAt(index) == digit), index + 1, predicate)
 
-    def parseRating(predicate: (Int, Int) => Boolean) = java.lang.Integer.parseInt(findRating(predicate).head, 2)
-
-    val generatorRating = parseRating(Ordering[Int].gteq)
-    val scrubberRating = parseRating(Ordering[Int].lt)
+    val generatorRating = findRating(input, 0, Ordering[Int].gteq)
+    val scrubberRating = findRating(input, 0, Ordering[Int].lt)
     generatorRating * scrubberRating
   end part2
 
