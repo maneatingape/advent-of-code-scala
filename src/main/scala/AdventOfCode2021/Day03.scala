@@ -3,7 +3,6 @@ package AdventOfCode2021
 object Day03:
   def part1(input: Seq[String]): Int =
     val (_, gammaRate, epsilonRate) = input
-      .map(_.toSeq)
       .transpose
       .map(seq => seq.count(_ == '1') > seq.length / 2)
       .foldRight((1, 0, 0)) { case (isGamma, (power, gamma, epsilon)) =>
