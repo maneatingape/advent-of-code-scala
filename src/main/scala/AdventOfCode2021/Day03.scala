@@ -7,7 +7,7 @@ object Day03:
       .transpose
       .map(seq => seq.count(_ == '1') > seq.length / 2)
       .foldRight((1, 0, 0)) { case (isGamma, (power, gamma, epsilon)) =>
-        if (isGamma) (power * 2, gamma + power, epsilon) else (power * 2, gamma, epsilon + power)
+        if isGamma then (power * 2, gamma + power, epsilon) else (power * 2, gamma, epsilon + power)
       }
     gammaRate * epsilonRate
 
@@ -18,7 +18,7 @@ object Day03:
       else
         val count = seq.count(_.charAt(index) == '1')
         val threshold = (seq.length + 1) / 2
-        val digit = if (predicate(count, threshold)) '1' else '0'
+        val digit = if predicate(count, threshold) then '1' else '0'
         findRating(seq.filter(_.charAt(index) == digit), index + 1, predicate)
 
     val generatorRating = findRating(input, 0, Ordering[Int].gteq)
