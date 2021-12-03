@@ -2,14 +2,14 @@ package AdventOfCode2021
 
 object Day03:
   def part1(input: Seq[String]): Int =
-    val (_, gamma_rate, epsilon_rate) = input
+    val (_, gammaRate, epsilonRate) = input
       .map(_.toSeq)
       .transpose
-      .map(s => s.count(_ == '1') > s.length / 2)
-      .foldRight((1, 0, 0)) { case (isGamma, (power, gamma_rate, epsilon_rate)) =>
-        if (isGamma) (power * 2, gamma_rate + power, epsilon_rate) else (power * 2, gamma_rate, epsilon_rate + power)
+      .map(seq => seq.count(_ == '1') > seq.length / 2)
+      .foldRight((1, 0, 0)) { case (isGamma, (power, gamma, epsilon)) =>
+        if (isGamma) (power * 2, gamma + power, epsilon) else (power * 2, gamma, epsilon + power)
       }
-    gamma_rate * epsilon_rate
+    gammaRate * epsilonRate
 
   def part2(input: Seq[String]): Int =
     def findRating(predicate: (Int, Int) => Boolean) =
