@@ -1,18 +1,18 @@
 package AdventOfCode2021
 
 object Day04:
-  case class Win(score: Int, turn: Int)
+  val indices =
+    val rows = Seq.tabulate(5, 5)((row, column) => 5 * row + column)
+    val columns = Seq.tabulate(5, 5)((row, column) => row + 5 * column)
+    rows ++ columns
 
-  object Board:
-    val indices =
-      val rows = Seq.tabulate(5, 5)((row, column) => 5 * row + column)
-      val columns = Seq.tabulate(5, 5)((row, column) => row + 5 * column)
-      rows ++ columns
+  case class Win(score: Int, turn: Int)
 
   case class Board(numbers: Seq[Int], score: Option[Win]):
     def mark(number: Int, turn: Int): Board =
       val nextNumbers = numbers.map(n => if n == number then 0 else n)
-      val nextScore = Option.when(Board.indices.exists(_.forall(i => nextNumbers(i) == 0)))(Win(nextNumbers.sum * number, turn))
+      val isWin = indices.exists(_.forall(i => nextNumbers(i) == 0))
+      val nextScore = Option.when(isWin)(Win(nextNumbers.sum * number, turn))
       Board(nextNumbers, score.orElse(nextScore))
 
   def play(input: Seq[String]): Seq[Win] =
