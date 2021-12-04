@@ -7,11 +7,12 @@ object Day04:
       val columns = Seq.tabulate(5, 5)((row, column) => row + 5 * column)
       rows ++ columns
 
-  class Board(val numbers: Seq[Int]):
-    val marked: Array[Boolean] = Array.fill(25)(false)
-    var score = Option.empty[Int]
+    def apply(numbers: Seq[Int]) = new Board(numbers, Array.fill(25)(false), None)
 
-    def mark(number: Int): Unit =
+  case class Board(numbers: Seq[Int], marked: Array[Boolean], score: Option[Int]):
+    def mark(number: Int): Board =
+      var updatedScore = score
+
       if score.isEmpty then
         val index = numbers.indexOf(number)
         if index >= 0 then
@@ -19,34 +20,31 @@ object Day04:
           val win = Board.indices.exists(_.forall(i => marked(i)))
           if win then
             val unmarkedSum = numbers.zipWithIndex.map((n,i) => if marked(i) then 0 else n).sum
-            score = Some(unmarkedSum * number)
+            updatedScore = Some(unmarkedSum * number)
+      Board(numbers, marked, updatedScore)
+    end mark
 
   def parseNumbersAndBoards(input: Seq[String]): (Seq[Int], Seq[Board]) =
-    val numbers = input.head.split(",").map(_.trim.toInt).toSeq
+    val numbers = input.head.split(",").map(_.toInt).toSeq
     val boards = input.tail.grouped(6).toSeq.map { xs =>
-      new Board(xs.mkString(" ").split(" ").filter(!_.isEmpty).map(_.toInt).toSeq)
+      Board(xs.mkString(" ").split(" ").filter(!_.isEmpty).map(_.toInt).toSeq)
     }
     (numbers, boards)
 
   def part1(input: Seq[String]): Int =
-    def firstWinner(numbers: Seq[Int], boards: Seq[Board]): Int =
-      boards.foreach(_.mark(numbers.head))
-      boards
-        .find(_.score.isDefined)
-        .flatMap(_.score)
-        .getOrElse(firstWinner(numbers.tail, boards))
+    def firstWinner(numbers: Seq[Int], boards: Seq[Board]): Int = boards
+      .map(_.mark(numbers.head))
+      .find(_.score.isDefined)
+      .flatMap(_.score)
+      .getOrElse(firstWinner(numbers.tail, boards))
 
     val (numbers, boards) = parseNumbersAndBoards(input)
     firstWinner(numbers, boards)
 
   def part2(input: Seq[String]): Int =
     def lastWinner(numbers: Seq[Int], boards: Seq[Board]): Int = boards match
-      case Seq(head) =>
-        numbers.foreach(head.mark)
-        head.score.get
-      case _ =>
-        boards.foreach(_.mark(numbers.head))
-        lastWinner(numbers.tail, boards.filter(_.score.isEmpty))
+      case Seq(head) => numbers.foldLeft(head)((board, number) => board.mark(number)).score.get
+      case _ => lastWinner(numbers.tail, boards.map(_.mark(numbers.head)).filter(_.score.isEmpty))
 
     val (numbers, boards) = parseNumbersAndBoards(input)
     lastWinner(numbers, boards)
