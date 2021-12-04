@@ -9,27 +9,16 @@ object Day04:
       val columns = Seq.tabulate(5, 5)((row, column) => row + 5 * column)
       rows ++ columns
 
-    def apply(numbers: Seq[Int]) = new Board(numbers, Array.fill(25)(false), None)
-
-  case class Board(numbers: Seq[Int], marked: Array[Boolean], score: Option[Win]):
+  case class Board(numbers: Seq[Int], score: Option[Win]):
     def mark(number: Int, turn: Int): Board =
-      var score = this.score
-
-      if score.isEmpty then
-        val index = numbers.indexOf(number)
-        if index >= 0 then
-          marked(index) = true
-          if Board.indices.exists(_.forall(i => marked(i))) then
-            val unmarkedSum = numbers.zipWithIndex.map((n,i) => if marked(i) then 0 else n).sum
-            score = Some(Win(unmarkedSum * number, turn))
-
-      Board(numbers, marked, score)
-    end mark
+      val nextNumbers = numbers.map(n => if n == number then 0 else n)
+      val nextScore = Option.when(Board.indices.exists(_.forall(i => nextNumbers(i) == 0)))(Win(nextNumbers.sum * number, turn))
+      Board(nextNumbers, score.orElse(nextScore))
 
   def play(input: Seq[String]): Seq[Win] =
     val numbers = input.head.split(",").map(_.toInt).toSeq
     val boards = input.tail.grouped(6).toSeq.map { xs =>
-      Board(xs.mkString(" ").split(" ").filter(!_.isEmpty).map(_.toInt).toSeq)
+      Board(xs.mkString(" ").split(" ").filter(!_.isEmpty).map(_.toInt).toSeq, None)
     }
     numbers
       .zipWithIndex
