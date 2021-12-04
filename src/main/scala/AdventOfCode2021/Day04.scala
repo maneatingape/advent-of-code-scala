@@ -11,17 +11,16 @@ object Day04:
 
   case class Board(numbers: Seq[Int], marked: Array[Boolean], score: Option[Int]):
     def mark(number: Int): Board =
-      var updatedScore = score
+      var score = this.score
 
       if score.isEmpty then
         val index = numbers.indexOf(number)
         if index >= 0 then
           marked(index) = true
-          val win = Board.indices.exists(_.forall(i => marked(i)))
-          if win then
+          if Board.indices.exists(_.forall(i => marked(i))) then
             val unmarkedSum = numbers.zipWithIndex.map((n,i) => if marked(i) then 0 else n).sum
-            updatedScore = Some(unmarkedSum * number)
-      Board(numbers, marked, updatedScore)
+            score = Some(unmarkedSum * number)
+      Board(numbers, marked, score)
     end mark
 
   def parseNumbersAndBoards(input: Seq[String]): (Seq[Int], Seq[Board]) =
