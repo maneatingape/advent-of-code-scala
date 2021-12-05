@@ -2,14 +2,12 @@ package AdventOfCode2021
 
 object Day05:
   case class Line(x1: Int, y1: Int, x2: Int, y2: Int):
-    def compare(a: Int, b: Int): Int = if a == b then 0 else if a < b then 1 else -1
-
     def isOrthogonal: Boolean = x1 == x2 || y1 == y2
 
     def points: Seq[(Int, Int)] =
-      val stepX = compare(x1, x2)
-      val stepY = compare(y1, y2)
-      val length = Math.max(Math.abs(x1 - x2), Math.abs(y1 - y2))
+      val stepX = (x2 - x1).sign
+      val stepY = (y2 - y1).sign
+      val length = (x1 - x2).abs.max((y1 - y2).abs)
       (0 to length).map(i => (x1 + stepX * i, y1 + stepY * i))
 
   def parseLines(input: Seq[String]): Seq[Line] = input
