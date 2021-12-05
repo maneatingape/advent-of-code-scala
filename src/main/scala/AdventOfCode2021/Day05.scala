@@ -2,9 +2,9 @@ package AdventOfCode2021
 
 object Day05:
   case class Line(x1: Int, y1: Int, x2: Int, y2: Int):
-    def compare(a: Int, b: Int) = if a == b then 0 else if a < b then 1 else -1
+    def compare(a: Int, b: Int): Int = if a == b then 0 else if a < b then 1 else -1
 
-    def isOrthogonal = x1 == x2 || y1 == y2
+    def isOrthogonal: Boolean = x1 == x2 || y1 == y2
 
     def points: Seq[(Int, Int)] =
       val stepX = compare(x1, x2)
