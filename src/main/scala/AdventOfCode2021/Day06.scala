@@ -1,10 +1,11 @@
 package AdventOfCode2021
 
 object Day06:
-  def simulate(input: Seq[Int], days: Int): Long = (1 to days)
-    .foldLeft(input.groupMapReduce(identity)(_ => 1L)(_ + _)) { (previous, _) =>
-      val next = previous.map((k, v) => (k - 1, v)).withDefaultValue(0L)
-      next ++ Map(8 -> next(-1), 6 -> (next(6) + next(-1))) - (-1)
+  def simulate(input: Seq[Int], days: Int): Long =
+    val school = input.groupMapReduce(identity)(_ => 1L)(_ + _)
+    (1 to days).foldLeft(school) { (current, _) =>
+      val fish = current.map((timer, count) => (timer - 1, count)).withDefaultValue(0L)
+      fish.removed(-1).updated(6, fish(-1) + fish(6)).updated(8, fish(-1))
     }
     .values.sum
 
