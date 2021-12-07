@@ -14,6 +14,6 @@ object Day06:
   def part2(input: Seq[Int]): Long = simulate(input, 256)
 
   def main(args: Array[String]): Unit =
-    val data = io.Source.fromResource("AdventOfCode2021/Day06.txt").getLines().flatMap(_.split(",")).map(_.toInt).toSeq
+    val data = io.Source.fromResource("AdventOfCode2021/Day06.txt").mkString.trim.split(",").map(_.toInt).toSeq
     println(part1(data))
     println(part2(data))

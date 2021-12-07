@@ -12,6 +12,6 @@ object Day07:
   def part2(input: Seq[Int]): Int = lowestCost(input, increasingCost)
 
   def main(args: Array[String]): Unit =
-    val data = io.Source.fromResource("AdventOfCode2021/Day07.txt").getLines().flatMap(_.split(",")).map(_.toInt).toSeq
+    val data = io.Source.fromResource("AdventOfCode2021/Day07.txt").mkString.trim.split(",").map(_.toInt).toSeq
     println(part1(data))
     println(part2(data))
