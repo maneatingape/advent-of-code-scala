@@ -24,16 +24,16 @@ object Day08:
     val occurrences = entry.patterns.flatten.groupMapReduce(identity)(_ => 1)(_ + _)
     def fromOccurrences(x: Int) = segments.filter(occurrences(_) == x).toSet
 
-    val setCF = fromLength(2)
+    val setCF = fromLength(2) // Digit 1 has pattern length two and uses segments c and f
     val setBCDF = fromLength(4)
 
-    val setE = fromOccurrences(4)
+    val setE = fromOccurrences(4) // Whichever letter is mapped to e will occur 4 times
     val setB = fromOccurrences(6)
-    val setDG = fromOccurrences(7)
+    val setDG = fromOccurrences(7) // Both letters mapped to d and g occur 7 times each
     val setAC = fromOccurrences(8)
     val setF = fromOccurrences(9)
 
-    val setC = setCF.diff(setF)
+    val setC = setCF.diff(setF) // Set difference eliminates the unknowns
     val setA = setAC.diff(setC)
     val setG = setDG.diff(setBCDF)
     val setD = setDG.diff(setG)
