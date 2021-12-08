@@ -1,90 +1,55 @@
 package AdventOfCode2021
 
 object Day08:
-  val sample = Seq(
-    //"acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab | cdfeb fcadb cdfeb cdbaf")
+  case class Entry(patterns: Seq[String], digits: Seq[String])
 
-    "be cfbegad cbdgef fgaecd cgeb fdcge agebfd fecdb fabcd edb | fdgacbe cefdb cefbgd gcbe",
-    "edbfga begcd cbg gc gcadebf fbgde acbgfd abcde gfcbed gfec | fcgedb cgb dgebacf gc",
-    "fgaebd cg bdaec gdafb agbcfd gdcbef bgcad gfac gcb cdgabef | cg cg fdcagb cbg",
-    "fbegcd cbd adcefb dageb afcb bc aefdc ecdab fgdeca fcdbega | efabcd cedba gadfec cb",
-    "aecbfdg fbg gf bafeg dbefa fcge gcbea fcaegb dgceab fcbdga | gecf egdcabf bgf bfgea",
-    "fgeab ca afcebg bdacfeg cfaedg gcfdb baec bfadeg bafgc acf | gebdcfa ecba ca fadegcb",
-    "dbcfg fgd bdegcaf fgec aegbdf ecdfab fbedc dacgb gdcebf gf | cefg dcbef fcge gbcadfe",
-    "bdfegc cbegaf gecbf dfcage bdacg ed bedf ced adcbefg gebcd | ed bcgafe cdgba cbgef",
-    "egadfb cdbfeg cegd fecab cgb gbdefca cg fgcdab egfdb bfceg | gbdfcae bgc cg cgb",
-    "gcafb gcf dcaebfg ecagb gf abcdeg gaef cafbge fdbac fegbdc | fgae cfgab fg bagce")
+  // All possible segments
+  val segments = Seq('a', 'b', 'c', 'd', 'e', 'f', 'g')
+  // Map sorted non-scrambled segment pattern to digit
+  val segmentsToDigit = Map("abcefg" -> 0, "cf" -> 1, "acdeg" -> 2, "acdfg" -> 3, "bcdf" -> 4, "abdfg" -> 5, "abdefg" -> 6, "acf" -> 7, "abcdefg" -> 8, "abcdfg" -> 9)
 
-  def isKnownDigit(pattern: String) = pattern.length match
+  def parseEntry(entry: String): Entry =
+    val Array(patterns, digits) = entry.split(" \\| ")
+    Entry(patterns.split(" "), digits.split(" "))
+
+  def isKnownDigit(pattern: String): Boolean = pattern.length match
     case 2 | 3 | 4 | 7 => true
     case _ => false
 
-  def part1(input: Seq[String]): Int = input
-    .flatMap(_.split(" \\| ")(1).split(" ").toSeq)
-    .count(isKnownDigit)
+  def unscrambleEntry(entry: Entry): Int =
+    // One is the only pattern 2 characters long and Seven the only pattern 3 characters long
+    def fromKnownLength(x: Int) = entry.patterns.filter(_.length == x).flatten.toSet
+    val setCF = fromKnownLength(2)
+    val setACF = fromKnownLength(3)
 
-  def part2(input: Seq[String]): Int = {
-    val foo = input.map(_.split(" \\| ").toSeq.map(_.split(" ").map(_.sorted).toSeq))
-    foo.map(line => helper(line)).sum
-  }
+    // Considering only the digits 0, 2, 3, 5, 6 and 9 then segments a and g occur 6 times, segments d and f 5 times,
+    // segments b and c 4 times and segment e 3 times.
+    val unknownPatterns = entry.patterns.filterNot(isKnownDigit)
+    val unknownOccurrences = unknownPatterns.flatten.groupMapReduce(identity)(_ => 1)(_ + _)
+    def fromUnknownOccurrences(x: Int) = segments.filter(unknownOccurrences(_) == x).toSet
 
-  def helper(foo: Seq[Seq[String]]): Int = {
-    val full = foo(0)
+    val setE = fromUnknownOccurrences(3)
+    val setBC = fromUnknownOccurrences(4)
+    val setAG = fromUnknownOccurrences(6)
+    val setDF = fromUnknownOccurrences(5)
 
-    val routesCF = full.find(_.length == 2).get.toSet // One
-    val routesACF = full.find(_.length == 3).get.toSet // Seven
-    val routesBCDF = full.find(_.length == 4).get.toSet // Four
-    val routeA = routesACF.diff(routesCF)
+    val setA = setACF.diff(setCF)
+    val setB = setBC.diff(setCF)
+    val setC = setBC.diff(setB)
+    val setD = setDF.diff(setCF)
+    val setF = setDF.diff(setD)
+    val setG = setAG.diff(setA)
 
-    val short = full.filterNot(isKnownDigit)
-    val segments = List('a', 'b', 'c', 'd', 'e', 'f', 'g')
+    val unscramble = Seq(setA, setB, setC, setD, setE, setF, setG).zip(segments).map((k, v) => (k.head, v)).toMap
 
-    val routesAG = segments.filter(c => short.flatMap(identity).count(_ == c) == 6).toSet
-    val routeG = routesAG.diff(routeA)
-    val routesBC = segments.filter(c => short.flatMap(identity).count(_ == c) == 4).toSet
-    val routeC = routesACF.intersect(routesBC)
-    val routeB = routesBC.diff(routeC)
-    val routesBD = routesBCDF.diff(routesACF)
-    val routeD = routesBD.diff(routeB)
-    val routeE = segments.filter(c => short.flatMap(identity).count(_ == c) == 3).toSet
-    val routeF = routesCF.diff(routeC)
+    entry.digits.map(scrambled => segmentsToDigit(scrambled.map(unscramble).sorted)).mkString.toInt
+  end unscrambleEntry
 
+  def part1(input: Seq[String]): Int = input.map(parseEntry).map(_.digits.count(isKnownDigit)).sum
 
-    val first = Map(
-      routeA.head -> 'a',
-      routeB.head -> 'b',
-      routeC.head -> 'c',
-      routeD.head -> 'd',
-      routeE.head -> 'e',
-      routeF.head -> 'f',
-      routeG.head -> 'g')
-
-    val second = Map(
-      "abcefg" -> 0,
-      "cf" -> 1,
-      "acdeg" -> 2,
-      "acdfg" -> 3,
-      "bcdf" -> 4,
-      "abdfg" -> 5,
-      "abdefg" -> 6,
-      "acf" -> 7,
-      "abcdefg" -> 8,
-      "abcdfg" -> 9)
-
-
-    val bar = foo(1)
-    val wix = bar.map(x => second(x.map(first).sorted))
-    val (number, _) = wix.foldRight((0, 1)) { case (digit, (total, power)) =>
-      (total + digit * power, power * 10)
-    }
-
-    println(bar)
-    println(wix)
-    println(number)
-    number
-  }
+  def part2(input: Seq[String]): Int = input.map(parseEntry).map(unscrambleEntry).sum
 
   def main(args: Array[String]): Unit =
     val data = io.Source.fromResource("AdventOfCode2021/Day08.txt").getLines().toSeq
-    //println(part1(data))
+    println(part1(data))
     println(part2(data))
