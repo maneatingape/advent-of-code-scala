@@ -17,7 +17,7 @@ object Day09:
     def neighbours: Seq[Point] = directions.map((dx, dy) => Point(grid, x + dx, y + dy))
     def lowest: Boolean = neighbours.forall(neighbour => neighbour.outOfBounds || risk < neighbour.risk)
 
-  def parseGrid(input: Seq[String]): Grid = Grid(input.map(_.map(_ - '0')))
+  def parseGrid(input: Seq[String]): Grid = Grid(input.map(_.map(_.asDigit)))
 
   def basinSize(lowest: Point): Int =
     def visit(visited: Set[Point], point: Point): Set[Point] =
