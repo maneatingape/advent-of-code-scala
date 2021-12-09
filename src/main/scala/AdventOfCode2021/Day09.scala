@@ -9,20 +9,20 @@ object Day09:
     def riskAt(x: Int, y: Int): Int = 1 + grid(y)(x)
     def lowestPoints: Seq[Point] = (0 until width)
       .flatMap(x => (0 until height).map(y => Point(this, x, y)))
-      .filter(point => directions.forall(point.lower))
+      .filter(_.lowest)
 
   case class Point(grid: Grid, x: Int, y: Int):
     def risk: Int = grid.riskAt(x, y)
     def outOfBounds: Boolean = x < 0 || x >= grid.width || y < 0 || y >= grid.height
-    def neighbour(delta: (Int, Int)): Point = Point(grid, x + delta._1, y + delta._2)
-    def lower(delta: (Int, Int)): Boolean = neighbour(delta).outOfBounds || risk < neighbour(delta).risk
+    def neighbours: Seq[Point] = directions.map((dx, dy) => Point(grid, x + dx, y + dy))
+    def lowest: Boolean = neighbours.forall(neighbour => neighbour.outOfBounds || risk < neighbour.risk)
 
   def parseGrid(input: Seq[String]): Grid = Grid(input.map(_.map(_ - '0')))
 
   def basinSize(lowest: Point): Int =
     def visit(visited: Set[Point], point: Point): Set[Point] =
       if visited.contains(point) || point.outOfBounds || point.risk == 10 then visited
-      else directions.foldLeft(visited + point)((visited, direction) => visit(visited, point.neighbour(direction)))
+      else point.neighbours.foldLeft(visited + point)(visit)
     visit(Set(), lowest).size
 
   def part1(input: Seq[String]): Int = parseGrid(input).lowestPoints.map(_.risk).sum
