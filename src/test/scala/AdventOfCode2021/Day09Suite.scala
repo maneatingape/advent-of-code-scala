@@ -3,7 +3,7 @@ package AdventOfCode2021
 import org.scalatest.funsuite.AnyFunSuite
 
 class Day09Suite extends AnyFunSuite:
-  val sample = Array(
+  val sample = Seq(
     "2199943210",
     "3987894921",
     "9856789892",
