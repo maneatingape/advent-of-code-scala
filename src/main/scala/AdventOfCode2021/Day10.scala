@@ -16,13 +16,10 @@ object Day10:
   def part1(input: Seq[String]): Long = input.map(check).map(_._2).map(closing).sum
 
   def part2(input: Seq[String]): Long =
-    val results = input.map { line =>
-      val (stack, state) = check(line)
-      if state != 'x' then 0L
-      else stack.dropRight(1).foldLeft(0L)((total, next) => 5 * total + opening(next))
+    val results = input.map(check).collect { case (stack, 'x') =>
+      stack.dropRight(1).foldLeft(0L)((total, next) => 5 * total + opening(next))
     }
-    val sorted = results.filter(_ > 0).sorted
-    sorted(sorted.length / 2)
+    results.sorted.apply(results.length / 2)
 
   def main(args: Array[String]): Unit =
     val data = io.Source.fromResource("AdventOfCode2021/Day10.txt").getLines().toSeq
