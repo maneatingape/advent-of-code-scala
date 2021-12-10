@@ -2,22 +2,23 @@ package AdventOfCode2021
 
 object Day10:
   val opening = Map('(' -> 1, '[' -> 2, '{' -> 3, '<' -> 4)
-  val closing = Map('x' -> 0, ')' -> 3, ']' -> 57, '}' -> 1197, '>' -> 25137)
+  val closing = Map(')' -> 3, ']' -> 57, '}' -> 1197, '>' -> 25137)
   val matching = Map(')' -> '(', ']' -> '[', '}' -> '{', '>' -> '<')
 
-  def check(line: String): (List[Char], Char ) =
-    line.foldLeft((List('x'), 'x')) { case ((stack, state), next) =>
-      if state != 'x' then (stack, state)
-      else if opening.contains(next) then (next :: stack, state)
-      else if matching(next) == stack.head then (stack.tail, state)
-      else (stack, next)
-    }
+  type Checked = Either[Char, List[Char]]
 
-  def part1(input: Seq[String]): Long = input.map(check).map(_._2).map(closing).sum
+  def check(line: String): Checked = line.foldLeft[Checked](Right(Nil)) {
+    case (Right(stack), next) if opening.contains(next) => Right(next :: stack)
+    case (Right(head :: tail), next) if matching(next) == head => Right(tail)
+    case (Left(left), _) => Left(left)
+    case (_, next) => Left(next)
+  }
+
+  def part1(input: Seq[String]): Long = input.map(check).collect { case Left(left) => closing(left) }.sum
 
   def part2(input: Seq[String]): Long =
-    val results = input.map(check).collect { case (stack, 'x') =>
-      stack.dropRight(1).foldLeft(0L)((total, next) => 5 * total + opening(next))
+    val results = input.map(check).collect { case Right(stack) =>
+      stack.foldLeft(0L)((total, next) => 5 * total + opening(next))
     }
     results.sorted.apply(results.length / 2)
 
