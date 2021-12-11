@@ -3,31 +3,32 @@ package AdventOfCode2021
 object Day11:
   val directions = Seq((-1, -1), (0, -1), (1, -1), (-1, 0), (1, 0), (-1, 1), (0, 1), (1, 1))
 
-  case class Grid(width: Int, height: Int, energy: collection.mutable.Map[Point, Int]):
+  case class Grid(width: Int, height: Int, energy: Map[Point, Int]):
     def withinBounds(point: Point): Boolean = point.x >= 0 && point.x < width && point.y >= 0 && point.y < height
     def neighbours(point: Point): Seq[Point] = directions.map((dx, dy) => Point(point.x + dx, point.y + dy)).filter(withinBounds)
+    def updated(point: Point, value: Int) = copy(energy = energy + (point -> value))
 
   case class Point(x: Int, y: Int)
 
   def parseGrid(input: Seq[String]): Grid =
     val energy = input.map(_.map(_.asDigit))
-    val points = Seq.tabulate(energy.head.size, energy.size)((x, y) => Point(x, y) -> energy(y)(x)).flatten
-    Grid(energy.head.size, energy.size, collection.mutable.LinkedHashMap.from(points))
+    val points = Seq.tabulate(energy.head.size, energy.size)((x, y) => Point(x, y) -> energy(y)(x))
+    Grid(energy.head.size, energy.size, points.flatten.toMap)
 
-  def step(grid: Grid): Int =
-    def helper(todo: Seq[Point], flashed: Set[Point]): Set[Point] =
-      val (nextTodo, nextFlashed) = todo.foldLeft[(Seq[Point], Set[Point])]((Seq(), flashed)) { case ((todo, flashed), point) =>
-        if !flashed.contains(point) then grid.energy(point) += 1
-        if grid.energy(point) <= 9 then (todo, flashed)
+  def step(grid: Grid): (Grid, Int) =
+    def helper(grid: Grid, todo: Seq[Point] = grid.energy.keys.toSeq, flashed: Set[Point] = Set()): (Grid, Int) =
+      val (nextGrid, nextTodo, nextFlashed) = todo.foldLeft((grid, Seq.empty[Point], flashed)) { case ((grid, todo, flashed), point) =>
+        if flashed.contains(point) then
+          (grid, todo, flashed)
+        else if grid.energy(point) < 9 then
+          (grid.updated(point, grid.energy(point) + 1), todo, flashed)
         else
-          grid.energy(point) = 0
-          val nextFlashed = flashed + point
-          val nextTodo = (todo ++ grid.neighbours(point)).filterNot(flashed.contains)
-          (nextTodo, nextFlashed)
+          val nextTodo = todo ++ grid.neighbours(point).filterNot(flashed.contains)
+          (grid.updated(point, 0), nextTodo, flashed + point)
       }
-      if nextTodo.isEmpty then nextFlashed else helper(nextTodo, nextFlashed)
-
-    helper(grid.energy.keys.toSeq, Set()).size
+      if nextTodo.isEmpty then (nextGrid, nextFlashed.size) else helper(nextGrid, nextTodo, nextFlashed)
+    helper(grid, grid.energy.keys.toSeq, Set())
+  end step
 
   def printGrid(grid: Grid): Unit =
     for y <- 0 until grid.height do
@@ -38,11 +39,20 @@ object Day11:
 
   def part1(input: Seq[String]): Int =
     val grid = parseGrid(input)
-    (1 to 100).map(_ => step(grid)).sum
+    val (_, total) = (1 to 100).foldLeft((grid, 0)) { case ((grid, total), _) =>
+      val (nextGrid, flashes) = step(grid)
+      (nextGrid, total + flashes)
+    }
+    total
 
   def part2(input: Seq[String]): Int =
-    val grid = parseGrid(input)
-    1 + (1 to Int.MaxValue).indexWhere(_ => step(grid) == grid.width * grid.height)
+    var grid = parseGrid(input)
+    def countFlashes: Int = {
+      val (nextGrid, flashes) = step(grid)
+      grid = nextGrid
+      flashes
+    }
+    1 + Iterator.continually(countFlashes).indexWhere(_ == grid.width * grid.height)
 
   def main(args: Array[String]): Unit =
     val data = io.Source.fromResource("AdventOfCode2021/Day11.txt").getLines().toSeq
