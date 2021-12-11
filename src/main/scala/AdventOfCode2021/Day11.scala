@@ -11,23 +11,25 @@ object Day11:
     def incremented(point: Point): Grid = Grid(energy.updated(point, energy(point) + 1))
     def zeroed(point: Point): Grid = Grid(energy.updated(point, 0))
 
-  def parseGrid(input: Seq[String]): (Grid, Int) =
+  case class Step(grid: Grid, flashes: Int)
+
+  def parse(input: Seq[String]): Step =
     val energy = input.map(_.map(_.asDigit))
     val points = Seq.tabulate(energy.head.size, energy.size)((x, y) => Point(x, y) -> energy(y)(x))
-    (Grid(points.flatten.toMap), 0)
+    Step(Grid(points.flatten.toMap), 0)
 
-  def step(grid: Grid, unused: Int): (Grid, Int) =
-    def helper(grid: Grid, todo: Seq[Point], flashed: Set[Point]): (Grid, Int) = todo match
-      case Nil => (grid, flashed.size)
+  def step(current: Step): Step =
+    def helper(grid: Grid, todo: Seq[Point], flashed: Set[Point]): Step = todo match
+      case Nil => Step(grid, flashed.size)
       case (head :: tail) =>
         if flashed.contains(head) then helper(grid, tail, flashed)
         else if grid.energy(head) < 9 then helper(grid.incremented(head), tail, flashed)
         else helper(grid.zeroed(head), tail ++ grid.neighbours(head), flashed + head)
-    helper(grid, grid.energy.keys.toSeq, Set())
+    helper(current.grid, current.grid.energy.keys.toSeq, Set())
 
-  def part1(input: Seq[String]): Int = Iterator.iterate(parseGrid(input))(step).take(101).map(_._2).sum
+  def part1(input: Seq[String]): Int = Iterator.iterate(parse(input))(step).take(101).map(_.flashes).sum
 
-  def part2(input: Seq[String]): Int = Iterator.iterate(parseGrid(input))(step).indexWhere(_._2 == 100)
+  def part2(input: Seq[String]): Int = Iterator.iterate(parse(input))(step).indexWhere(_.flashes == 100)
 
   def main(args: Array[String]): Unit =
     val data = io.Source.fromResource("AdventOfCode2021/Day11.txt").getLines().toSeq
