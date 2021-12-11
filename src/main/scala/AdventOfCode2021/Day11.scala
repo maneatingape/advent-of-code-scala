@@ -11,16 +11,15 @@ object Day11:
     def incremented(point: Point): Grid = Grid(energy.updated(point, energy(point) + 1))
     def zeroed(point: Point): Grid = Grid(energy.updated(point, 0))
 
-  case class Step(grid: Grid, flashes: Int)
+  case class State(grid: Grid, flashes: Int)
 
-  def parse(input: Seq[String]): Step =
-    val energy = input.map(_.map(_.asDigit))
-    val points = Seq.tabulate(energy.head.size, energy.size)((x, y) => Point(x, y) -> energy(y)(x))
-    Step(Grid(points.flatten.toMap), 0)
+  def parse(input: Seq[String]): State =
+    val points = Seq.tabulate(input.head.size, input.size)((x, y) => Point(x, y) -> input(y)(x).asDigit)
+    State(Grid(points.flatten.toMap), 0)
 
-  def step(current: Step): Step =
-    def helper(grid: Grid, todo: Seq[Point], flashed: Set[Point]): Step = todo match
-      case Nil => Step(grid, flashed.size)
+  def step(current: State): State =
+    def helper(grid: Grid, todo: Seq[Point], flashed: Set[Point]): State = todo match
+      case Nil => State(grid, flashed.size)
       case (head :: tail) =>
         if flashed.contains(head) then helper(grid, tail, flashed)
         else if grid.energy(head) < 9 then helper(grid.incremented(head), tail, flashed)
