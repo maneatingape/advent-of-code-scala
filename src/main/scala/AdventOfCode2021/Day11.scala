@@ -20,29 +20,25 @@ object Day11:
     Grid(points.flatten.toMap)
 
   @tailrec
-  def step(currentGrid: Grid, currentTodo: Seq[Point], currentFlashed: Set[Point]): (Grid, Int) =
-    val initial = (currentGrid, Seq.empty[Point], currentFlashed)
-    val (grid, todo, flashed) = currentTodo.foldLeft(initial) { case ((grid, todo, flashed), point) =>
-      if flashed.contains(point) then (grid, todo, flashed)
-      else if grid.energy(point) < 9 then (grid.incremented(point), todo, flashed)
-      else (grid.zeroed(point), todo ++ grid.neighbours(point).filterNot(flashed.contains), flashed + point)
-    }
-    if todo.isEmpty then (grid, flashed.size) else step(grid, todo, flashed)
+  def step(grid: Grid, todo: Seq[Point], flashed: Set[Point]): (Grid, Int) = todo match
+    case Nil => (grid, flashed.size)
+    case (head :: tail) =>
+      if flashed.contains(head) then step(grid, tail, flashed)
+      else if grid.energy(head) < 9 then step(grid.incremented(head), tail, flashed)
+      else step(grid.zeroed(head), tail ++ grid.neighbours(head), flashed + head)
 
   def part1(input: Seq[String]): Int =
     @tailrec
-    def helper(grid: Grid, iteration: Int = 1, total: Int = 0): Int = {
+    def helper(grid: Grid, iteration: Int = 1, total: Int = 0): Int =
       val (nextGrid, flashes) = step(grid, grid.points, Set())
       if iteration > 100 then total else helper(nextGrid, iteration + 1, total + flashes)
-    }
     helper(parseGrid(input))
 
   def part2(input: Seq[String]): Int =
     @tailrec
-    def helper(grid: Grid, iteration: Int = 1): Int = {
+    def helper(grid: Grid, iteration: Int = 1): Int =
       val (nextGrid, flashes) = step(grid, grid.points, Set())
       if flashes == grid.energy.size then iteration else helper(nextGrid, iteration + 1)
-    }
     helper(parseGrid(input))
 
   def main(args: Array[String]): Unit =
