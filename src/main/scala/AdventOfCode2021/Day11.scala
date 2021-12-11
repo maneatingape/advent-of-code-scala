@@ -11,8 +11,8 @@ object Day11:
   case class Grid(energy: Map[Point, Int]):
     def points: Seq[Point] = energy.keys.toSeq
     def neighbours(point: Point): Seq[Point] = directions.map(point.updated).filter(energy.contains)
-    def incremented(point: Point) = copy(energy = energy + (point -> (energy(point) + 1)))
-    def zeroed(point: Point) = copy(energy = energy + (point -> 0))
+    def incremented(point: Point): Grid = copy(energy = energy + (point -> (energy(point) + 1)))
+    def zeroed(point: Point): Grid = copy(energy = energy + (point -> 0))
 
   def parseGrid(input: Seq[String]): Grid =
     val energy = input.map(_.map(_.asDigit))
