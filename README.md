@@ -19,3 +19,4 @@ Entries for the annual [Advent of Code](https://adventofcode.com/) challenge, wr
 | 9 | [Smoke Basin](https://adventofcode.com/2021/day/9) | [Source](src/main/scala/AdventOfCode2021/Day09.scala) |
 | 10 | [Syntax Scoring](https://adventofcode.com/2021/day/10) | [Source](src/main/scala/AdventOfCode2021/Day10.scala) |
 | 11 | [Dumbo Octopus](https://adventofcode.com/2021/day/11) | [Source](src/main/scala/AdventOfCode2021/Day11.scala) |
+| 12 | [Passage Pathing](https://adventofcode.com/2021/day/12) | [Source](src/main/scala/AdventOfCode2021/Day12.scala) |
