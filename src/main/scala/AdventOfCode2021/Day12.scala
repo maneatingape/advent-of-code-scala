@@ -3,9 +3,9 @@ package AdventOfCode2021
 object Day12:
   type Cave = Map[String, List[String]]
 
-  def parse(input: Seq[String]): Cave = input.foldLeft[Cave](Map()) { case (cave, line) =>
+  def parse(input: Seq[String]): Cave = input.foldLeft[Cave](Map().withDefaultValue(Nil)) { case (cave, line) =>
     val Array(start, end) = line.split("-")
-    cave.updated(start, end :: cave.getOrElse(start, Nil)).updated(end, start :: cave.getOrElse(end, Nil))
+    cave.updated(start, end :: cave(start)).updated(end, start :: cave(end))
   }
 
   def descend(cave: Cave)(rule: (String, List[String]) => Boolean): Int =
@@ -20,7 +20,7 @@ object Day12:
   def part1(input: Seq[String]): Int = descend(parse(input))((next, path) => path.contains(next))
 
   def part2(input: Seq[String]): Int = descend(parse(input)) { (next, path) =>
-    val occurrences = (next :: path).groupMapReduce(identity)(_ => 1)(_ + _).values.toSeq
+    val occurrences = (next :: path).groupBy(identity).values.map(_.length)
     occurrences.exists(_ > 2) || occurrences.count(_ == 2) > 1
   }
 
