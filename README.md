@@ -21,3 +21,11 @@ Entries for the annual [Advent of Code](https://adventofcode.com/) challenge, wr
 | 11 | [Dumbo Octopus](https://adventofcode.com/2021/day/11) | [Source](src/main/scala/AdventOfCode2021/Day11.scala) |
 | 12 | [Passage Pathing](https://adventofcode.com/2021/day/12) | [Source](src/main/scala/AdventOfCode2021/Day12.scala) |
 | 13 | [Transparent Origami](https://adventofcode.com/2021/day/13) | [Source](src/main/scala/AdventOfCode2021/Day13.scala) |
+
+## 2020
+
+| Day | Problem | Solution |
+| --- | --- | --- |
+| 1 | [Report Repair](https://adventofcode.com/2020/day/1) | [Source](src/main/scala/AdventOfCode20210/Day01.scala) |
+| 2 | [Password Philosophy](https://adventofcode.com/2020/day/2) | [Source](src/main/scala/AdventOfCode20210/Day02.scala) |
+| 3 | [Toboggan Trajectory](https://adventofcode.com/2020/day/3) | [Source](src/main/scala/AdventOfCode20210/Day03.scala) |
