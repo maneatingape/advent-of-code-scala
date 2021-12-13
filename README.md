@@ -36,3 +36,4 @@ Entries for the annual [Advent of Code](https://adventofcode.com/) challenge, wr
 | 8 | [Handheld Halting](https://adventofcode.com/2020/day/8) | [Source](src/main/scala/AdventOfCode2020/Day08.scala) |
 | 9 | [Encoding Error](https://adventofcode.com/2020/day/9) | [Source](src/main/scala/AdventOfCode2020/Day09.scala) |
 | 10 | [Adapter Array](https://adventofcode.com/2020/day/10) | [Source](src/main/scala/AdventOfCode2020/Day10.scala) |
+| 11 | [Seating System](https://adventofcode.com/2020/day/11) | [Source](src/main/scala/AdventOfCode2020/Day11.scala) |
