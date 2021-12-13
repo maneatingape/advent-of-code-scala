@@ -29,3 +29,4 @@ Entries for the annual [Advent of Code](https://adventofcode.com/) challenge, wr
 | 1 | [Report Repair](https://adventofcode.com/2020/day/1) | [Source](src/main/scala/AdventOfCode20210/Day01.scala) |
 | 2 | [Password Philosophy](https://adventofcode.com/2020/day/2) | [Source](src/main/scala/AdventOfCode20210/Day02.scala) |
 | 3 | [Toboggan Trajectory](https://adventofcode.com/2020/day/3) | [Source](src/main/scala/AdventOfCode20210/Day03.scala) |
+| 4 | [Passport Processing](https://adventofcode.com/2020/day/4) | [Source](src/main/scala/AdventOfCode20210/Day04.scala) |
