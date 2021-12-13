@@ -19,15 +19,16 @@ object Day08:
   }
 
   def execute(program: Seq[Instruction]): State =
-    def next(state: State) = Some((state, state))
-    Iterator.unfold[State, State](Running(0, 0, Nil)) {
-      case Running(acc, ip, visited) =>
-        if ip >= program.length then next(Halted(acc))
-        else if visited.contains(ip) then next(Infinite(acc))
-        else next(Running(acc + program(ip).acc, ip + program(ip).ip, ip :: visited))
-      case _ => None
+    Iterator.iterate[State](Running(0, 0, Nil)) { case Running(acc, ip, visited) =>
+      if ip >= program.length then Halted(acc)
+      else if visited.contains(ip) then Infinite(acc)
+      else Running(acc + program(ip).acc, ip + program(ip).ip, ip :: visited)
     }
-    .toSeq.last
+    .dropWhile {
+      case state: Running => true
+      case _ => false
+    }
+    .next()
 
   def part1(input: Seq[String]): Int =
     val program = parse(input)
