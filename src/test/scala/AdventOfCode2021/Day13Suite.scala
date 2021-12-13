@@ -27,7 +27,9 @@ class Day13Suite extends AnyFunSuite:
     "fold along x=5")
 
   test("Part 1 should handle sample input correctly") {
-    assert(Day13.part1(sample) == 17)
+    assert(Day13.part1(sample).size == 17)
   }
 
-  // Not possible to unit test part 2
+  test("Part 2 should handle sample input correctly") {
+    assert(Day13.part2(sample).size == 16)
+  }
