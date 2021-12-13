@@ -33,3 +33,4 @@ Entries for the annual [Advent of Code](https://adventofcode.com/) challenge, wr
 | 5 | [Binary Boarding](https://adventofcode.com/2020/day/5) | [Source](src/main/scala/AdventOfCode2020/Day05.scala) |
 | 6 | [Custom Customs](https://adventofcode.com/2020/day/6) | [Source](src/main/scala/AdventOfCode2020/Day06.scala) |
 | 7 | [Handy Haversacks](https://adventofcode.com/2020/day/7) | [Source](src/main/scala/AdventOfCode2020/Day07.scala) |
+| 8 | [Handheld Halting](https://adventofcode.com/2020/day/8) | [Source](src/main/scala/AdventOfCode2020/Day08.scala) |
