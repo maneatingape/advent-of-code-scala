@@ -1,13 +1,9 @@
 package AdventOfCode2020
 
 object Day05:
-  def binary(seq: Seq[Int]): Int = Integer.parseInt(seq.mkString, 2)
-
   def seatId(line: String): Int =
-    val (first, second) = line.splitAt(7)
-    val row = first.map(c => if c == 'B' then 1 else 0)
-    val column = second.map(c => if c == 'R' then 1 else 0)
-    8 * binary(row) + binary(column)
+    val binary = line.map(c => if c == 'B' || c == 'R' then 1 else 0)
+    Integer.parseInt(binary.mkString, 2)
 
   def part1(input: Seq[String]): Int = input.map(seatId).max
 
