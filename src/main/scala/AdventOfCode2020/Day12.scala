@@ -5,12 +5,12 @@ object Day12:
 
   def cos(angle: Int) = angle % 360 match
     case 0 => 1
-    case 180 => -1
+    case 180 | -180 => -1
     case _ => 0
 
   def sin(angle: Int) = angle % 360 match
-    case 90 => 1
-    case 270 => -1
+    case 90 | -270 => 1
+    case 270 | -90 => -1
     case _ => 0
 
   def parse(line: String): (Char, Int) = line.head -> line.tail.toInt
