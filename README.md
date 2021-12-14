@@ -39,3 +39,4 @@ Entries for the annual [Advent of Code](https://adventofcode.com/) challenge, wr
 | 10 | [Adapter Array](https://adventofcode.com/2020/day/10) | [Source](src/main/scala/AdventOfCode2020/Day10.scala) |
 | 11 | [Seating System](https://adventofcode.com/2020/day/11) | [Source](src/main/scala/AdventOfCode2020/Day11.scala) |
 | 12 | [Rain Risk](https://adventofcode.com/2020/day/12) | [Source](src/main/scala/AdventOfCode2020/Day12.scala) |
+| 13 | [Shuttle Search](https://adventofcode.com/2020/day/13) | [Source](src/main/scala/AdventOfCode2020/Day13.scala) |
