@@ -1,37 +1,33 @@
 package AdventOfCode2021
 
+import AdventOfCode2021.Day14.Totals
+
 object Day14:
-  type Quantity = Map[Char, Long]
-  type Pairs = Map[String, Long]
+  type Totals = Map[String, Long]
+
+  extension (map: Totals)
+    def increase(key: String, amount: Long): Totals = map.updated(key, map.getOrElse(key, 0L) + amount)
 
   def insertion(input: String, steps: Int): Long =
     val Array(polymer, tail) = input.trim.split("\n\n")
     val rules = tail.split("\n").map(_.trim.split(" -> ")).map(a => a(0) -> a(1)).toMap
 
-    val quantity = polymer.foldLeft[Quantity](Map().withDefaultValue(0L)) { (map, element) =>
-      map.updated(element, map(element) + 1L)
-    }
+    val quantity = polymer.foldLeft[Totals](Map())((map, element) => map.increase(element.toString, 1))
+    val pairs = polymer.sliding(2).foldLeft[Totals](Map())((map, pair) => map.increase(pair, 1))
 
-    val pairs = polymer.sliding(2).foldLeft[Pairs](Map().withDefaultValue(0L)) { case (map, pair) =>
-      map.updated(pair, map(pair) + 1L)
-    }
-
-    def step(pairs: Pairs, quantity: Quantity): (Pairs, Quantity) =
-      pairs.keys.foldLeft[(Pairs, Quantity)]((Map().withDefaultValue(0L), quantity)) { case ((map, quantity), key) =>
+    def step(pairs: Totals, quantity: Totals): (Totals, Totals) =
+      pairs.foldLeft[(Totals, Totals)]((Map(), quantity)) { case ((pairs, quantity), (key, value)) =>
         val first = key.head + rules(key)
         val second = rules(key) + key.last
 
-        val nextPairs = map.updated(first, map(first) + pairs(key)).updated(second, map(second) + pairs(key))
-        val nextQuantity = quantity.updated(rules(key).head, quantity(rules(key).head) + pairs(key))
+        val nextPairs = pairs.increase(first, value).increase(second, value)
+        val nextQuantity = quantity.increase(rules(key), value)
 
         (nextPairs, nextQuantity)
       }
 
-    val (_, wix) = (0 until steps).foldLeft((pairs, quantity)) { case ((pairs, quantity), index) =>
-      step(pairs, quantity)
-    }
-
-    wix.values.max - wix.values.min
+    val (_, result) = Iterator.iterate((pairs, quantity))(step).drop(steps).next()
+    result.values.max - result.values.min
 
 
   def part1(input: String): Long = insertion(input, 10)
