@@ -43,3 +43,4 @@ Entries for the annual [Advent of Code](https://adventofcode.com/) challenge, wr
 | 13 | [Shuttle Search](https://adventofcode.com/2020/day/13) | [Source](src/main/scala/AdventOfCode2020/Day13.scala) |
 | 14 | [Docking Data](https://adventofcode.com/2020/day/14) | [Source](src/main/scala/AdventOfCode2020/Day14.scala) |
 | 15 | [Rambunctious Recitation](https://adventofcode.com/2020/day/15) | [Source](src/main/scala/AdventOfCode2020/Day15.scala) |
+| 16 | [Ticket Translation](https://adventofcode.com/2020/day/16) | [Source](src/main/scala/AdventOfCode2020/Day16.scala) |
