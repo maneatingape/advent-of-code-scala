@@ -15,11 +15,8 @@ object Day15:
 
   def path(grid: Grid): Int =
     val (start, end) = (Point(0, 0), grid.keys.maxBy(p => p.x * p.y))
-    val risk = collection.mutable.LinkedHashMap[Point, Int]()
-    val todo = collection.mutable.Queue[Point]()
-
-    risk.put(start, 0)
-    todo.enqueue(start)
+    val risk = collection.mutable.Map(start -> 0)
+    val todo = collection.mutable.Queue(start)
 
     while todo.nonEmpty do
       val point = todo.dequeue()
