@@ -1,5 +1,7 @@
 package AdventOfCode2021
 
+import scala.annotation.tailrec
+
 object Day15:
   val directions = Seq((1, 0), (-1, 0), (0, -1), (0, 1))
 
@@ -15,18 +17,20 @@ object Day15:
 
   def path(grid: Grid): Int =
     val (start, end) = (Point(0, 0), grid.keys.maxBy(p => p.x * p.y))
-    val risk = collection.mutable.Map(start -> 0)
-    val todo = collection.mutable.Queue(start)
 
-    while todo.nonEmpty do
-      val point = todo.dequeue()
-      grid.neighbours(point).foreach { next =>
-        if !risk.contains(next) || risk(point) + grid(next) < risk(next) then
-          risk(next) = risk(point) + grid(next)
-          todo.enqueue(next)
-      }
+    @tailrec
+    def dijkstra(todo: Set[Point], risk: Grid): Int =
+      val point = todo.minBy(risk)
+      if point == end then risk(end)
+      else
+        val (nextTodo, nextRisk) = grid.neighbours(point)
+          .filter(next => !risk.contains(next) || risk(point) + grid(next) < risk(next))
+          .foldLeft((todo - point, risk)) { case ((todo, risk), next) =>
+            (todo + next, risk.updated(next, risk(point) + grid(next)))
+          }
+        dijkstra(nextTodo, nextRisk)
 
-    risk(end)
+    dijkstra(Set(start), Map(start -> 0))
   end path
 
   def expand(grid: Grid): Grid =
