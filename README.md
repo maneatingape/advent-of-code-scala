@@ -47,3 +47,4 @@ Entries for the annual [Advent of Code](https://adventofcode.com/) challenge, wr
 | 16 | [Ticket Translation](https://adventofcode.com/2020/day/16) | [Source](src/main/scala/AdventOfCode2020/Day16.scala) |
 | 17 | [Conway Cubes](https://adventofcode.com/2020/day/17) | [Source](src/main/scala/AdventOfCode2020/Day17.scala) |
 | 18 | [Operation Order](https://adventofcode.com/2020/day/18) | [Source](src/main/scala/AdventOfCode2020/Day18.scala) |
+| 19 | [Monster Messages](https://adventofcode.com/2020/day/19) | [Source](src/main/scala/AdventOfCode2020/Day19.scala) |
