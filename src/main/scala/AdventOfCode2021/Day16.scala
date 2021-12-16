@@ -15,37 +15,35 @@ object Day16:
 
   def decode(input: Seq[Int]): (Int, Packet) =
     val version = binary(input.take(3))
-    val typeId = binary(input.drop(3).take(3))
-    typeId match
-      case 4 => decodeLiteral(version, typeId, input)
-      case _ =>
-        val lengthTypeId = input.drop(6).head
-        if lengthTypeId == 1 then decodeOperatorBitLength(version, typeId, input)
-        else decodeOperatorSubPackets(version, typeId, input)
+    val typeId = binary(input.slice(3, 6))
+    val lengthTypeId = input(6)
+    if typeId == 4 then decodeLiteral(version, typeId, input)
+    else if lengthTypeId == 1 then decodeOperatorBitLength(version, typeId, input)
+    else decodeOperatorSubPackets(version, typeId, input)
 
   def decodeLiteral(version: Long, typeId: Long, input: Seq[Int]): (Int, Packet) =
-    val (_, groups, read) = Iterator.iterate((1, Seq.empty[Int], 6)) { case (prefix, groups, read) =>
-      val nextPrefix = input.drop(read).head
-      val nextGroup = groups ++ input.drop(read + 1).take(4)
-      val nextRead = read + 5
-      (nextPrefix, nextGroup, nextRead)
-    }
-    .dropWhile(_._1 == 1).next()
-    (read, Literal(version, typeId, binary(groups)))
+    val (_, chunks, read) = Iterator.iterate((1, Seq.empty[Int], 6))(decodeNextChunk(input)).dropWhile(_._1 == 1).next()
+    (read, Literal(version, typeId, binary(chunks)))
+
+  def decodeNextChunk(input: Seq[Int])(prefix: Int, chunks: Seq[Int], read: Int): (Int, Seq[Int], Int) =
+    val nextPrefix = input(read)
+    val nextGroup = chunks ++ input.slice(read + 1, read + 5)
+    val nextRead = read + 5
+    (nextPrefix, nextGroup, nextRead)
 
   def decodeOperatorBitLength(version: Long, typeId: Long, input: Seq[Int]): (Int, Packet) =
-    val subPackets = binary(input.drop(7).take(11)).toInt
+    val subPackets = binary(input.slice(7, 18)).toInt
     val (read, packets) = Iterator.iterate((18, List.empty[Packet]))(decodeNextPacket(input)).drop(subPackets).next()
     (read, Operator(version, typeId, packets.reverse))
 
   def decodeOperatorSubPackets(version: Long, typeId: Long, input: Seq[Int]): (Int, Packet) =
-    val subLength = binary(input.drop(7).take(15)) + 22
+    val subLength = binary(input.slice(7, 22)) + 22
     val (read, packets) = Iterator.iterate((22, List.empty[Packet]))(decodeNextPacket(input)).dropWhile(_._1 < subLength).next()
     (read, Operator(version, typeId, packets.reverse))
 
   def decodeNextPacket(input: Seq[Int])(read: Int, packets: List[Packet]): (Int, List[Packet]) =
-    val (nextRead, packet) = decode(input.drop(read))
-    (read + nextRead, packet :: packets)
+    val (nextRead, nextPacket) = decode(input.drop(read))
+    (read + nextRead, nextPacket :: packets)
 
   def versionSum(packet: Packet): Long = packet match
     case Literal(version, _, _) => version
