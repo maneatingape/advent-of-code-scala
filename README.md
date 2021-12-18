@@ -25,6 +25,7 @@ Entries for the annual [Advent of Code](https://adventofcode.com/) challenge, wr
 | 15 | [Chiton](https://adventofcode.com/2021/day/15) | [Source](src/main/scala/AdventOfCode2021/Day15.scala) |
 | 16 | [Packet Decoder](https://adventofcode.com/2021/day/16) | [Source](src/main/scala/AdventOfCode2021/Day16.scala) |
 | 17 | [Trick Shot](https://adventofcode.com/2021/day/17) | [Source](src/main/scala/AdventOfCode2021/Day17.scala) |
+| 17 | [Snailfish](https://adventofcode.com/2021/day/18) | [Source](src/main/scala/AdventOfCode2021/Day18.scala) |
 
 ## 2020
 
