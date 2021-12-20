@@ -1,31 +1,27 @@
 package AdventOfCode2021
 
 object Day20:
-  val directions = Seq((-1, -1), (0, -1), (1, -1), (-1, 0), (0, 0), (1, 0), (-1, 1), (0, 1), (1, 1))
-
   extension (c: Char) def toDigit: Int = if c == '#' then 1 else 0
   extension (seq: Seq[Int]) def binary: Int = Integer.parseInt(seq.mkString, 2)
 
   case class Point(x: Int, y: Int):
-    def updated(dx: Int, dy: Int): Point = Point(x + dx, y + dy)
-    def neighbours: Seq[Point] = directions.map(updated)
+    def neighbours: Seq[Point] = for dy <- -1 to 1; dx <- -1 to 1 yield Point(x + dx, y + dy)
 
   case class Grid(min: Int, max: Int, pixels: Map[Point, Int]):
-    def index(point: Point, default: Int): Int = point.neighbours.map(pixels.getOrElse(_, default)).binary
-    def lit: Int = pixels.values.sum
+    def indexAt(point: Point, default: Int): Int = point.neighbours.map(pixels.getOrElse(_, default)).binary
 
   def parse(input: Seq[String]): (Seq[Int], Grid) =
     val algorithm = input.head.map(toDigit)
     val data = input.drop(2)
-    val pixels = Seq.tabulate(data.head.size, data.size)((x, y) => Point(x, y) -> data(y)(x).toDigit)
-    (algorithm, Grid(-1, data.size, pixels.flatten.toMap))
+    val pixels = for y <- 0 until data.size; x <- 0 until data.size yield Point(x, y) -> data(y)(x).toDigit
+    (algorithm, Grid(-1, data.size, pixels.toMap))
 
   def step(algorithm: Seq[Int])(default: Int, grid: Grid): (Int, Grid) =
     val pixels = for
       y <- grid.min to grid.max
       x <- grid.min to grid.max
     yield
-      val index = grid.index(Point(x, y), default)
+      val index = grid.indexAt(Point(x, y), default)
       Point(x, y) -> algorithm(index)
 
     val nextDefault = if default == 0 then algorithm.head else algorithm.last
@@ -36,7 +32,7 @@ object Day20:
   def enhance(input: Seq[String], steps: Int): Int =
     val (algorithm, grid) = parse(input)
     val (_, enhanced) = Iterator.iterate((0, grid))(step(algorithm)).drop(steps).next()
-    enhanced.lit
+    enhanced.pixels.values.sum
 
   def part1(input: Seq[String]): Int = enhance(input, 2)
 
