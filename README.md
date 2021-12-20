@@ -54,3 +54,4 @@ Entries for the annual [Advent of Code](https://adventofcode.com/) challenge, wr
 | 19 | [Monster Messages](https://adventofcode.com/2020/day/19) | [Source](src/main/scala/AdventOfCode2020/Day19.scala) |
 | 20 | [Jurassic Jigsaw](https://adventofcode.com/2020/day/20) | [Source](src/main/scala/AdventOfCode2020/Day20.scala) |
 | 21 | [Allergen Assessment](https://adventofcode.com/2020/day/21) | [Source](src/main/scala/AdventOfCode2020/Day21.scala) |
+| 22 | [Crab Combat](https://adventofcode.com/2020/day/22) | [Source](src/main/scala/AdventOfCode2020/Day22.scala) |
