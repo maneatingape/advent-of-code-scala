@@ -27,6 +27,7 @@ Entries for the annual [Advent of Code](https://adventofcode.com/) challenge, wr
 | 17 | [Trick Shot](https://adventofcode.com/2021/day/17) | [Source](src/main/scala/AdventOfCode2021/Day17.scala) |
 | 18 | [Snailfish](https://adventofcode.com/2021/day/18) | [Source](src/main/scala/AdventOfCode2021/Day18.scala) |
 | 19 | [Beacon Scanner](https://adventofcode.com/2021/day/19) | [Source](src/main/scala/AdventOfCode2021/Day19.scala) |
+| 20 | [Trench Map](https://adventofcode.com/2021/day/20) | [Source](src/main/scala/AdventOfCode2021/Day20.scala) |
 
 ## 2020
 
