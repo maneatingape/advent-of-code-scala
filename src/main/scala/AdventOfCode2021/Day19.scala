@@ -17,17 +17,17 @@ class Day19(input: String):
   case class Scanner(beacons: Seq[Beacon]):
     def permutations: Seq[Scanner] = beacons.map(_.permutations).transpose.map(Scanner(_))
 
-  def parse(input: String): Seq[Scanner] = input.split("\n\n").zipWithIndex.map { (block, index) =>
+  def parse(input: String): Seq[Scanner] = input.split("\n\n").map { block =>
     Scanner(block.trim.split("\n").tail.map(_.trim.split(",").map(_.toInt)).map(a => Beacon(a(0), a(1), a(2))))
   }
 
   def findMatch(beacons: Set[Beacon], candidate: Scanner): Option[(Scanner, Beacon)] =
     val list = for
+      scanner <- candidate.permutations
       firstBeacon <- beacons
-      secondScanner <- candidate.permutations
-      secondBeacon <- secondScanner.beacons
-      if secondScanner.beacons.map(_ + firstBeacon - secondBeacon).toSet.intersect(beacons).size >= 12
-    do return Some((secondScanner, firstBeacon - secondBeacon))
+      secondBeacon <- scanner.beacons
+      if scanner.beacons.map(_ + firstBeacon - secondBeacon).toSet.intersect(beacons).size >= 12
+    do return Some((scanner, firstBeacon - secondBeacon))
     None
   end findMatch
 
