@@ -15,19 +15,23 @@ class Day19(input: String):
   end Beacon
 
   case class Scanner(beacons: Seq[Beacon]):
+    val deltas = (for first <- beacons; second <- beacons yield first - second).toSet
     def permutations: Seq[Scanner] = beacons.map(_.permutations).transpose.map(Scanner(_))
 
   def parse(input: String): Seq[Scanner] = input.split("\n\n").map { block =>
     Scanner(block.trim.split("\n").tail.map(_.trim.split(",").map(_.toInt)).map(a => Beacon(a(0), a(1), a(2))))
   }
 
-  def findMatch(beacons: Set[Beacon], candidate: Scanner): Option[(Scanner, Beacon)] =
-    val list = for
-      scanner <- candidate.permutations
-      firstBeacon <- beacons
-      secondBeacon <- scanner.beacons
-      if scanner.beacons.map(_ + firstBeacon - secondBeacon).toSet.intersect(beacons).size >= 12
-    do return Some((scanner, firstBeacon - secondBeacon))
+  def findMatch(firstScanner: Scanner, candidate: Scanner): Option[(Scanner, Beacon)] =
+    for
+      secondScanner <- candidate.permutations
+      if secondScanner.deltas.intersect(firstScanner.deltas).size > 12 * 11
+    do
+      for
+        firstBeacon <- firstScanner.beacons
+        secondBeacon <- secondScanner.beacons
+        if secondScanner.beacons.map(_ + firstBeacon - secondBeacon).toSet.intersect(firstScanner.beacons.toSet).size >= 12
+      do return Some((secondScanner, firstBeacon - secondBeacon))
     None
   end findMatch
 
@@ -40,7 +44,7 @@ class Day19(input: String):
         val nextOffsets = offsets.appended(currentOffset)
 
         val (nextTodo, nextRemaining) = remaining.foldLeft((todo.tail, remaining)) { case ((todo, remaining), candidate) =>
-          findMatch(current.beacons.toSet, candidate) match
+          findMatch(current, candidate) match
             case Some((scanner, offset)) => (todo.updated(scanner, offset + currentOffset), remaining.filterNot(_ == candidate))
             case None => (todo, remaining)
         }
