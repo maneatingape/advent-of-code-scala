@@ -42,28 +42,19 @@ object Day21:
 
   def part2(input: Seq[String]): Long =
     val cache = collection.mutable.Map[State, Total]()
+    def play(state: State): Total = cache.getOrElseUpdate(state, compute(state))
+    def partition(player: Player) = diracDiceThrice.map(player.next).partition(_.score >= 21)
 
-    def play(state: State): Total =
-      if !cache.contains(state) then
-        val outerResults =
-          for dice1 <- diracDiceThrice yield
-            val State(player1, player2) = state
-            val nextPlayer1 = player1.next(dice1)
-            if nextPlayer1.score >= 21 then Total(1, 0) else
-              val innerResults =
-                for dice2 <- diracDiceThrice yield
-                  val nextPlayer2 = player2.next(dice2)
-                  if nextPlayer2.score >= 21 then Total(0, 1) else
-                    play(State(nextPlayer1, nextPlayer2))
-                  end if
-                end for
-              innerResults.reduce(_ + _)
-            end if
-          end for
-        cache(state) = outerResults.reduce(_ + _)
-      end if
-      cache(state)
-    end play
+    def compute(state: State): Total =
+      val (player1Wins, rest) = partition(state.player1)
+      rest.map { nextPlayer1 =>
+        val (player2Wins, other) = partition(state.player2)
+        other
+          .map(nextPlayer2 => play(State(nextPlayer1, nextPlayer2)))
+          .fold(Total(0, player2Wins.size))(_ + _)
+      }
+      .fold(Total(player1Wins.size, 0))(_ + _)
+    end compute
 
     play(parse(input)).max
   end part2
