@@ -46,14 +46,12 @@ object Day21:
     def partition(player: Player) = diracDiceThrice.map(player.next).partition(_.score >= 21)
 
     def compute(state: State): Total =
-      val (player1Wins, rest) = partition(state.player1)
-      rest.map { nextPlayer1 =>
-        val (player2Wins, other) = partition(state.player2)
-        other
-          .map(nextPlayer2 => play(State(nextPlayer1, nextPlayer2)))
-          .fold(Total(0, player2Wins.size))(_ + _)
+      val (winsP1, rest) = partition(state.player1)
+      rest.map { nextP1 =>
+        val (winsP2, other) = partition(state.player2)
+        other.map(nextP2 => play(State(nextP1, nextP2))).fold(Total(0, winsP2.size))(_ + _)
       }
-      .fold(Total(player1Wins.size, 0))(_ + _)
+      .fold(Total(winsP1.size, 0))(_ + _)
     end compute
 
     play(parse(input)).max
