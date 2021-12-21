@@ -1,6 +1,8 @@
 package AdventOfCode2021
 
 object Day21:
+  val diracDiceThrice: Seq[Int] = for first <- 1 to 3; second <- 1 to 3; third <- 1 to 3 yield first + second + third
+
   case class Player(space: Int, score: Int = 0):
     def next(move: Int): Player =
       val nextSpace = (((space - 1) + move) % 10) + 1
@@ -12,11 +14,9 @@ object Day21:
     def roll: DeterministicDice = DeterministicDice(value % 100 + 1, rolled + 1)
     def thrice: (DeterministicDice, Int) = Iterator.iterate((this, 0))((dice, move) => (dice.roll, move + dice.value)).drop(3).next()
 
-  case class Winner(player1: Long, player2: Long):
-    def +(other: Winner): Winner = Winner(player1 + other.player1, player2 + other.player2)
-    def max: Long = player1.max(player2)
-
-  def diracDiceThrice: Seq[Int] = for first <- 1 to 3; second <- 1 to 3; third <- 1 to 3 yield first + second + third
+  case class Total(player1Wins: Long, player2Wins: Long):
+    def +(other: Total): Total = Total(player1Wins + other.player1Wins, player2Wins + other.player2Wins)
+    def max: Long = player1Wins.max(player2Wins)
 
   def parse(input: Seq[String]): State =
     val positions = input.map(line => line.drop(1 + line.lastIndexOf(" ")).toInt)
@@ -41,20 +41,20 @@ object Day21:
   end part1
 
   def part2(input: Seq[String]): Long =
-    val cache = collection.mutable.Map[State, Winner]()
+    val cache = collection.mutable.Map[State, Total]()
 
-    def play(state: State): Winner =
+    def play(state: State): Total =
       if !cache.contains(state) then
         val outerResults =
           for dice1 <- diracDiceThrice yield
             val State(player1, player2) = state
             val nextPlayer1 = player1.next(dice1)
-            if nextPlayer1.score >= 21 then Winner(1, 0) else
+            if nextPlayer1.score >= 21 then Total(1, 0) else
               val innerResults =
                 for dice2 <- diracDiceThrice yield
                   val nextPlayer2 = player2.next(dice2)
-                  if nextPlayer2.score >= 21 then Winner(0, 1) else
-                      play(State(nextPlayer1, nextPlayer2))
+                  if nextPlayer2.score >= 21 then Total(0, 1) else
+                    play(State(nextPlayer1, nextPlayer2))
                   end if
                 end for
               innerResults.reduce(_ + _)
