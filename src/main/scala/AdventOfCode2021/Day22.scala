@@ -30,7 +30,7 @@ object Day22:
       val (s1, e1) = (start, end)
       val (s2, e2) = (other.start, other.end)
       if s2 <= s1 && e1 <= e2 then Some(this)
-      else if s1 <= s2 && e2 <= e1 then Some(other)
+      else if s1 < s2 && e2 < e1 then Some(other)
       else if s2 <= s1 && s1 <= e2 then Some(Dimension(s1, e2))
       else if s1 <= s2 && s2 <= e1 then Some(Dimension(s2, e1))
       else None
@@ -73,10 +73,9 @@ object Day22:
     def helper(todo: List[RebootStep], reactor: Set[Cuboid]): Set[Cuboid] = todo match
       case Nil => reactor
       case RebootStep(true, head) :: tail =>
-        reactor.find(_.intersect(head).isDefined) match
+        reactor.view.map(_.intersect(head)).flatten.headOption match
           case None => helper(tail, reactor + head)
-          case Some(collision) =>
-            val intersect = collision.intersect(head).get
+          case Some(intersect) =>
             val remaining = (head.split(intersect) - intersect).map(RebootStep(true, _))
             helper(remaining.toList ++ tail, reactor)
       case RebootStep(false, head) :: tail =>
