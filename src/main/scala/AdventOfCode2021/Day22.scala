@@ -70,24 +70,24 @@ object Day22:
   end part1
 
   def part2(input: Seq[String]): Long =
-    def helper(todo: List[RebootStep], reactor: Set[Cuboid]): Set[Cuboid] = todo match
+    def helper(todo: List[RebootStep], reactor: List[Cuboid]): List[Cuboid] = todo match
       case Nil => reactor
       case RebootStep(true, head) :: tail =>
         reactor.view.map(_.intersect(head)).flatten.headOption match
-          case None => helper(tail, reactor + head)
+          case None => helper(tail, head :: reactor)
           case Some(intersect) =>
-            val remaining = (head.split(intersect).toSet - intersect).map(RebootStep(true, _))
-            helper(remaining.toList ++ tail, reactor)
+            val remaining = head.split(intersect).map(RebootStep(true, _))
+            helper(remaining ++ tail, reactor)
       case RebootStep(false, head) :: tail =>
         val nextReactor = reactor.flatMap { cuboid =>
           cuboid.intersect(head) match
-            case None => Set(cuboid)
-            case Some(intersect) => cuboid.split(intersect).toSet - intersect
+            case None => List(cuboid)
+            case Some(intersect) => cuboid.split(intersect)
         }
         helper(tail, nextReactor)
     end helper
 
-    helper(parse(input), Set()).toSeq.map(_.volume).sum
+    helper(parse(input), Nil).map(_.volume).sum
   end part2
 
   def main(args: Array[String]): Unit =
