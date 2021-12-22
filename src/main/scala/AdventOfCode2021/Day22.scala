@@ -13,12 +13,12 @@ object Day22:
         nextZs <- zs.intersect(other.zs)
       yield Cuboid(nextXs, nextYs, nextZs)
 
-    def split(other: Cuboid): Set[Cuboid] =
-      for
-        nextXs <- xs.split(other.xs)
-        nextYs <- ys.split(other.ys)
-        nextZs <- zs.split(other.zs)
-      yield Cuboid(nextXs, nextYs, nextZs)
+    def split(other: Cuboid): List[Cuboid] =
+      val (headX :: tailX) = xs.split(other.xs)
+      val (headY :: tailY) = ys.split(other.ys)
+      val (headZ :: tailZ) = zs.split(other.zs)
+      tailX.map(Cuboid(_, ys, zs)) ++ tailY.map(Cuboid(headX, _, zs)) ++ tailZ.map(Cuboid(headX, headY, _))
+    end split
   end Cuboid
 
   case class Dimension(from: Int, to: Int):
@@ -35,14 +35,14 @@ object Day22:
       else if s1 <= s2 && s2 <= e1 then Some(Dimension(s2, e1))
       else None
 
-    def split(other: Dimension): Set[Dimension] =
+    def split(other: Dimension): List[Dimension] =
       val (s1, e1) = (start, end)
       val (s2, e2) = (other.start, other.end)
-      if s2 <= s1 && e1 <= e2 then Set(this)
-      else if s1 < s2 && e2 < e1 then Set(Dimension(s1, s2 - 1), Dimension(s2, e2), Dimension(e2 + 1, e1))
-      else if s1 <= e2 && e2 < e1 then Set(Dimension(s1, e2), Dimension(e2 + 1, e1))
-      else if s1 < s2 && s2 <= e1 then Set(Dimension(s1, s2 - 1), Dimension(s2, e2))
-      else Set()
+      if s2 <= s1 && e1 <= e2 then List(this)
+      else if s1 < s2 && e2 < e1 then List(Dimension(s2, e2), Dimension(s1, s2 - 1), Dimension(e2 + 1, e1))
+      else if s1 <= e2 && e2 < e1 then List(Dimension(s1, e2), Dimension(e2 + 1, e1))
+      else if s1 < s2 && s2 <= e1 then List(Dimension(s2, e2), Dimension(s1, s2 - 1))
+      else List()
   end Dimension
 
   def parse(input: Seq[String]): List[RebootStep] =
@@ -76,13 +76,13 @@ object Day22:
         reactor.view.map(_.intersect(head)).flatten.headOption match
           case None => helper(tail, reactor + head)
           case Some(intersect) =>
-            val remaining = (head.split(intersect) - intersect).map(RebootStep(true, _))
+            val remaining = (head.split(intersect).toSet - intersect).map(RebootStep(true, _))
             helper(remaining.toList ++ tail, reactor)
       case RebootStep(false, head) :: tail =>
         val nextReactor = reactor.flatMap { cuboid =>
           cuboid.intersect(head) match
             case None => Set(cuboid)
-            case Some(intersect) => cuboid.split(intersect) - intersect
+            case Some(intersect) => cuboid.split(intersect).toSet - intersect
         }
         helper(tail, nextReactor)
     end helper
