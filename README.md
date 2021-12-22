@@ -66,3 +66,4 @@ Entries for the annual [Advent of Code](https://adventofcode.com/) challenge, wr
 | Day | Problem | Solution |
 | --- | --- | --- |
 | 1 | [The Tyranny of the Rocket Equation](https://adventofcode.com/2019/day/1) | [Source](src/main/scala/AdventOfCode2019/Day01.scala) |
+| 2 | [1202 Program Alarm](https://adventofcode.com/2019/day/2) | [Source](src/main/scala/AdventOfCode2019/Day02.scala) |
