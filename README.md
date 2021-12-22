@@ -60,3 +60,9 @@ Entries for the annual [Advent of Code](https://adventofcode.com/) challenge, wr
 | 23 | [Crab Cups](https://adventofcode.com/2020/day/23) | [Source](src/main/scala/AdventOfCode2020/Day23.scala) |
 | 24 | [Lobby Layout](https://adventofcode.com/2020/day/24) | [Source](src/main/scala/AdventOfCode2020/Day24.scala) |
 | 25 | [Combo Breaker](https://adventofcode.com/2020/day/25) | [Source](src/main/scala/AdventOfCode2020/Day25.scala) |
+
+## 2019
+
+| Day | Problem | Solution |
+| --- | --- | --- |
+| 1 | [The Tyranny of the Rocket Equation](https://adventofcode.com/2019/day/1) | [Source](src/main/scala/AdventOfCode2019/Day01.scala) |
