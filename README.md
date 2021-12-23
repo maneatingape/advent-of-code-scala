@@ -30,6 +30,7 @@ Entries for the annual [Advent of Code](https://adventofcode.com/) challenge, wr
 | 20 | [Trench Map](https://adventofcode.com/2021/day/20) | [Source](src/main/scala/AdventOfCode2021/Day20.scala) |
 | 21 | [Dirac Dice](https://adventofcode.com/2021/day/21) | [Source](src/main/scala/AdventOfCode2021/Day21.scala) |
 | 22 | [Reactor Reboot](https://adventofcode.com/2021/day/22) | [Source](src/main/scala/AdventOfCode2021/Day22.scala) |
+| 23 | [Amphipod](https://adventofcode.com/2021/day/23) | [Source](src/main/scala/AdventOfCode2021/Day23.scala) |
 
 ## 2020
 
