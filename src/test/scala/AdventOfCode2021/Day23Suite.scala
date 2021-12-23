@@ -10,11 +10,11 @@ class Day23Suite extends AnyFunSuite:
     "  #A#D#C#A#",
     "  #########")
 
-// Tests are too slow
+// Tests are correct but too slow
 //  test("Part 1 should handle sample input correctly") {
 //    assert(Day23.part1(sample) == 12521)
 //  }
 //
 //  test("Part 2 should handle sample input correctly") {
-//    assert(Day23.part2(sample) == 49532)
+//    assert(Day23.part2(sample) == 44169)
 //  }

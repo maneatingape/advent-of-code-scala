@@ -35,13 +35,18 @@ object Day23:
   end debug
 
   def paths(current: Burrow): Seq[Burrow] =
-    val leaving = current.rooms.flatMap { case (key, room) =>
+    val third = current.rooms.flatMap { case (key, room) =>
       roomToHallway(current, key, room)
     }
-    val arriving = current.hallway.zipWithIndex.filter(_._1 != '.').map { (amphipod, index) =>
-      hallwayToRoom(current, amphipod, index)
+    val second = current.rooms.flatMap { case (key, room) =>
+      roomToRoom(current, key, room)
     }
-    leaving.toSeq ++ arriving.flatten
+    val first = current.hallway.zipWithIndex.filter(_._1 != '.').map { (amphipod, index) =>
+      hallwayToRoom(current, amphipod, index)
+    }.flatten
+
+    val preferred = first.toSeq ++ second
+    if preferred.nonEmpty then preferred else third.toSeq
   end paths
 
   def roomToHallway(current: Burrow, key: Char, room: Seq[Char]): Seq[Burrow] =
@@ -72,6 +77,22 @@ object Day23:
     else None
   end hallwayToRoom
 
+  def roomToRoom(current: Burrow, key: Char, room: Seq[Char]): Seq[Burrow] =
+    if room.forall(_ == key) then return Seq()
+
+    val start = roomIndex(key)
+    val end = roomIndex(room.head)
+    val range = if start < end then (start to end) else (end to start)
+
+    if current.rooms(room.head).forall(_ == room.head) && range.forall(n => current.hallway(n) == '.') then
+      val nextR = current.rooms
+        .updated(key, room.tail)
+        .updated(room.head, current.rooms(room.head).prepended(room.head))
+      val nextC = current.cost + (range.size + current.roomMax - current.rooms(key).size + current.roomMax - current.rooms(room.head).size) * costPerSpace(room.head)
+      Seq(Burrow(current.roomMax, nextC, current.hallway, nextR))
+    else Seq()
+  end roomToRoom
+
   def isFinished(burrow: Burrow): Boolean =
     burrow.rooms.forall { case (key, room) => room.size == burrow.roomMax && room.forall(_ == key) }
 
@@ -93,5 +114,5 @@ object Day23:
 
   def main(args: Array[String]): Unit =
     val data = io.Source.fromResource("AdventOfCode2021/Day23.txt").getLines().toSeq
-//    println(part1(data))
+    println(part1(data))
     println(part2(data))
