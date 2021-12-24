@@ -10,7 +10,7 @@ object Day24:
   val indexes = Map("w" -> 0, "x" -> 1, "y" -> 2, "z" -> 3)
   val execute = Map("add" -> add, "mul" -> mul, "div" -> div, "mod" -> mod, "eql" -> eql)
 
-  def execute(instructions: Seq[String], order: Boolean): String =
+  def execute(instructions: Seq[String], smallest: Boolean): String =
     val visited = collection.mutable.Set[(Seq[Long], Int)]()
     var finished = Option.empty[Seq[Int]]
 
@@ -27,12 +27,13 @@ object Day24:
 
       if decoded.length == 2 then
         for
-          nextW <- if order then (9 to 1 by - 1) else (1 to 9)
+          nextW <- if smallest then (1 to 9) else (9 to 1 by - 1)
         do
           val nextState = state.updated(0, nextW.toLong)
           if !visited.contains((nextState, monadIndex)) then
             visited.add((nextState, monadIndex))
             helper(nextState, instructionIndex + 1, monadIndex + 1, path.appended(nextW))
+        end for
       else if indexes.contains(decoded(2)) then
         val op = execute(decoded(0))
         val src = indexes(decoded(2))
@@ -50,9 +51,9 @@ object Day24:
     finished.get.mkString
   end execute
 
-  def part1(input: Seq[String]): String = execute(input, true)
+  def part1(input: Seq[String]): String = execute(input, false)
 
-  def part2(input: Seq[String]): String = execute(input, false)
+  def part2(input: Seq[String]): String = execute(input, true)
 
   def main(args: Array[String]): Unit =
     val data = io.Source.fromResource("AdventOfCode2021/Day24.txt").getLines().toSeq
