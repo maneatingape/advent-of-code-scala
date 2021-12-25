@@ -32,6 +32,7 @@ Entries for the annual [Advent of Code](https://adventofcode.com/) challenge, wr
 | 22 | [Reactor Reboot](https://adventofcode.com/2021/day/22) | [Source](src/main/scala/AdventOfCode2021/Day22.scala) |
 | 23 | [Amphipod](https://adventofcode.com/2021/day/23) | [Source](src/main/scala/AdventOfCode2021/Day23.scala) |
 | 24 | [Arithmetic Logic Unit](https://adventofcode.com/2021/day/24) | [Source](src/main/scala/AdventOfCode2021/Day24.scala) |
+| 25 | [Sea Cucumber](https://adventofcode.com/2021/day/25) | [Source](src/main/scala/AdventOfCode2021/Day25.scala) |
 
 ## 2020
 
