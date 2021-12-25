@@ -72,3 +72,4 @@ Entries for the annual [Advent of Code](https://adventofcode.com/) challenge, wr
 | 2 | [1202 Program Alarm](https://adventofcode.com/2019/day/2) | [Source](src/main/scala/AdventOfCode2019/Day02.scala) |
 | 3 | [Crossed Wires](https://adventofcode.com/2019/day/3) | [Source](src/main/scala/AdventOfCode2019/Day03.scala) |
 | 4 | [Secure Container](https://adventofcode.com/2019/day/4) | [Source](src/main/scala/AdventOfCode2019/Day04.scala) |
+| 5 | [Sunny with a Chance of Asteroids](https://adventofcode.com/2019/day/5) | [Source](src/main/scala/AdventOfCode2019/Day05.scala) |
