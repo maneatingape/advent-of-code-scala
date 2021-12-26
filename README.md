@@ -76,3 +76,4 @@ Entries for the annual [Advent of Code](https://adventofcode.com/) challenge, wr
 | 6 | [Universal Orbit Map](https://adventofcode.com/2019/day/6) | [Source](src/main/scala/AdventOfCode2019/Day06.scala) |
 | 7 | [Amplification Circuit](https://adventofcode.com/2019/day/7) | [Source](src/main/scala/AdventOfCode2019/Day07.scala) |
 | 8 | [Space Image Format](https://adventofcode.com/2019/day/8) | [Source](src/main/scala/AdventOfCode2019/Day08.scala) |
+| 9 | [Sensor Boost](https://adventofcode.com/2019/day/9) | [Source](src/main/scala/AdventOfCode2019/Day09.scala) |
