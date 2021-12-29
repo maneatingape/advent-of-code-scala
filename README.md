@@ -81,3 +81,4 @@ Entries for the annual [Advent of Code](https://adventofcode.com/) challenge, wr
 | 11 | [Space Police](https://adventofcode.com/2019/day/11) | [Source](src/main/scala/AdventOfCode2019/Day11.scala) |
 | 12 | [The N-Body Problem](https://adventofcode.com/2019/day/12) | [Source](src/main/scala/AdventOfCode2019/Day12.scala) |
 | 13 | [Care Package](https://adventofcode.com/2019/day/13) | [Source](src/main/scala/AdventOfCode2019/Day13.scala) |
+| 14 | [Space Stoichiometry](https://adventofcode.com/2019/day/14) | [Source](src/main/scala/AdventOfCode2019/Day14.scala) |
