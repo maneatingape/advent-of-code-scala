@@ -83,3 +83,4 @@ Entries for the annual [Advent of Code](https://adventofcode.com/) challenge, wr
 | 13 | [Care Package](https://adventofcode.com/2019/day/13) | [Source](src/main/scala/AdventOfCode2019/Day13.scala) |
 | 14 | [Space Stoichiometry](https://adventofcode.com/2019/day/14) | [Source](src/main/scala/AdventOfCode2019/Day14.scala) |
 | 15 | [Oxygen System](https://adventofcode.com/2019/day/15) | [Source](src/main/scala/AdventOfCode2019/Day15.scala) |
+| 16 | [Flawed Frequency Transmission](https://adventofcode.com/2019/day/16) | [Source](src/main/scala/AdventOfCode2019/Day16.scala) |
