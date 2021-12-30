@@ -39,18 +39,18 @@ object Day09:
       case 0 => memory.updated(memory(ip + offset), value)
       case 2 => memory.updated(relativeBase + memory(ip + offset), value)
 
-    def withInput(next: Long*): IntCode = copy(input = input.appendedAll(next))
+    def withInput(next: Long*): IntCode = copy(input = next)
 
     def nextOutput: IntCode = Iterator.iterate(next)(_.next).dropWhile(_.result == Running).next()
 
-    def lastOutput: Long =
+    def allOutput: Seq[Long] =
       val output = Iterator.iterate(this)(_.nextOutput).takeWhile(_.result != Halted)
-      output.toSeq.map(_.result).collect { case Output(value) => value }.last
+      output.toSeq.map(_.result).collect { case Output(value) => value }
   end IntCode
 
-  def part1(memory: Seq[Long]): Long = IntCode(memory).withInput(1).lastOutput
+  def part1(memory: Seq[Long]): Long = IntCode(memory).withInput(1).allOutput.last
 
-  def part2(memory: Seq[Long]): Long = IntCode(memory).withInput(2).lastOutput
+  def part2(memory: Seq[Long]): Long = IntCode(memory).withInput(2).allOutput.last
 
   def main(args: Array[String]): Unit =
     val data = io.Source.fromResource("AdventOfCode2019/Day09.txt").mkString.trim.split(",").map(_.toLong).toSeq
