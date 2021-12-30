@@ -85,3 +85,4 @@ Entries for the annual [Advent of Code](https://adventofcode.com/) challenge, wr
 | 15 | [Oxygen System](https://adventofcode.com/2019/day/15) | [Source](src/main/scala/AdventOfCode2019/Day15.scala) |
 | 16 | [Flawed Frequency Transmission](https://adventofcode.com/2019/day/16) | [Source](src/main/scala/AdventOfCode2019/Day16.scala) |
 | 17 | [Set and Forget](https://adventofcode.com/2019/day/17) | [Source](src/main/scala/AdventOfCode2019/Day17.scala) |
+| 18 | [Many-Worlds Interpretation](https://adventofcode.com/2019/day/18) | [Source](src/main/scala/AdventOfCode2019/Day18.scala) |
