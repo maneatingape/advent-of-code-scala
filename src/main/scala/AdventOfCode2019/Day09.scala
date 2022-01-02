@@ -18,7 +18,16 @@ object Day09:
   case class IntCode(ip: Long, relativeBase: Long, memory: Map[Long, Long], input: Seq[Long], result: IntCode.State):
     import IntCode._
 
-    private def next: IntCode = memory(ip) % 100 match
+    private def read(offset: Int): Long = (memory(ip) / powers(offset)) % 10 match
+      case 0 => memory(memory(ip + offset))
+      case 1 => memory(ip + offset)
+      case 2 => memory(relativeBase + memory(ip + offset))
+
+    private def write(offset: Int, value: Long): Map[Long, Long] = (memory(ip) / powers(offset)) % 10 match
+      case 0 => memory.updated(memory(ip + offset), value)
+      case 2 => memory.updated(relativeBase + memory(ip + offset), value)
+
+    def next: IntCode = memory(ip) % 100 match
       case 1 => copy(ip = ip + 4, memory = write(3, read(1) + read(2)), result = Running)                   // Add
       case 2 => copy(ip = ip + 4, memory = write(3, read(1) * read(2)), result = Running)                   // Multiply
       case 3 => copy(ip = ip + 2, memory = write(1, input.head), input = input.tail, result = Running)      // Read
@@ -29,15 +38,6 @@ object Day09:
       case 8 => copy(ip = ip + 4, memory = write(3, if read(1) == read(2) then 1 else 0), result = Running) // Equals
       case 9 => copy(ip = ip + 2, relativeBase = relativeBase + read(1), result = Running)                  // Relative base
       case 99 => copy(result = Halted)                                                                      // Halt
-
-    private def read(offset: Int): Long = (memory(ip) / powers(offset)) % 10 match
-      case 0 => memory(memory(ip + offset))
-      case 1 => memory(ip + offset)
-      case 2 => memory(relativeBase + memory(ip + offset))
-
-    private def write(offset: Int, value: Long): Map[Long, Long] = (memory(ip) / powers(offset)) % 10 match
-      case 0 => memory.updated(memory(ip + offset), value)
-      case 2 => memory.updated(relativeBase + memory(ip + offset), value)
 
     def withInput(next: Long*): IntCode = copy(input = next)
 
