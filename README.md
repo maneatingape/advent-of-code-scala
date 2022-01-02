@@ -91,3 +91,4 @@ Entries for the annual [Advent of Code](https://adventofcode.com/) challenge, wr
 | 21 | [Springdroid Adventure](https://adventofcode.com/2019/day/21) | [Source](src/main/scala/AdventOfCode2019/Day21.scala) |
 | 22 | [Slam Shuffle](https://adventofcode.com/2019/day/22) | [Source](src/main/scala/AdventOfCode2019/Day22.scala) |
 | 23 | [Category Six](https://adventofcode.com/2019/day/23) | [Source](src/main/scala/AdventOfCode2019/Day23.scala) |
+| 24 | [Planet of Discord](https://adventofcode.com/2019/day/24) | [Source](src/main/scala/AdventOfCode2019/Day24.scala) |
