@@ -93,3 +93,9 @@
 | 23 | [Category Six](https://adventofcode.com/2019/day/23) | [Source](src/main/scala/AdventOfCode2019/Day23.scala) |
 | 24 | [Planet of Discord](https://adventofcode.com/2019/day/24) | [Source](src/main/scala/AdventOfCode2019/Day24.scala) |
 | 25 | [Cryostasis](https://adventofcode.com/2019/day/25) | [Source](src/main/scala/AdventOfCode2019/Day25.scala) |
+
+## 2018
+
+| Day | Problem | Solution |
+| --- | --- | --- |
+| 1 | [Chronal Calibration](https://adventofcode.com/2018/day/1) | [Source](src/main/scala/AdventOfCode2018/Day01.scala) |
