@@ -122,3 +122,4 @@ The minimal SBT project provides:
 | 2 | [Inventory Management System](https://adventofcode.com/2018/day/2) | [Source](src/main/scala/AdventOfCode2018/Day02.scala) |
 | 3 | [No Matter How You Slice It](https://adventofcode.com/2018/day/3) | [Source](src/main/scala/AdventOfCode2018/Day03.scala) |
 | 4 | [Repose Record](https://adventofcode.com/2018/day/4) | [Source](src/main/scala/AdventOfCode2018/Day04.scala) |
+| 5 | [Alchemical Reduction](https://adventofcode.com/2018/day/5) | [Source](src/main/scala/AdventOfCode2018/Day05.scala) |
