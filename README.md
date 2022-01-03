@@ -1,8 +1,28 @@
-## Advent of Code
+# Advent of Code
 
-2021 to 2019 entries for the annual [Advent of Code](https://adventofcode.com/) challenge, written in idiomatic functional Scala.
+2021 to 2019 entries for the annual [Advent of Code](https://adventofcode.com/) challenge, written in concise idiomatic functional Scala.
+
+The priority of the code is Readability > Simplicity > Performance.
+
+As far as possible, each day's solution embraces the following approaches:
+* Self-contained within a single file, depending only on the standard Scala library.
+* Comprised of [pure functions](https://en.wikipedia.org/wiki/Pure_function), taking only an input and returning a result.
+* [Immutable data structures](https://docs.scala-lang.org/scala3/book/fp-immutable-values.html), using copy-on-write to update.
+* Side effects, such as printing to the screen, contained to a single `main` method.
+
+The minimal SBT project provides:
+* Straightforward consistent layout of code, resources and tests.
+* Unit test coverage based on the sample input.
+* Continuous integration using [GitHub Actions](https://docs.github.com/en/actions).
 
 [![Scala CI](https://github.com/maneatingape/advent-of-code/actions/workflows/scala.yml/badge.svg)](https://github.com/maneatingape/advent-of-code/actions)
+
+## Years
+
+* [2021](#2021)
+* [2020](#2020)
+* [2019](#2019)
+* [2018](#2018)
 
 ## 2021
 
