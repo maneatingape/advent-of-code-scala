@@ -99,3 +99,4 @@
 | Day | Problem | Solution |
 | --- | --- | --- |
 | 1 | [Chronal Calibration](https://adventofcode.com/2018/day/1) | [Source](src/main/scala/AdventOfCode2018/Day01.scala) |
+| 2 | [Inventory Management System](https://adventofcode.com/2018/day/2) | [Source](src/main/scala/AdventOfCode2018/Day02.scala) |
