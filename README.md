@@ -128,3 +128,4 @@ The minimal SBT project provides:
 | 9 | [Marble Mania](https://adventofcode.com/2018/day/9) | [Source](src/main/scala/AdventOfCode2018/Day09.scala) |
 | 10 | [The Stars Align](https://adventofcode.com/2018/day/10) | [Source](src/main/scala/AdventOfCode2018/Day10.scala) |
 | 11 | [Chronal Charge](https://adventofcode.com/2018/day/11) | [Source](src/main/scala/AdventOfCode2018/Day11.scala) |
+| 12 | [Subterranean Sustainability](https://adventofcode.com/2018/day/12) | [Source](src/main/scala/AdventOfCode2018/Day12.scala) |
