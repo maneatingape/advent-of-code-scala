@@ -125,3 +125,4 @@ The minimal SBT project provides:
 | 5 | [Alchemical Reduction](https://adventofcode.com/2018/day/5) | [Source](src/main/scala/AdventOfCode2018/Day05.scala) |
 | 6 | [Chronal Coordinates](https://adventofcode.com/2018/day/6) | [Source](src/main/scala/AdventOfCode2018/Day06.scala) |
 | 7 | [The Sum of Its Parts](https://adventofcode.com/2018/day/7) | [Source](src/main/scala/AdventOfCode2018/Day07.scala) |
+| 8 | [Memory Maneuver](https://adventofcode.com/2018/day/8) | [Source](src/main/scala/AdventOfCode2018/Day08.scala) |
