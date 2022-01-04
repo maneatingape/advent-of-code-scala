@@ -2,13 +2,12 @@
 
 2021 to 2019 entries for the annual [Advent of Code](https://adventofcode.com/) challenge, written in concise idiomatic functional Scala.
 
-The priority of the code is Readability > Simplicity > Performance.
+The coding style philosophy is [Readability](https://www.lihaoyi.com/post/StrategicScalaStylePrincipleofLeastPower.html) > [Simplicity](https://en.wikipedia.org/wiki/KISS_principle) > [Performance](https://www.laws-of-software.com/laws/knuth/).
 
 As far as possible, each day's solution embraces the following approaches:
 * Self-contained within a single file, depending only on the standard Scala library.
-* Comprised of [pure functions](https://en.wikipedia.org/wiki/Pure_function), taking only an input and returning a result.
 * [Immutable data structures](https://docs.scala-lang.org/scala3/book/fp-immutable-values.html), using copy-on-write to update.
-* Side effects, such as printing to the screen, contained to a single `main` method.
+* [Pure functions](https://en.wikipedia.org/wiki/Pure_function) with side effects, such as printing to the screen, restricted to a single `main` method.
 
 The minimal SBT project provides:
 * Straightforward consistent layout of code, resources and tests.
