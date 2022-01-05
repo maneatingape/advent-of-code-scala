@@ -131,3 +131,4 @@ The minimal SBT project provides:
 | 12 | [Subterranean Sustainability](https://adventofcode.com/2018/day/12) | [Source](src/main/scala/AdventOfCode2018/Day12.scala) |
 | 13 | [Mine Cart Madness](https://adventofcode.com/2018/day/13) | [Source](src/main/scala/AdventOfCode2018/Day13.scala) |
 | 14 | [Chocolate Charts](https://adventofcode.com/2018/day/14) | [Source](src/main/scala/AdventOfCode2018/Day14.scala) |
+| 15 | [Beverage Bandits](https://adventofcode.com/2018/day/15) | [Source](src/main/scala/AdventOfCode2018/Day15.scala) |
