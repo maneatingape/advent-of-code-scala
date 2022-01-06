@@ -134,3 +134,4 @@ The minimal SBT project provides:
 | 15 | [Beverage Bandits](https://adventofcode.com/2018/day/15) | [Source](src/main/scala/AdventOfCode2018/Day15.scala) |
 | 16 | [Chronal Classification](https://adventofcode.com/2018/day/16) | [Source](src/main/scala/AdventOfCode2018/Day16.scala) |
 | 17 | [Reservoir Research](https://adventofcode.com/2018/day/17) | [Source](src/main/scala/AdventOfCode2018/Day17.scala) |
+| 18 | [Settlers of The North Pole](https://adventofcode.com/2018/day/18) | [Source](src/main/scala/AdventOfCode2018/Day18.scala) |
