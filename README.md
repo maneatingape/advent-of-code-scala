@@ -133,3 +133,4 @@ The minimal SBT project provides:
 | 14 | [Chocolate Charts](https://adventofcode.com/2018/day/14) | [Source](src/main/scala/AdventOfCode2018/Day14.scala) |
 | 15 | [Beverage Bandits](https://adventofcode.com/2018/day/15) | [Source](src/main/scala/AdventOfCode2018/Day15.scala) |
 | 16 | [Chronal Classification](https://adventofcode.com/2018/day/16) | [Source](src/main/scala/AdventOfCode2018/Day16.scala) |
+| 17 | [Reservoir Research](https://adventofcode.com/2018/day/17) | [Source](src/main/scala/AdventOfCode2018/Day17.scala) |
