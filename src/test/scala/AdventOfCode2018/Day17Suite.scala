@@ -13,12 +13,10 @@ class Day17Suite extends AnyFunSuite:
     "x=504, y=10..13",
     "y=13, x=498..504")
 
-  val day17 = Day17(sample)
-
   test("Part 1 should handle sample input correctly") {
-    assert(day17.part1 == 57)
+    assert(Day17.part1(sample) == 57)
   }
 
   test("Part 2 should handle sample input correctly") {
-    assert(day17.part2 == 29)
+    assert(Day17.part2(sample) == 29)
   }

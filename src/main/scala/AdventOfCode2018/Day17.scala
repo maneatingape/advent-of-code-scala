@@ -1,8 +1,6 @@
 package AdventOfCode2018
 
-import scala.annotation.tailrec
-
-class Day17(input: Seq[String]):
+object Day17:
   case class Ground(top: Int, bottom: Int, clay: Set[Point])
 
   case class Point(x: Int, y: Int):
@@ -10,8 +8,9 @@ class Day17(input: Seq[String]):
     def right: Point = Point(x + 1, y)
     def below: Point = Point(x, y + 1)
 
-  case class Span(start: Point, end: Point):
-    def points: Seq[Point] = for x <- start.x to end.x yield Point(x, start.y)
+  sealed trait Result
+  case object Stopped extends Result
+  case object Moving extends Result
 
   def parse(input: Seq[String]): Ground =
     val vertical = """x=(\d+), y=(\d+)..(\d+)""".r
@@ -22,45 +21,44 @@ class Day17(input: Seq[String]):
     }
     Ground(clay.map(_.y).min, clay.map(_.y).max, clay)
 
-  @tailrec
-  private def waterfall(ground: Ground, spans: Set[Span], stopped: Set[Point], moving: Set[Point]): (Set[Point], Set[Point]) =
+  def waterfall(ground: Ground): (Int, Int) =
+    val stopped = collection.mutable.Set[Point]()
+    val moving = collection.mutable.Set[Point]()
+
     def blocked(point: Point) = stopped.contains(point) || ground.clay.contains(point)
 
-    val newMoving = spans
-      .flatMap { span => Seq(span.start.below, span.end.below) }
-      .flatMap { edge =>
-        Iterator.iterate(edge)(_.below).takeWhile(point => !moving.contains(point) && !blocked(point) && point.y <= ground.bottom)
-      }
-    val newSpans = newMoving.map(point => Span(point, point))
+    def helper(point: Point): Result =
+      if blocked(point) then Stopped
+      else if point.y > ground.bottom || moving.contains(point) then Moving
+      else helper(point.below) match
+        case Moving =>
+          moving += point
+          Moving
+        case Stopped =>
+          val left = Iterator.iterate(point)(_.left).dropWhile(next => helper(next.below) == Stopped && !blocked(next.left)).next()
+          val right = Iterator.iterate(point)(_.right).dropWhile(next => helper(next.below) == Stopped && !blocked(next.right)).next()
+          val points = for x <- left.x to right.x yield Point(x, point.y)
+          if blocked(left.left) && blocked(right.right) then
+            stopped ++= points
+            Stopped
+          else
+            moving ++= points
+            Moving
+    end helper
 
-    val expandedSpans = (spans ++ newSpans).map { case Span(start, end) =>
-      val nextStart = Iterator.iterate(start)(_.left).dropWhile(next => blocked(next.below) && !blocked(next.left)).next()
-      val nextEnd = Iterator.iterate(end)(_.right).dropWhile(next => blocked(next.below) && !blocked(next.right)).next()
-      Span(nextStart, nextEnd)
-    }
-    val stoppedSpans = expandedSpans.filter { case span @ Span(start, end) =>
-      blocked(start.left) && blocked(end.right) && span.points.map(_.below).forall(blocked)
-    }
-
-    val nextSpans = expandedSpans -- stoppedSpans
-    val nextStopped = stopped ++ stoppedSpans.flatMap(_.points)
-    val nextMoving = moving ++ newMoving
-
-    if spans == nextSpans && stopped == nextStopped then (spans.filter(_.start.y >= ground.top).flatMap(_.points), stopped)
-    else waterfall(ground, nextSpans, nextStopped, nextMoving)
+    helper(Point(500, 0))
+    (moving.filterInPlace(point => point.y >= ground.top).size, stopped.size)
   end waterfall
 
-  private lazy val result =
-    val (moving, stopped) = waterfall(parse(input), Set(Span(Point(500, 1), Point(500, 1))), Set(), Set())
-    (moving.size, stopped.size)
+  def part1(input: Seq[String]): Int =
+    val (moving, stopped) = waterfall(parse(input))
+    moving + stopped
 
-  def part1: Int = result._1 + result._2
+  def part2(input: Seq[String]): Int =
+    val (moving, stopped) = waterfall(parse(input))
+    stopped
 
-  def part2: Int = result._2
-
-object Day17:
   def main(args: Array[String]): Unit =
     val data = io.Source.fromResource("AdventOfCode2018/Day17.txt").getLines().toSeq
-    val day17 = Day17(data)
-    println(day17.part1)
-    println(day17.part2)
+    println(part1(data))
+    println(part2(data))
