@@ -137,3 +137,4 @@ The minimal SBT project provides:
 | 18 | [Settlers of The North Pole](https://adventofcode.com/2018/day/18) | [Source](src/main/scala/AdventOfCode2018/Day18.scala) |
 | 19 | [Go With The Flow](https://adventofcode.com/2018/day/19) | [Source](src/main/scala/AdventOfCode2018/Day19.scala) |
 | 20 | [A Regular Map](https://adventofcode.com/2018/day/20) | [Source](src/main/scala/AdventOfCode2018/Day20.scala) |
+| 21 | [Chronal Conversion](https://adventofcode.com/2018/day/21) | [Source](src/main/scala/AdventOfCode2018/Day21.scala) |
