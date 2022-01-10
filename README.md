@@ -151,3 +151,4 @@ The minimal SBT project provides:
 | 1 | [Inverse Captcha](https://adventofcode.com/2017/day/1) | [Source](src/main/scala/AdventOfCode2017/Day01.scala) |
 | 2 | [Corruption Checksum](https://adventofcode.com/2017/day/2) | [Source](src/main/scala/AdventOfCode2017/Day02.scala) |
 | 3 | [Spiral Memory](https://adventofcode.com/2017/day/3) | [Source](src/main/scala/AdventOfCode2017/Day03.scala) |
+| 4 | [High-Entropy Passphrases](https://adventofcode.com/2017/day/4) | [Source](src/main/scala/AdventOfCode2017/Day04.scala) |
