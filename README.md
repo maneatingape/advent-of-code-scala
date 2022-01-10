@@ -152,3 +152,4 @@ The minimal SBT project provides:
 | 2 | [Corruption Checksum](https://adventofcode.com/2017/day/2) | [Source](src/main/scala/AdventOfCode2017/Day02.scala) |
 | 3 | [Spiral Memory](https://adventofcode.com/2017/day/3) | [Source](src/main/scala/AdventOfCode2017/Day03.scala) |
 | 4 | [High-Entropy Passphrases](https://adventofcode.com/2017/day/4) | [Source](src/main/scala/AdventOfCode2017/Day04.scala) |
+| 5 | [A Maze of Twisty Trampolines, All Alike](https://adventofcode.com/2017/day/5) | [Source](src/main/scala/AdventOfCode2017/Day05.scala) |
