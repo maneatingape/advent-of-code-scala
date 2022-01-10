@@ -1,6 +1,6 @@
 # Advent of Code
 
-2021 to 2019 entries for the annual [Advent of Code](https://adventofcode.com/) challenge, written in concise idiomatic functional Scala.
+2021 to 2018 entries for the annual [Advent of Code](https://adventofcode.com/) challenge, written in concise idiomatic functional Scala.
 
 The coding style philosophy is [Readability](https://www.lihaoyi.com/post/StrategicScalaStylePrincipleofLeastPower.html) > [Simplicity](https://en.wikipedia.org/wiki/KISS_principle) > [Performance](https://www.laws-of-software.com/laws/knuth/).
 
