@@ -139,4 +139,6 @@ The minimal SBT project provides:
 | 20 | [A Regular Map](https://adventofcode.com/2018/day/20) | [Source](src/main/scala/AdventOfCode2018/Day20.scala) |
 | 21 | [Chronal Conversion](https://adventofcode.com/2018/day/21) | [Source](src/main/scala/AdventOfCode2018/Day21.scala) |
 | 22 | [Mode Maze](https://adventofcode.com/2018/day/22) | [Source](src/main/scala/AdventOfCode2018/Day22.scala) |
+| 23 | [Experimental Emergency Teleportation](https://adventofcode.com/2018/day/23) | [Source](src/main/scala/AdventOfCode2018/Day23.scala) |
 | 24 | [Immune System Simulator 20XX](https://adventofcode.com/2018/day/24) | [Source](src/main/scala/AdventOfCode2018/Day24.scala) |
+| 25 | [Four-Dimensional Adventure](https://adventofcode.com/2018/day/25) | [Source](src/main/scala/AdventOfCode2018/Day25.scala) |
