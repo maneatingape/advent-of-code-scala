@@ -149,3 +149,4 @@ The minimal SBT project provides:
 | Day | Problem | Solution |
 | --- | --- | --- |
 | 1 | [Inverse Captcha](https://adventofcode.com/2017/day/1) | [Source](src/main/scala/AdventOfCode2017/Day01.scala) |
+| 2 | [Corruption Checksum](https://adventofcode.com/2017/day/2) | [Source](src/main/scala/AdventOfCode2017/Day02.scala) |
