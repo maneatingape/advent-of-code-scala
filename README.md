@@ -22,6 +22,7 @@ The minimal SBT project provides:
 * [2020](#2020)
 * [2019](#2019)
 * [2018](#2018)
+* [2017](#2017)
 
 ## 2021
 
@@ -142,3 +143,9 @@ The minimal SBT project provides:
 | 23 | [Experimental Emergency Teleportation](https://adventofcode.com/2018/day/23) | [Source](src/main/scala/AdventOfCode2018/Day23.scala) |
 | 24 | [Immune System Simulator 20XX](https://adventofcode.com/2018/day/24) | [Source](src/main/scala/AdventOfCode2018/Day24.scala) |
 | 25 | [Four-Dimensional Adventure](https://adventofcode.com/2018/day/25) | [Source](src/main/scala/AdventOfCode2018/Day25.scala) |
+
+## 2017
+
+| Day | Problem | Solution |
+| --- | --- | --- |
+| 1 | [Inverse Captcha](https://adventofcode.com/2017/day/1) | [Source](src/main/scala/AdventOfCode2017/Day01.scala) |
