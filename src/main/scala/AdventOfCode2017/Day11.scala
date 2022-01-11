@@ -1,20 +1,17 @@
 package AdventOfCode2017
 
 object Day11:
-  case class Hex(x: Int, y: Int):
-    private def even: Boolean = x % 2 == 0
+  case class Hex(q: Int, r: Int):
+    def manhattan: Int = q.abs.max(r.abs)
     def step(next: String): Hex = next match
-      case "n" => Hex(x, y - 1)
-      case "s" => Hex(x, y + 1)
-      case "ne" => if even then Hex(x + 1, y) else Hex(x + 1, y - 1)
-      case "nw" => if even then Hex(x - 1, y) else Hex(x - 1, y - 1)
-      case "se" => if even then Hex(x + 1, y + 1) else Hex(x + 1, y)
-      case "sw" => if even then Hex(x - 1, y + 1) else Hex(x - 1, y)
-    def distance: Int =
-      val offset = if y > 0 then (x.abs + 1) / 2 else (x.abs / 2)
-      x.abs + (y.abs - offset).max(0)
+      case "n" => Hex(q + 1, r - 1)
+      case "s" => Hex(q - 1, r + 1)
+      case "ne" => Hex(q + 1, r)
+      case "sw" => Hex(q - 1, r)
+      case "nw" => Hex(q, r - 1)
+      case "se" => Hex(q, r + 1)
 
-  def walk(input: String): Seq[Int] = input.split(",").scanLeft(Hex(0, 0))(_.step(_)).map(_.distance)
+  def walk(input: String): Seq[Int] = input.split(",").scanLeft(Hex(0, 0))(_.step(_)).map(_.manhattan)
 
   def part1(input: String): Int = walk(input).last
 
