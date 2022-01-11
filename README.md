@@ -158,3 +158,4 @@ The minimal SBT project provides:
 | 8 | [I Heard You Like Registers](https://adventofcode.com/2017/day/8) | [Source](src/main/scala/AdventOfCode2017/Day08.scala) |
 | 9 | [Stream Processing](https://adventofcode.com/2017/day/9) | [Source](src/main/scala/AdventOfCode2017/Day09.scala) |
 | 10 | [Knot Hash](https://adventofcode.com/2017/day/10) | [Source](src/main/scala/AdventOfCode2017/Day10.scala) |
+| 11 | [Hex Ed](https://adventofcode.com/2017/day/11) | [Source](src/main/scala/AdventOfCode2017/Day11.scala) |
