@@ -154,3 +154,4 @@ The minimal SBT project provides:
 | 4 | [High-Entropy Passphrases](https://adventofcode.com/2017/day/4) | [Source](src/main/scala/AdventOfCode2017/Day04.scala) |
 | 5 | [A Maze of Twisty Trampolines, All Alike](https://adventofcode.com/2017/day/5) | [Source](src/main/scala/AdventOfCode2017/Day05.scala) |
 | 6 | [Memory Reallocation](https://adventofcode.com/2017/day/6) | [Source](src/main/scala/AdventOfCode2017/Day06.scala) |
+| 7 | [Recursive Circus](https://adventofcode.com/2017/day/7) | [Source](src/main/scala/AdventOfCode2017/Day07.scala) |
