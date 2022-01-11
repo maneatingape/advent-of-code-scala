@@ -160,3 +160,4 @@ The minimal SBT project provides:
 | 10 | [Knot Hash](https://adventofcode.com/2017/day/10) | [Source](src/main/scala/AdventOfCode2017/Day10.scala) |
 | 11 | [Hex Ed](https://adventofcode.com/2017/day/11) | [Source](src/main/scala/AdventOfCode2017/Day11.scala) |
 | 12 | [Digital Plumber](https://adventofcode.com/2017/day/12) | [Source](src/main/scala/AdventOfCode2017/Day12.scala) |
+| 13 | [Packet Scanners](https://adventofcode.com/2017/day/13) | [Source](src/main/scala/AdventOfCode2017/Day13.scala) |
