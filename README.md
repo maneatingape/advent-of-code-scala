@@ -156,3 +156,4 @@ The minimal SBT project provides:
 | 6 | [Memory Reallocation](https://adventofcode.com/2017/day/6) | [Source](src/main/scala/AdventOfCode2017/Day06.scala) |
 | 7 | [Recursive Circus](https://adventofcode.com/2017/day/7) | [Source](src/main/scala/AdventOfCode2017/Day07.scala) |
 | 8 | [I Heard You Like Registers](https://adventofcode.com/2017/day/8) | [Source](src/main/scala/AdventOfCode2017/Day08.scala) |
+| 9 | [Stream Processing](https://adventofcode.com/2017/day/9) | [Source](src/main/scala/AdventOfCode2017/Day09.scala) |
