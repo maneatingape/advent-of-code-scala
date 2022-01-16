@@ -165,3 +165,4 @@ The minimal SBT project provides:
 | 15 | [Dueling Generators](https://adventofcode.com/2017/day/15) | [Source](src/main/scala/AdventOfCode2017/Day15.scala) |
 | 16 | [Permutation Promenade](https://adventofcode.com/2017/day/16) | [Source](src/main/scala/AdventOfCode2017/Day16.scala) |
 | 17 | [Spinlock](https://adventofcode.com/2017/day/17) | [Source](src/main/scala/AdventOfCode2017/Day17.scala) |
+| 18 | [Duet](https://adventofcode.com/2017/day/18) | [Source](src/main/scala/AdventOfCode2017/Day18.scala) |
