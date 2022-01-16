@@ -166,3 +166,4 @@ The minimal SBT project provides:
 | 16 | [Permutation Promenade](https://adventofcode.com/2017/day/16) | [Source](src/main/scala/AdventOfCode2017/Day16.scala) |
 | 17 | [Spinlock](https://adventofcode.com/2017/day/17) | [Source](src/main/scala/AdventOfCode2017/Day17.scala) |
 | 18 | [Duet](https://adventofcode.com/2017/day/18) | [Source](src/main/scala/AdventOfCode2017/Day18.scala) |
+| 19 | [A Series of Tubes](https://adventofcode.com/2017/day/19) | [Source](src/main/scala/AdventOfCode2017/Day19.scala) |
