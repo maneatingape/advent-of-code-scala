@@ -168,3 +168,4 @@ The minimal SBT project provides:
 | 18 | [Duet](https://adventofcode.com/2017/day/18) | [Source](src/main/scala/AdventOfCode2017/Day18.scala) |
 | 19 | [A Series of Tubes](https://adventofcode.com/2017/day/19) | [Source](src/main/scala/AdventOfCode2017/Day19.scala) |
 | 20 | [Particle Swarm](https://adventofcode.com/2017/day/20) | [Source](src/main/scala/AdventOfCode2017/Day20.scala) |
+| 21 | [Fractal Art](https://adventofcode.com/2017/day/21) | [Source](src/main/scala/AdventOfCode2017/Day21.scala) |
