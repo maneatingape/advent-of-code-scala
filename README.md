@@ -172,3 +172,4 @@ The minimal SBT project provides:
 | 22 | [Sporifica Virus](https://adventofcode.com/2017/day/22) | [Source](src/main/scala/AdventOfCode2017/Day22.scala) |
 | 23 | [Coprocessor Conflagration](https://adventofcode.com/2017/day/23) | [Source](src/main/scala/AdventOfCode2017/Day23.scala) |
 | 24 | [Electromagnetic Moat](https://adventofcode.com/2017/day/24) | [Source](src/main/scala/AdventOfCode2017/Day24.scala) |
+| 25 | [The Halting Problem](https://adventofcode.com/2017/day/25) | [Source](src/main/scala/AdventOfCode2017/Day25.scala) |
