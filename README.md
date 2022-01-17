@@ -171,3 +171,4 @@ The minimal SBT project provides:
 | 21 | [Fractal Art](https://adventofcode.com/2017/day/21) | [Source](src/main/scala/AdventOfCode2017/Day21.scala) |
 | 22 | [Sporifica Virus](https://adventofcode.com/2017/day/22) | [Source](src/main/scala/AdventOfCode2017/Day22.scala) |
 | 23 | [Coprocessor Conflagration](https://adventofcode.com/2017/day/23) | [Source](src/main/scala/AdventOfCode2017/Day23.scala) |
+| 24 | [Electromagnetic Moat](https://adventofcode.com/2017/day/24) | [Source](src/main/scala/AdventOfCode2017/Day24.scala) |
