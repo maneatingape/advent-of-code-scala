@@ -21,9 +21,9 @@ object Day24:
     helper(parse(input), 0, 0, 0)._2
   end build
 
-  def part1(input: Seq[String]): Int = build(input, Ordering.by(identity))
+  def part1(input: Seq[String]): Int = build(input, Ordering.by(_._2))
 
-  def part2(input: Seq[String]): Int = build(input, Ordering.by(_._2))
+  def part2(input: Seq[String]): Int = build(input, Ordering.by(identity))
 
   def main(args: Array[String]): Unit =
     val data = io.Source.fromResource("AdventOfCode2017/Day24.txt").getLines().toSeq
