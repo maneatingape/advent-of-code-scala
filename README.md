@@ -170,3 +170,4 @@ The minimal SBT project provides:
 | 20 | [Particle Swarm](https://adventofcode.com/2017/day/20) | [Source](src/main/scala/AdventOfCode2017/Day20.scala) |
 | 21 | [Fractal Art](https://adventofcode.com/2017/day/21) | [Source](src/main/scala/AdventOfCode2017/Day21.scala) |
 | 22 | [Sporifica Virus](https://adventofcode.com/2017/day/22) | [Source](src/main/scala/AdventOfCode2017/Day22.scala) |
+| 23 | [Coprocessor Conflagration](https://adventofcode.com/2017/day/23) | [Source](src/main/scala/AdventOfCode2017/Day23.scala) |
