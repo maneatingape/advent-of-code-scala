@@ -183,3 +183,4 @@ The minimal SBT project provides:
 | 2 | [Bathroom Security](https://adventofcode.com/2016/day/2) | [Source](src/main/scala/AdventOfCode2016/Day02.scala) |
 | 3 | [Squares With Three Sides](https://adventofcode.com/2016/day/3) | [Source](src/main/scala/AdventOfCode2016/Day03.scala) |
 | 4 | [Security Through Obscurity](https://adventofcode.com/2016/day/4) | [Source](src/main/scala/AdventOfCode2016/Day04.scala) |
+| 5 | [How About a Nice Game of Chess?](https://adventofcode.com/2016/day/5) | [Source](src/main/scala/AdventOfCode2016/Day05.scala) |
