@@ -184,3 +184,4 @@ The minimal SBT project provides:
 | 3 | [Squares With Three Sides](https://adventofcode.com/2016/day/3) | [Source](src/main/scala/AdventOfCode2016/Day03.scala) |
 | 4 | [Security Through Obscurity](https://adventofcode.com/2016/day/4) | [Source](src/main/scala/AdventOfCode2016/Day04.scala) |
 | 5 | [How About a Nice Game of Chess?](https://adventofcode.com/2016/day/5) | [Source](src/main/scala/AdventOfCode2016/Day05.scala) |
+| 6 | [Signals and Noise](https://adventofcode.com/2016/day/6) | [Source](src/main/scala/AdventOfCode2016/Day06.scala) |
