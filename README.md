@@ -180,3 +180,4 @@ The minimal SBT project provides:
 | Day | Problem | Solution |
 | --- | --- | --- |
 | 1 | [No Time for a Taxicab](https://adventofcode.com/2016/day/1) | [Source](src/main/scala/AdventOfCode2016/Day01.scala) |
+| 2 | [Bathroom Security](https://adventofcode.com/2016/day/2) | [Source](src/main/scala/AdventOfCode2016/Day02.scala) |
