@@ -23,6 +23,7 @@ The minimal SBT project provides:
 * [2019](#2019)
 * [2018](#2018)
 * [2017](#2017)
+* [2016](#2016)
 
 ## 2021
 
@@ -173,3 +174,9 @@ The minimal SBT project provides:
 | 23 | [Coprocessor Conflagration](https://adventofcode.com/2017/day/23) | [Source](src/main/scala/AdventOfCode2017/Day23.scala) |
 | 24 | [Electromagnetic Moat](https://adventofcode.com/2017/day/24) | [Source](src/main/scala/AdventOfCode2017/Day24.scala) |
 | 25 | [The Halting Problem](https://adventofcode.com/2017/day/25) | [Source](src/main/scala/AdventOfCode2017/Day25.scala) |
+
+## 2016
+
+| Day | Problem | Solution |
+| --- | --- | --- |
+| 1 | [No Time for a Taxicab](https://adventofcode.com/2016/day/1) | [Source](src/main/scala/AdventOfCode2016/Day01.scala) |
