@@ -185,3 +185,4 @@ The minimal SBT project provides:
 | 4 | [Security Through Obscurity](https://adventofcode.com/2016/day/4) | [Source](src/main/scala/AdventOfCode2016/Day04.scala) |
 | 5 | [How About a Nice Game of Chess?](https://adventofcode.com/2016/day/5) | [Source](src/main/scala/AdventOfCode2016/Day05.scala) |
 | 6 | [Signals and Noise](https://adventofcode.com/2016/day/6) | [Source](src/main/scala/AdventOfCode2016/Day06.scala) |
+| 7 | [Internet Protocol Version 7](https://adventofcode.com/2016/day/7) | [Source](src/main/scala/AdventOfCode2016/Day07.scala) |
