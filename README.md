@@ -186,3 +186,4 @@ The minimal SBT project provides:
 | 5 | [How About a Nice Game of Chess?](https://adventofcode.com/2016/day/5) | [Source](src/main/scala/AdventOfCode2016/Day05.scala) |
 | 6 | [Signals and Noise](https://adventofcode.com/2016/day/6) | [Source](src/main/scala/AdventOfCode2016/Day06.scala) |
 | 7 | [Internet Protocol Version 7](https://adventofcode.com/2016/day/7) | [Source](src/main/scala/AdventOfCode2016/Day07.scala) |
+| 8 | [Two-Factor Authentication](https://adventofcode.com/2016/day/8) | [Source](src/main/scala/AdventOfCode2016/Day08.scala) |
