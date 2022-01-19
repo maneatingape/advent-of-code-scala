@@ -189,3 +189,4 @@ The minimal SBT project provides:
 | 8 | [Two-Factor Authentication](https://adventofcode.com/2016/day/8) | [Source](src/main/scala/AdventOfCode2016/Day08.scala) |
 | 9 | [Explosives in Cyberspace](https://adventofcode.com/2016/day/9) | [Source](src/main/scala/AdventOfCode2016/Day09.scala) |
 | 10 | [Balance Bots](https://adventofcode.com/2016/day/10) | [Source](src/main/scala/AdventOfCode2016/Day10.scala) |
+| 11 | [Radioisotope Thermoelectric Generators](https://adventofcode.com/2016/day/11) | [Source](src/main/scala/AdventOfCode2016/Day11.scala) |
