@@ -191,3 +191,4 @@ The minimal SBT project provides:
 | 10 | [Balance Bots](https://adventofcode.com/2016/day/10) | [Source](src/main/scala/AdventOfCode2016/Day10.scala) |
 | 11 | [Radioisotope Thermoelectric Generators](https://adventofcode.com/2016/day/11) | [Source](src/main/scala/AdventOfCode2016/Day11.scala) |
 | 12 | [Leonardo's Monorail](https://adventofcode.com/2016/day/12) | [Source](src/main/scala/AdventOfCode2016/Day12.scala) |
+| 13 | [A Maze of Twisty Little Cubicles](https://adventofcode.com/2016/day/13) | [Source](src/main/scala/AdventOfCode2016/Day13.scala) |
