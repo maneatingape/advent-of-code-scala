@@ -192,3 +192,4 @@ The minimal SBT project provides:
 | 11 | [Radioisotope Thermoelectric Generators](https://adventofcode.com/2016/day/11) | [Source](src/main/scala/AdventOfCode2016/Day11.scala) |
 | 12 | [Leonardo's Monorail](https://adventofcode.com/2016/day/12) | [Source](src/main/scala/AdventOfCode2016/Day12.scala) |
 | 13 | [A Maze of Twisty Little Cubicles](https://adventofcode.com/2016/day/13) | [Source](src/main/scala/AdventOfCode2016/Day13.scala) |
+| 14 | [One-Time Pad](https://adventofcode.com/2016/day/14) | [Source](src/main/scala/AdventOfCode2016/Day14.scala) |
