@@ -57,7 +57,7 @@ object Day22:
     def heuristic(state: State) = state.location.manhattan(end.location)
 
     while todo.nonEmpty do
-      val (current, wtf) = todo.dequeue()
+      val (current, _) = todo.dequeue()
       if current == end then return cost(end)
 
       neighbours(current, terrain).foreach { case (next, time) =>
