@@ -20,6 +20,15 @@ object Day11:
         destination <- Set(elevator + 1, elevator - 1).filter(floors.indices.contains)
       yield State(destination, floors.updated(elevator, floors(elevator) -- subset).updated(destination, floors(destination) ++ subset))
       all.filter(_.valid).toSeq
+    def equivalent: Seq[(Int, Int)] =
+      floors.map { floor =>
+        floor.foldLeft((0, 0)) { case ((chips, generators), next) =>
+          next match
+            case Chip(_) => (chips + 1, generators)
+            case Generator(_) => (chips, generators + 1)
+        }
+      }
+      .appended((elevator, elevator))
 
   def parse(input: Seq[String]): State =
     val chipRegex = "(\\w+)(?=-compatible)".r
@@ -28,7 +37,7 @@ object Day11:
     State(0, floors)
 
   def dijkstra(start: State): Int =
-    val cache = collection.mutable.Map(start -> 0)
+    val cache = collection.mutable.Map(start.equivalent -> 0)
     val todo = collection.mutable.PriorityQueue(start -> 0)(Ordering.by((_,c) => -c))
 
     while todo.nonEmpty do
@@ -36,8 +45,9 @@ object Day11:
       if current.finished then return total
       current.candidates.foreach { next =>
         val cost = total + 1
-        if !cache.contains(next) || cost < cache(next) then
-          cache(next) = cost
+        val hash = next.equivalent
+        if !cache.contains(hash) || cost < cache(hash) then
+          cache(hash) = cost
           todo.enqueue(next -> cost)
       }
 
