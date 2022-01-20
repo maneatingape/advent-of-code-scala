@@ -6,7 +6,8 @@ object Day16:
     Iterator.iterate(start)(step).dropWhile(_.length < target).next().take(target)
 
   def checksum(start: String): String =
-    def step(s: String) = s.grouped(2).map(g => if g(0) == g(1) then '1' else '0').mkString
+    val groupSize = Integer.lowestOneBit(start.length)
+    def step(s: String) = s.grouped(groupSize).map(g => if g.count(_ == '1') % 2 == 0 then '1' else '0').mkString
     Iterator.iterate(start)(step).dropWhile(_.length % 2 == 0).next()
 
   def part1(input: String): String = checksum(dragon(input, 272))
