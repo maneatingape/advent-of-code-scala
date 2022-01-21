@@ -199,3 +199,4 @@ The minimal SBT project provides:
 | 18 | [Like a Rogue](https://adventofcode.com/2016/day/18) | [Source](src/main/scala/AdventOfCode2016/Day18.scala) |
 | 19 | [An Elephant Named Joseph](https://adventofcode.com/2016/day/19) | [Source](src/main/scala/AdventOfCode2016/Day19.scala) |
 | 20 | [Firewall Rules](https://adventofcode.com/2016/day/20) | [Source](src/main/scala/AdventOfCode2016/Day20.scala) |
+| 21 | [Scrambled Letters and Hash](https://adventofcode.com/2016/day/21) | [Source](src/main/scala/AdventOfCode2016/Day21.scala) |
