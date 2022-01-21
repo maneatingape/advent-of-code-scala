@@ -10,20 +10,16 @@ object Day22:
       Technique(nextA, nextC, m)
 
     def inverse: Technique =
-      val (nextA, _) = modularInverse(a, m)
-      val nextC = nextA * -c
+      val nextA = a.modInverse(m)
+      val nextC = mod(nextA * -c)
       Technique(nextA, nextC, m)
 
-    private def mod(n: BigInt) = (n % m + m) % m
-
-    private def modularInverse(a: BigInt, b: BigInt): (BigInt, BigInt) = if a == 0 then (0, 1) else
-      val (x1, y1) = modularInverse(b % a, a)
-      (y1 - (b / a) * x1, x1)
+    private def mod(n: BigInt) = n % m
   end Technique
 
   def parse(input: Seq[String], size: Long): Technique = input.map(_.split(" "))
     .map {
-      case Array(_, "into", _, _) => Technique(-1, size - 1, size)
+      case Array(_, "into", _, _) => Technique(size - 1, size - 1, size)
       case Array(_, "with" ,_, n) => Technique(n.toLong, 0, size)
       case Array("cut", n) => Technique(1, size - n.toLong, size)
     }
