@@ -198,3 +198,4 @@ The minimal SBT project provides:
 | 17 | [Two Steps Forward](https://adventofcode.com/2016/day/17) | [Source](src/main/scala/AdventOfCode2016/Day17.scala) |
 | 18 | [Like a Rogue](https://adventofcode.com/2016/day/18) | [Source](src/main/scala/AdventOfCode2016/Day18.scala) |
 | 19 | [An Elephant Named Joseph](https://adventofcode.com/2016/day/19) | [Source](src/main/scala/AdventOfCode2016/Day19.scala) |
+| 20 | [Firewall Rules](https://adventofcode.com/2016/day/20) | [Source](src/main/scala/AdventOfCode2016/Day20.scala) |
