@@ -197,3 +197,4 @@ The minimal SBT project provides:
 | 16 | [Dragon Checksum](https://adventofcode.com/2016/day/16) | [Source](src/main/scala/AdventOfCode2016/Day16.scala) |
 | 17 | [Two Steps Forward](https://adventofcode.com/2016/day/17) | [Source](src/main/scala/AdventOfCode2016/Day17.scala) |
 | 18 | [Like a Rogue](https://adventofcode.com/2016/day/18) | [Source](src/main/scala/AdventOfCode2016/Day18.scala) |
+| 19 | [An Elephant Named Joseph](https://adventofcode.com/2016/day/19) | [Source](src/main/scala/AdventOfCode2016/Day19.scala) |
