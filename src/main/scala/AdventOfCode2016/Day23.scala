@@ -56,11 +56,11 @@ object Day23:
     .updated(14, "mul 2 c")
 
   def run(input: Seq[String], eggs: Int): Int =
-    Iterator.iterate(Cpu(patch(input), Map("a" -> eggs)))(_.step).dropWhile(_.state == Running).next().registers("a")
+    Iterator.iterate(Cpu(input, Map("a" -> eggs)))(_.step).dropWhile(_.state == Running).next().registers("a")
 
   def part1(input: Seq[String]): Int = run(input, 7)
 
-  def part2(input: Seq[String]): Int = run(input, 12)
+  def part2(input: Seq[String]): Int = run(patch(input), 12)
 
   def main(args: Array[String]): Unit =
     val data = io.Source.fromResource("AdventOfCode2016/Day23.txt").getLines().toSeq
