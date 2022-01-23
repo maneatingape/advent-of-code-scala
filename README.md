@@ -202,3 +202,4 @@ The minimal SBT project provides:
 | 21 | [Scrambled Letters and Hash](https://adventofcode.com/2016/day/21) | [Source](src/main/scala/AdventOfCode2016/Day21.scala) |
 | 22 | [Grid Computing](https://adventofcode.com/2016/day/22) | [Source](src/main/scala/AdventOfCode2016/Day22.scala) |
 | 23 | [Safe Cracking](https://adventofcode.com/2016/day/23) | [Source](src/main/scala/AdventOfCode2016/Day23.scala) |
+| 24 | [Air Duct Spelunking](https://adventofcode.com/2016/day/24) | [Source](src/main/scala/AdventOfCode2016/Day24.scala) |
