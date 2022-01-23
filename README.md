@@ -215,3 +215,4 @@ The minimal SBT project provides:
 | 3 | [Perfectly Spherical Houses in a Vacuum](https://adventofcode.com/2015/day/3) | [Source](src/main/scala/AdventOfCode2015/Day03.scala) |
 | 4 | [The Ideal Stocking Stuffer](https://adventofcode.com/2015/day/4) | [Source](src/main/scala/AdventOfCode2015/Day04.scala) |
 | 5 | [Doesn't He Have Intern-Elves For This?](https://adventofcode.com/2015/day/5) | [Source](src/main/scala/AdventOfCode2015/Day05.scala) |
+| 6 | [Probably a Fire Hazard](https://adventofcode.com/2015/day/6) | [Source](src/main/scala/AdventOfCode2015/Day06.scala) |
