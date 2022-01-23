@@ -24,6 +24,7 @@ The minimal SBT project provides:
 * [2018](#2018)
 * [2017](#2017)
 * [2016](#2016)
+* [2015](#2015)
 
 ## 2021
 
@@ -204,3 +205,9 @@ The minimal SBT project provides:
 | 23 | [Safe Cracking](https://adventofcode.com/2016/day/23) | [Source](src/main/scala/AdventOfCode2016/Day23.scala) |
 | 24 | [Air Duct Spelunking](https://adventofcode.com/2016/day/24) | [Source](src/main/scala/AdventOfCode2016/Day24.scala) |
 | 25 | [Clock Signal](https://adventofcode.com/2016/day/25) | [Source](src/main/scala/AdventOfCode2016/Day25.scala) |
+
+## 2015
+
+| Day | Problem | Solution |
+| --- | --- | --- |
+| 1 | [Not Quite Lisp](https://adventofcode.com/2015/day/1) | [Source](src/main/scala/AdventOfCode2015/Day01.scala) |
