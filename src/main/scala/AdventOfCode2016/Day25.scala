@@ -28,13 +28,19 @@ object Day25:
   // This seed is then repeatedly bit shifted right by dividing by 2
   // using an inefficient linear time loop.
   // The remainder (the bit that drops off) is the output.
-  // This means that output sequence is simply the binary digits of "a" + 4 * 633.
+  // This means that output sequence is simply the binary digits of "a" + 4 * 633
+  // in reverse, repeated over and over.
   // To obtain the desired pattern we need the next highest binary number that has the
   // pattern "101010.....". For this data that number is 2730 - 4 * 633 = 198.
+  def part1(input: Seq[String]): Int =
+    Iterator.from(0).map { start =>
+      Iterator.iterate(Cpu(input, Map("a" -> start)))(_.step)
+        .collect { case Cpu(_, _, _, Output(value)) => value }
+        .take(12)
+        .mkString
+    }
+    .indexWhere(_ == "010101010101")
+
   def main(args: Array[String]): Unit =
     val data = io.Source.fromResource("AdventOfCode2016/Day25.txt").getLines().toSeq
-    val magic = 198
-    val result = Iterator.iterate(Cpu(data, Map("a" -> magic)))(_.step).take(100000).collect {
-      case Cpu(_, _, _, Output(value)) => value
-    }
-    println(result.mkString)
+    println(part1(data))
