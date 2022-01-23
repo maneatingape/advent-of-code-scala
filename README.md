@@ -211,3 +211,4 @@ The minimal SBT project provides:
 | Day | Problem | Solution |
 | --- | --- | --- |
 | 1 | [Not Quite Lisp](https://adventofcode.com/2015/day/1) | [Source](src/main/scala/AdventOfCode2015/Day01.scala) |
+| 2 | [I Was Told There Would Be No Math](https://adventofcode.com/2015/day/2) | [Source](src/main/scala/AdventOfCode2015/Day02.scala) |
