@@ -213,3 +213,4 @@ The minimal SBT project provides:
 | 1 | [Not Quite Lisp](https://adventofcode.com/2015/day/1) | [Source](src/main/scala/AdventOfCode2015/Day01.scala) |
 | 2 | [I Was Told There Would Be No Math](https://adventofcode.com/2015/day/2) | [Source](src/main/scala/AdventOfCode2015/Day02.scala) |
 | 3 | [Perfectly Spherical Houses in a Vacuum](https://adventofcode.com/2015/day/3) | [Source](src/main/scala/AdventOfCode2015/Day03.scala) |
+| 4 | [The Ideal Stocking Stuffer](https://adventofcode.com/2015/day/4) | [Source](src/main/scala/AdventOfCode2015/Day04.scala) |
