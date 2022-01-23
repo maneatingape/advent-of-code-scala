@@ -203,3 +203,4 @@ The minimal SBT project provides:
 | 22 | [Grid Computing](https://adventofcode.com/2016/day/22) | [Source](src/main/scala/AdventOfCode2016/Day22.scala) |
 | 23 | [Safe Cracking](https://adventofcode.com/2016/day/23) | [Source](src/main/scala/AdventOfCode2016/Day23.scala) |
 | 24 | [Air Duct Spelunking](https://adventofcode.com/2016/day/24) | [Source](src/main/scala/AdventOfCode2016/Day24.scala) |
+| 25 | [Clock Signal](https://adventofcode.com/2016/day/25) | [Source](src/main/scala/AdventOfCode2016/Day25.scala) |
