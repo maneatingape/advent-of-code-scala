@@ -219,3 +219,4 @@ The minimal SBT project provides:
 | 7 | [Some Assembly Required](https://adventofcode.com/2015/day/7) | [Source](src/main/scala/AdventOfCode2015/Day07.scala) |
 | 8 | [Matchsticks](https://adventofcode.com/2015/day/8) | [Source](src/main/scala/AdventOfCode2015/Day08.scala) |
 | 9 | [All in a Single Night](https://adventofcode.com/2015/day/9) | [Source](src/main/scala/AdventOfCode2015/Day09.scala) |
+| 10 | [Elves Look, Elves Say](https://adventofcode.com/2015/day/10) | [Source](src/main/scala/AdventOfCode2015/Day10.scala) |
