@@ -216,3 +216,4 @@ The minimal SBT project provides:
 | 4 | [The Ideal Stocking Stuffer](https://adventofcode.com/2015/day/4) | [Source](src/main/scala/AdventOfCode2015/Day04.scala) |
 | 5 | [Doesn't He Have Intern-Elves For This?](https://adventofcode.com/2015/day/5) | [Source](src/main/scala/AdventOfCode2015/Day05.scala) |
 | 6 | [Probably a Fire Hazard](https://adventofcode.com/2015/day/6) | [Source](src/main/scala/AdventOfCode2015/Day06.scala) |
+| 7 | [Some Assembly Required](https://adventofcode.com/2015/day/7) | [Source](src/main/scala/AdventOfCode2015/Day07.scala) |
