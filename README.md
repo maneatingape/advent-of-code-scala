@@ -223,3 +223,4 @@ The minimal SBT project provides:
 | 11 | [Corporate Policy](https://adventofcode.com/2015/day/11) | [Source](src/main/scala/AdventOfCode2015/Day11.scala) |
 | 12 | [JSAbacusFramework.io](https://adventofcode.com/2015/day/12) | [Source](src/main/scala/AdventOfCode2015/Day12.scala) |
 | 13 | [Knights of the Dinner Table](https://adventofcode.com/2015/day/13) | [Source](src/main/scala/AdventOfCode2015/Day13.scala) |
+| 14 | [Reindeer Olympics](https://adventofcode.com/2015/day/14) | [Source](src/main/scala/AdventOfCode2015/Day14.scala) |
