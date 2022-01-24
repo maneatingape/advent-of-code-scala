@@ -217,3 +217,4 @@ The minimal SBT project provides:
 | 5 | [Doesn't He Have Intern-Elves For This?](https://adventofcode.com/2015/day/5) | [Source](src/main/scala/AdventOfCode2015/Day05.scala) |
 | 6 | [Probably a Fire Hazard](https://adventofcode.com/2015/day/6) | [Source](src/main/scala/AdventOfCode2015/Day06.scala) |
 | 7 | [Some Assembly Required](https://adventofcode.com/2015/day/7) | [Source](src/main/scala/AdventOfCode2015/Day07.scala) |
+| 8 | [Matchsticks](https://adventofcode.com/2015/day/8) | [Source](src/main/scala/AdventOfCode2015/Day08.scala) |
