@@ -227,3 +227,4 @@ The minimal SBT project provides:
 | 15 | [Science for Hungry People](https://adventofcode.com/2015/day/15) | [Source](src/main/scala/AdventOfCode2015/Day15.scala) |
 | 16 | [Aunt Sue](https://adventofcode.com/2015/day/16) | [Source](src/main/scala/AdventOfCode2015/Day16.scala) |
 | 17 | [No Such Thing as Too Much](https://adventofcode.com/2015/day/17) | [Source](src/main/scala/AdventOfCode2015/Day17.scala) |
+| 18 | [Like a GIF For Your Yard](https://adventofcode.com/2015/day/18) | [Source](src/main/scala/AdventOfCode2015/Day18.scala) |
