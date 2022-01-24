@@ -221,3 +221,4 @@ The minimal SBT project provides:
 | 9 | [All in a Single Night](https://adventofcode.com/2015/day/9) | [Source](src/main/scala/AdventOfCode2015/Day09.scala) |
 | 10 | [Elves Look, Elves Say](https://adventofcode.com/2015/day/10) | [Source](src/main/scala/AdventOfCode2015/Day10.scala) |
 | 11 | [Corporate Policy](https://adventofcode.com/2015/day/11) | [Source](src/main/scala/AdventOfCode2015/Day11.scala) |
+| 12 | [JSAbacusFramework.io](https://adventofcode.com/2015/day/12) | [Source](src/main/scala/AdventOfCode2015/Day12.scala) |
