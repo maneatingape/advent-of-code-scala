@@ -225,3 +225,4 @@ The minimal SBT project provides:
 | 13 | [Knights of the Dinner Table](https://adventofcode.com/2015/day/13) | [Source](src/main/scala/AdventOfCode2015/Day13.scala) |
 | 14 | [Reindeer Olympics](https://adventofcode.com/2015/day/14) | [Source](src/main/scala/AdventOfCode2015/Day14.scala) |
 | 15 | [Science for Hungry People](https://adventofcode.com/2015/day/15) | [Source](src/main/scala/AdventOfCode2015/Day15.scala) |
+| 16 | [Aunt Sue](https://adventofcode.com/2015/day/16) | [Source](src/main/scala/AdventOfCode2015/Day16.scala) |
