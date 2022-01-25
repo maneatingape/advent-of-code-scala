@@ -229,3 +229,4 @@ The minimal SBT project provides:
 | 17 | [No Such Thing as Too Much](https://adventofcode.com/2015/day/17) | [Source](src/main/scala/AdventOfCode2015/Day17.scala) |
 | 18 | [Like a GIF For Your Yard](https://adventofcode.com/2015/day/18) | [Source](src/main/scala/AdventOfCode2015/Day18.scala) |
 | 19 | [Medicine for Rudolph](https://adventofcode.com/2015/day/19) | [Source](src/main/scala/AdventOfCode2015/Day19.scala) |
+| 20 | [Infinite Elves and Infinite Houses](https://adventofcode.com/2015/day/20) | [Source](src/main/scala/AdventOfCode2015/Day20.scala) |
