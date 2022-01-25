@@ -233,3 +233,4 @@ The minimal SBT project provides:
 | 21 | [RPG Simulator 20XX](https://adventofcode.com/2015/day/21) | [Source](src/main/scala/AdventOfCode2015/Day21.scala) |
 | 22 | [Wizard Simulator 20XX](https://adventofcode.com/2015/day/22) | [Source](src/main/scala/AdventOfCode2015/Day22.scala) |
 | 23 | [Opening the Turing Lock](https://adventofcode.com/2015/day/23) | [Source](src/main/scala/AdventOfCode2015/Day23.scala) |
+| 24 | [It Hangs in the Balance](https://adventofcode.com/2015/day/24) | [Source](src/main/scala/AdventOfCode2015/Day24.scala) |
