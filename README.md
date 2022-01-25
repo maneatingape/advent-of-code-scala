@@ -232,3 +232,4 @@ The minimal SBT project provides:
 | 20 | [Infinite Elves and Infinite Houses](https://adventofcode.com/2015/day/20) | [Source](src/main/scala/AdventOfCode2015/Day20.scala) |
 | 21 | [RPG Simulator 20XX](https://adventofcode.com/2015/day/21) | [Source](src/main/scala/AdventOfCode2015/Day21.scala) |
 | 22 | [Wizard Simulator 20XX](https://adventofcode.com/2015/day/22) | [Source](src/main/scala/AdventOfCode2015/Day22.scala) |
+| 23 | [Opening the Turing Lock](https://adventofcode.com/2015/day/23) | [Source](src/main/scala/AdventOfCode2015/Day23.scala) |
