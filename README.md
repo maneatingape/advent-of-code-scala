@@ -230,3 +230,4 @@ The minimal SBT project provides:
 | 18 | [Like a GIF For Your Yard](https://adventofcode.com/2015/day/18) | [Source](src/main/scala/AdventOfCode2015/Day18.scala) |
 | 19 | [Medicine for Rudolph](https://adventofcode.com/2015/day/19) | [Source](src/main/scala/AdventOfCode2015/Day19.scala) |
 | 20 | [Infinite Elves and Infinite Houses](https://adventofcode.com/2015/day/20) | [Source](src/main/scala/AdventOfCode2015/Day20.scala) |
+| 21 | [RPG Simulator 20XX](https://adventofcode.com/2015/day/21) | [Source](src/main/scala/AdventOfCode2015/Day21.scala) |
