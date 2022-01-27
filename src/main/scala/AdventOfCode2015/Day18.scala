@@ -8,14 +8,14 @@ object Day18:
     def neighbours: Seq[Point] = adjacent.map(delta)
 
   def parse(input: Seq[String]): Set[Point] =
-    Set.tabulate(100, 100)(Point).flatten.filter(p => input(p.y)(p.x) == '#')
+    Set.tabulate(100, 100)(Point.apply).flatten.filter(p => input(p.y)(p.x) == '#')
 
   def step(grid: Set[Point]): Set[Point] =
     def rule(point: Point) =
       val active = grid.contains(point)
       val count = point.neighbours.count(grid.contains)
       count == 3 || (active && count == 2)
-    Set.tabulate(100, 100)(Point).flatten.filter(rule)
+    Set.tabulate(100, 100)(Point.apply).flatten.filter(rule)
 
   def corners(grid: Set[Point]): Set[Point] =
     step(grid) ++ Set(Point(0, 0), Point(0, 99), Point(99, 0), Point(99, 99))
