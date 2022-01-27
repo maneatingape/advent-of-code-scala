@@ -2,6 +2,7 @@ package AdventOfCode2019
 
 object Day22:
   case class Technique(a: BigInt, c: BigInt, m: BigInt):
+    def mod(n: BigInt) = n % m
     def shuffle(index: Long): Long = mod(a * index + c).toLong
 
     def merge(other: Technique): Technique =
@@ -14,7 +15,10 @@ object Day22:
       val nextC = mod(nextA * -c)
       Technique(nextA, nextC, m)
 
-    private def mod(n: BigInt) = n % m
+    def pow(exp: BigInt): Technique =
+      val nextA = a.modPow(exp, m)
+      val nextC = mod((nextA - 1) * (a - 1).modInverse(m) * c)
+      Technique(nextA, nextC, m)
   end Technique
 
   def parse(input: Seq[String], size: Long): Technique = input.map(_.split(" "))
@@ -27,13 +31,7 @@ object Day22:
 
   def part1(input: Seq[String]): Long = parse(input, 10007).shuffle(2019)
 
-  def part2(input: Seq[String]): Long =
-    def helper(remaining: Long, result: Long, technique: Technique): Long = if remaining == 0 then result else
-      val nextResult = if remaining % 2 == 0 then result else technique.shuffle(result)
-      helper(remaining / 2, nextResult, technique.merge(technique))
-
-    helper(101741582076661L, 2020, parse(input, 119315717514047L).inverse)
-  end part2
+  def part2(input: Seq[String]): Long = parse(input, 119315717514047L).inverse.pow(101741582076661L).shuffle(2020)
 
   def main(args: Array[String]): Unit =
     val data = io.Source.fromResource("AdventOfCode2019/Day22.txt").getLines().toSeq
