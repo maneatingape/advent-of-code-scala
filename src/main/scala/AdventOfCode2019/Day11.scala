@@ -12,12 +12,12 @@ object Day11:
   def paint(intCode: IntCode, direction: Point, position: Point, panels: Map[Point, Long]): Map[Point, Long] =
     val first = intCode.withInput(panels(position)).nextOutput
     first.result match
-      case Halted => panels
       case Output(color) =>
         val second = first.nextOutput
         val Output(turn) = second.result
         val nextDirection = if turn == 1 then direction.cw else direction.ccw
         paint(second, nextDirection, position + nextDirection, panels.updated(position, color))
+      case _ => panels
   end paint
 
   def part1(memory: Seq[Long]): Long = paint(IntCode(memory), Point(0, -1), Point(0, 0), Map().withDefaultValue(0L)).size

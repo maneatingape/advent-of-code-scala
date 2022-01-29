@@ -19,16 +19,14 @@ object Day08:
   }
 
   def execute(program: Seq[Instruction]): State =
-    Iterator.iterate[State](Running(0, 0, Nil)) { case Running(acc, ip, visited) =>
+    def helper(running: Running): State =
+      val Running(acc, ip, visited) = running
       if ip >= program.length then Halted(acc)
       else if visited.contains(ip) then Infinite(acc)
-      else Running(acc + program(ip).acc, ip + program(ip).ip, ip :: visited)
-    }
-    .dropWhile {
-      case state: Running => true
-      case _ => false
-    }
-    .next()
+      else helper(Running(acc + program(ip).acc, ip + program(ip).ip, ip :: visited))
+
+    helper(Running(0, 0, Nil))
+  end execute
 
   def part1(input: Seq[String]): Int =
     val program = parse(input)

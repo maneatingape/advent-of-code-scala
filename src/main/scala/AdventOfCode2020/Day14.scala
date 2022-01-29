@@ -15,10 +15,10 @@ object Day14:
   case class Version2(pattern: String):
     val version1 = {
       def helper(todo: List[Char], path: List[Char]): Seq[Version1] = todo match
-        case Nil => Seq(Version1(path.reverse.mkString))
         case ('0' :: tail) => helper(tail, 'X' :: path)
         case ('1' :: tail) => helper(tail, '1' :: path)
         case ('X' :: tail) => helper(tail, '0' :: path) ++ helper(tail, '1' :: path)
+        case _ => Seq(Version1(path.reverse.mkString))
       helper(pattern.toList, Nil)
     }
 
