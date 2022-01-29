@@ -6,11 +6,11 @@ object Day15:
   val directions = Seq((1, 0), (-1, 0), (0, -1), (0, 1))
 
   case class Point(x: Int, y: Int):
-    def updated(dx: Int, dy: Int): Point = Point(x + dx, y + dy)
+    def delta(dx: Int, dy: Int): Point = Point(x + dx, y + dy)
 
   type Grid = Map[Point, Int]
   extension (grid: Grid)
-    def neighbours(point: Point): Seq[Point] = directions.map(point.updated).filter(grid.contains)
+    def neighbours(point: Point): Seq[Point] = directions.map(point.delta).filter(grid.contains)
 
   def parse(input: Seq[String]): Grid =
     Seq.tabulate(input.head.size, input.size)((x, y) => Point(x, y) -> input(y)(x).asDigit).flatten.toMap

@@ -14,12 +14,10 @@ object Day10:
     case (_, next) => Left(next)
   }
 
-  def part1(input: Seq[String]): Long = input.map(check).collect { case Left(left) => closing(left) }.sum
+  def part1(input: Seq[String]): Long = input.partitionMap(check)._1.map(closing).sum
 
   def part2(input: Seq[String]): Long =
-    val results = input.map(check).collect { case Right(stack) =>
-      stack.foldLeft(0L)((total, next) => 5 * total + opening(next))
-    }
+    val results = input.partitionMap(check)._2.map(_.foldLeft(0L)((total, next) => 5 * total + opening(next)))
     results.sorted.apply(results.length / 2)
 
   def main(args: Array[String]): Unit =
