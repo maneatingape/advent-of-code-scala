@@ -18,10 +18,8 @@ object Day22:
 
   def parse(input: Seq[String]): State =
     val points = for y <- input.indices; x <- input.indices if input(y)(x) == '#' yield Point(x, y)
-    val half = input.size / 2
-    val offset = Point(-half, -half)
-    val start = points.map(_ + offset).map(_ -> Infected).toMap.withDefaultValue(Clean)
-    State(start, Point(0, 0), Point(0, -1), 0)
+    val start = points.map(_ -> Infected).toMap.withDefaultValue(Clean)
+    State(start, Point(input.size / 2, input.size / 2), Point(0, -1), 0)
 
   def part1(input: Seq[String]): Int =
     def step(state: State): State = state.grid(state.location) match
