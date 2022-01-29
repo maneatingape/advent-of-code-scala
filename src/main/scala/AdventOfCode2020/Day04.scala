@@ -1,7 +1,5 @@
 package AdventOfCode2020
 
-import AdventOfCode2020.Day04.hairColor
-
 object Day04:
   val fourDigits = "\\d{4}".r
   val nineDigits = "\\d{9}".r

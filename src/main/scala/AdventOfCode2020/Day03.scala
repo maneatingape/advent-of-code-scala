@@ -1,15 +1,11 @@
 package AdventOfCode2020
 
 object Day03:
-  def parse(input: Seq[String]): Seq[Seq[Boolean]] = input.map(_.map(_ == '#'))
-
-  def slope(trees: Seq[Seq[Boolean]], right: Int, down: Int): Int =
+  def slope(trees: Seq[String])(right: Int, down: Int): Long =
     val ys = (0 until trees.size by down).zipWithIndex.drop(1)
-    ys.count((y, index) => trees(y)((right * index) % trees.head.size))
+    ys.count((y, index) => trees(y)((right * index) % trees.head.size) == '#')
 
-  def risk(input: Seq[String], slopes: Seq[(Int, Int)]): Long =
-    val trees = parse(input)
-    slopes.map(slope(trees, _, _)).map(_.toLong).product
+  def risk(input: Seq[String], slopes: Seq[(Int, Int)]): Long = slopes.map(slope(input)).product
 
   def part1(input: Seq[String]): Long = risk(input, Seq((3, 1)))
 

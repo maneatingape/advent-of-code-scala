@@ -11,7 +11,7 @@ object Day02:
   def part2(input: Seq[String]): Int = input.count { case pattern(lower, upper, letter, password) =>
     val first = password.charAt(lower.toInt - 1) == letter.head
     val second = password.charAt(upper.toInt - 1) == letter.head
-    (first && !second) || (!first && second)
+    first ^ second
   }
 
   def main(args: Array[String]): Unit =
