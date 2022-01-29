@@ -2,12 +2,9 @@ package AdventOfCode2021
 
 object Day06:
   def simulate(input: Seq[Int], days: Int): Long =
-    val school = input.groupMapReduce(identity)(_ => 1L)(_ + _)
-    (1 to days).foldLeft(school) { (current, _) =>
-      val fish = current.map((timer, count) => (timer - 1, count)).withDefaultValue(0L)
-      fish.removed(-1).updated(6, fish(-1) + fish(6)).updated(8, fish(-1))
-    }
-    .values.sum
+    val fish = Array.tabulate(9)(i => input.count(_ == i).toLong)
+    for day <- 0 until days do fish((day + 7) % 9) += fish(day % 9)
+    fish.sum
 
   def part1(input: Seq[Int]): Long = simulate(input, 80)
 

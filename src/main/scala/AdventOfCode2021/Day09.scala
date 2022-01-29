@@ -3,31 +3,29 @@ package AdventOfCode2021
 object Day09:
   val directions = Seq((1, 0), (-1, 0), (0, -1), (0, 1))
 
-  case class Grid(grid: Seq[Seq[Int]]):
-    def height: Int = grid.length
-    def width: Int = grid.head.length
-    def riskAt(x: Int, y: Int): Int = 1 + grid(y)(x)
-    def lowestPoints: Seq[Point] = (0 until width)
-      .flatMap(x => (0 until height).map(y => Point(this, x, y)))
-      .filter(_.lowest)
+  case class Point(x: Int, y: Int):
+    def delta(dx: Int, dy: Int): Point = Point(x + dx, y + dy)
 
-  case class Point(grid: Grid, x: Int, y: Int):
-    def risk: Int = grid.riskAt(x, y)
-    def outOfBounds: Boolean = x < 0 || x >= grid.width || y < 0 || y >= grid.height
-    def neighbours: Seq[Point] = directions.map((dx, dy) => Point(grid, x + dx, y + dy))
-    def lowest: Boolean = neighbours.forall(neighbour => neighbour.outOfBounds || risk < neighbour.risk)
+  type Grid = Map[Point, Int]
+  extension (grid: Grid)
+    def neighbours(point: Point): Seq[Point] = directions.map(point.delta).filter(grid.contains)
+    def lowest(point: Point): Boolean = neighbours(point).map(grid).forall(_ > grid(point))
+    def lowestPoints: Seq[(Grid, Point)] = grid.keys.toSeq.filter(lowest).map(grid -> _)
 
-  def parseGrid(input: Seq[String]): Grid = Grid(input.map(_.map(_.asDigit)))
+  def parse(input: Seq[String]): Grid =
+    Seq.tabulate(input.head.size, input.size)((x, y) => Point(x, y) -> input(y)(x).asDigit).flatten.toMap
 
-  def basinSize(lowest: Point): Int =
+  def risk(grid: Grid, point: Point): Int = 1 + grid(point)
+
+  def basinSize(grid: Grid, lowest: Point): Int =
     def visit(visited: Set[Point], point: Point): Set[Point] =
-      if visited.contains(point) || point.outOfBounds || point.risk == 10 then visited
-      else point.neighbours.foldLeft(visited + point)(visit)
+      if visited.contains(point) || grid(point) == 9 then visited
+      else grid.neighbours(point).foldLeft(visited + point)(visit)
     visit(Set(), lowest).size
 
-  def part1(input: Seq[String]): Int = parseGrid(input).lowestPoints.map(_.risk).sum
+  def part1(input: Seq[String]): Int = parse(input).lowestPoints.map(risk).sum
 
-  def part2(input: Seq[String]): Int = parseGrid(input).lowestPoints.map(basinSize).sorted.reverse.take(3).product
+  def part2(input: Seq[String]): Int = parse(input).lowestPoints.map(basinSize).sorted.takeRight(3).product
 
   def main(args: Array[String]): Unit =
     val data = io.Source.fromResource("AdventOfCode2021/Day09.txt").getLines().toSeq

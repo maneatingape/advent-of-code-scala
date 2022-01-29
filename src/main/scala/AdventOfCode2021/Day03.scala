@@ -1,16 +1,12 @@
 package AdventOfCode2021
 
 object Day03:
-  def part1(input: Seq[String]): Int =
-    val (_, gammaRate, epsilonRate) = input
-      .transpose
-      .map(seq => seq.count(_ == '1') > seq.length / 2)
-      .foldRight((1, 0, 0)) { case (isGamma, (power, gamma, epsilon)) =>
-        if isGamma then (power * 2, gamma + power, epsilon) else (power * 2, gamma, epsilon + power)
-      }
-    gammaRate * epsilonRate
+  def part1(input: Seq[String]): Int = input
+      .transpose.map(seq => if seq.count(_ == '1') > seq.length / 2 then Seq(1, 0) else Seq(0, 1))
+      .transpose.map(seq => Integer.parseInt(seq.mkString, 2))
+      .product
 
-  def part2(input: Seq[String])(using ordering: Ordering[Int]): Int =
+  def part2(input: Seq[String]): Int =
     def findRating(seq: Seq[String], index: Int, predicate: (Int, Int) => Boolean): Int =
       if seq.length == 1 then
         Integer.parseInt(seq.head, 2)
@@ -20,8 +16,8 @@ object Day03:
         val digit = if predicate(count, threshold) then '1' else '0'
         findRating(seq.filter(_.charAt(index) == digit), index + 1, predicate)
 
-    val generatorRating = findRating(input, 0, ordering.gteq)
-    val scrubberRating = findRating(input, 0, ordering.lt)
+    val generatorRating = findRating(input, 0, _ >= _)
+    val scrubberRating = findRating(input, 0, _ < _)
     generatorRating * scrubberRating
   end part2
 
