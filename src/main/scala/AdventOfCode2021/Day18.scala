@@ -6,11 +6,11 @@ object Day18:
 
   def read(input: String): Number =
     val (_, number) = input.foldLeft(0 -> Seq.empty[Node]) { case ((depth, number), next) =>
-    next match
-      case '[' => (depth + 1) -> number
-      case ']' => (depth - 1) -> number
-      case ',' => depth -> number
-      case _ => depth -> number.appended(Node(next.asDigit, depth))
+      next match
+        case '[' => (depth + 1) -> number
+        case ']' => (depth - 1) -> number
+        case ',' => depth -> number
+        case _ => depth -> number.appended(Node(next.asDigit, depth))
     }
     number
 
@@ -34,19 +34,18 @@ object Day18:
   }
 
   def magnitude(number: Number): Int =
-    val root = (4 to 1 by - 1).foldLeft(number) { case (head +: tail, depth) =>
-      tail.foldLeft(Seq(head)) { case (rest :+ last, next) =>
-        if last.depth != depth || next.depth != depth then rest.appended(last).appended(next)
-        else rest.appended(Node(3 * last.value + 2 * next.value, depth - 1))
-      }
-    }
-    root.head.value
+    def helper(number: Number): Number = number match
+      case Seq(left, right, rest*) if left.depth == right.depth =>
+        val merged = Node(3 * left.value + 2 * right.value, left.depth - 1)
+        helper(helper(rest).prepended(merged))
+      case other => other
+    helper(number).head.value
 
   def add(left: Number, right: Number): Number =
-    val start = (left ++ right).map(node => Node(node.value, node.depth + 1))
-    Iterator.iterate(Option(start))(_.flatMap(number => explode(number).orElse(split(number))))
-      .takeWhile(_.isDefined)
-      .toSeq.last.get
+    def helper(number: Number): Number = explode(number).orElse(split(number)) match
+      case Some(next) => helper(next)
+      case None => number
+    helper((left ++ right).map(node => Node(node.value, node.depth + 1)))
 
   def part1(input: Seq[String]): Int = magnitude(input.map(read).reduce(add))
 
