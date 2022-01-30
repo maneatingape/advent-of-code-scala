@@ -142,12 +142,10 @@ class Day19Suite extends AnyFunSuite:
     30,-46,-14
   """
 
-  val day19 = Day19(sample)
-
   test("Part 1 should handle sample input correctly") {
-    assert(day19.part1 == 79)
+    assert(Day19.part1(sample) == 79)
   }
 
   test("Part 2 should handle sample input correctly") {
-    assert(day19.part2 == 3621)
+    assert(Day19.part2(sample) == 3621)
   }

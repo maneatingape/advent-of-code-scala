@@ -1,6 +1,6 @@
 package AdventOfCode2021
 
-class Day19(input: String):
+object Day19:
   case class Beacon(x: Int, y: Int, z: Int):
     def +(other: Beacon): Beacon = Beacon(x + other.x, y + other.y, z + other.z)
     def -(other: Beacon): Beacon = Beacon(x - other.x, y - other.y, z - other.z)
@@ -35,9 +35,8 @@ class Day19(input: String):
     None
   end findMatch
 
-  lazy val result: (Int, Int) = {
+  def result(scanners: Seq[Scanner]): (Set[Beacon], Seq[Beacon]) =
     def helper(beacons: Set[Beacon], offsets: Seq[Beacon], todo: Map[Scanner, Beacon], remaining: Seq[Scanner]): (Set[Beacon], Seq[Beacon]) =
-      println(beacons.size + " " + todo.size + " " + remaining.size)
       if todo.isEmpty then (beacons, offsets) else
         val (current, currentOffset) = todo.head
         val nextBeacons = beacons ++ current.beacons.map(_ + currentOffset)
@@ -53,17 +52,18 @@ class Day19(input: String):
       end if
     end helper
 
-    val scanners = parse(input)
-    val (beacons, offsets) = helper(Set(), Seq(), Map(scanners.head -> Beacon(0, 0, 0)), scanners.tail)
-    (beacons.size, offsets.combinations(2).toSeq.map { case Seq(first, second) => first.manhattan(second) }.max)
-  }
+    helper(Set(), Seq(), Map(scanners.head -> Beacon(0, 0, 0)), scanners.tail)
+  end result
 
-  def part1: Int = result._1
-  def part2: Int = result._2
+  def part1(input: String): Int =
+    val (beacons, _) = result(parse(input))
+    beacons.size
 
-object Day19:
+  def part2(input: String): Int =
+    val (_, offsets) = result(parse(input))
+    offsets.combinations(2).map(pair => pair.head.manhattan(pair.last)).max
+
   def main(args: Array[String]): Unit =
     val data = io.Source.fromResource("AdventOfCode2021/Day19.txt").mkString
-    val day19 = Day19(data)
-    println(day19.part1)
-    println(day19.part2)
+    println(Day19.part1(data))
+    println(Day19.part2(data))
