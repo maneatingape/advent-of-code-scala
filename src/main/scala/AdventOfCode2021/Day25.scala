@@ -9,7 +9,6 @@ object Day25:
     val height = input.size
     val points = for x <- 0 until width; y <- 0 until height if input(y)(x) != '.' yield Point(x, y) -> input(y)(x)
     OceanTrench(width, height, points.toMap)
-  end parse
 
   def step(grid: OceanTrench): OceanTrench =
     val east = grid.seaCucumbers.map { case (point, kind) =>
@@ -21,13 +20,11 @@ object Day25:
       if kind == 'v' && !east.contains(next) then next -> kind else point -> kind
     }
     grid.copy(seaCucumbers = south)
-  end step
 
   def part1(input: Seq[String]): Int =
     def helper(trench: OceanTrench, steps: Int): Int =
       val next = step(trench)
       if next == trench then steps else helper(next, steps + 1)
-    end helper
 
     helper(parse(input), 1)
   end part1
