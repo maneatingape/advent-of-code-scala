@@ -10,6 +10,7 @@ object Day13:
 
   case class Point(x: Int, y: Int):
     def delta(dx: Int, dy: Int): Point = Point(x + dx, y + dy)
+    def location: String = s"$x,$y"
 
   case class Cart(tracks: Map[Point, Char], position: Point, facing: Char, turn: Turn):
     def next: Cart =
@@ -45,8 +46,7 @@ object Day13:
         if (todo.tail ++ carts).map(_.position).contains(cart.position) then cart.position
         else helper(todo.tail, carts.appended(cart))
 
-    val crash = helper(Seq(), parse(input))
-    crash.x + "," + crash.y
+    helper(Seq(), parse(input)).location
   end part1
 
   def part2(input: Seq[String]): String =
@@ -62,8 +62,7 @@ object Day13:
           helper(todo.tail.filterNot(_.position == cart.position), carts.filterNot(_.position == cart.position))
         else helper(todo.tail, carts.appended(cart))
 
-    val last = helper(Seq(), parse(input))
-    last.x + "," + last.y
+    helper(Seq(), parse(input)).location
   end part2
 
   def main(args: Array[String]): Unit =
