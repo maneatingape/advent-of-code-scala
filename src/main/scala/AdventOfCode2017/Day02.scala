@@ -1,7 +1,7 @@
 package AdventOfCode2017
 
 object Day02:
-  def parse(input: Seq[String]): Seq[Seq[Int]] = input.map(_.split("\\D+").map(_.toInt))
+  def parse(input: Seq[String]): Seq[Seq[Int]] = input.map(_.split("\\D+").map(_.toInt).toSeq)
 
   def part1(input: Seq[String]): Int = parse(input).map(row => row.max - row.min).sum
 

@@ -18,8 +18,8 @@ object Day19:
     val deltas = (for first <- beacons; second <- beacons yield first - second).toSet
     def permutations: Seq[Scanner] = beacons.map(_.permutations).transpose.map(Scanner(_))
 
-  def parse(input: String): Seq[Scanner] = input.split("\n\n").map { block =>
-    Scanner(block.trim.split("\n").tail.map(_.trim.split(",").map(_.toInt)).map(a => Beacon(a(0), a(1), a(2))))
+  def parse(input: String): Seq[Scanner] = input.split("\n\n").toSeq.map { block =>
+    Scanner(block.trim.split("\n").tail.map(_.trim.split(",").map(_.toInt)).map(a => Beacon(a(0), a(1), a(2))).toSeq)
   }
 
   def findMatch(firstScanner: Scanner, candidate: Scanner): Option[(Scanner, Beacon)] =

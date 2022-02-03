@@ -29,6 +29,6 @@ object Day16:
     dances.drop(1000000000 % period).next()
 
   def main(args: Array[String]): Unit =
-    val data = io.Source.fromResource("AdventOfCode2017/Day16.txt").mkString.trim.split(",")
+    val data = io.Source.fromResource("AdventOfCode2017/Day16.txt").mkString.trim.split(",").toSeq
     println(part1(data))
     println(part2(data))

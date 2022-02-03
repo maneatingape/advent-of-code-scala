@@ -9,7 +9,7 @@ object Day08:
 
   def parseEntry(entry: String): Entry =
     val Array(patterns, digits) = entry.split(" \\| ")
-    Entry(patterns.split(" "), digits.split(" "))
+    Entry(patterns.split(" ").toSeq, digits.split(" ").toSeq)
 
   def isKnownDigit(pattern: String): Boolean = pattern.length match
     case 2 | 3 | 4 | 7 => true

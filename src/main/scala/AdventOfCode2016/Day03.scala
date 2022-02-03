@@ -1,7 +1,7 @@
 package AdventOfCode2016
 
 object Day03:
-  def split(line: String): Seq[Int] = line.trim.split(" +").map(_.toInt)
+  def split(line: String): Seq[Int] = line.trim.split(" +").map(_.toInt).toSeq
 
   def triangle(row: Seq[Int]): Boolean =
     val Seq(a, b, c) = row

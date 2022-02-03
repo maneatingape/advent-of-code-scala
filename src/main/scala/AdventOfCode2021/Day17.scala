@@ -12,7 +12,7 @@ object Day17:
     for dx <- math.sqrt(left).toInt to right; dy <- bottom to -bottom if fire(dx, dy) yield (dy * (dy + 1)) / 2
   end bruteForce
 
-  def parse(input: String): Seq[Int] = input.split("[^-\\d]+").tail.map(_.toInt)
+  def parse(input: String): Seq[Int] = input.split("[^-\\d]+").tail.map(_.toInt).toSeq
 
   def part1(input: String): Int = bruteForce(parse(input)).max
 

@@ -17,7 +17,7 @@ object Day04:
 
   def play(input: Seq[String]): Seq[Win] =
     val numbers = input.head.split(",").map(_.toInt).toSeq
-    val boards = input.tail.grouped(6).toSeq.map(s => Board(s.mkString(" ").split(" ").flatMap(_.toIntOption)))
+    val boards = input.tail.grouped(6).toSeq.map(s => Board(s.mkString(" ").split(" ").flatMap(_.toIntOption).toSeq))
     numbers
       .zipWithIndex
       .foldLeft(boards) { case (boards, (number, turn)) => boards.map(_.mark(number, turn)) }

@@ -11,7 +11,7 @@ object Day11:
       case "nw" => Hex(q, r - 1)
       case "se" => Hex(q, r + 1)
 
-  def walk(input: String): Seq[Int] = input.split(",").scanLeft(Hex(0, 0))(_.step(_)).map(_.manhattan)
+  def walk(input: String): Seq[Int] = input.split(",").scanLeft(Hex(0, 0))(_.step(_)).map(_.manhattan).toSeq
 
   def part1(input: String): Int = walk(input).last
 

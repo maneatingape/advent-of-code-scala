@@ -11,7 +11,7 @@ object Day16:
   def parse(input: Seq[String]): (Set[Rule], Seq[Int], Seq[Seq[Int]]) =
     val (rules, rest) = input.splitAt(input.indexOf(""))
     val (your, nearby) = (rest(2), rest.drop(5))
-    (rules.map(Rule.apply).toSet, your.split(",").map(_.toInt), nearby.map(_.split(",").map(_.toInt)))
+    (rules.map(Rule.apply).toSet, your.split(",").map(_.toInt).toSeq, nearby.map(_.split(",").map(_.toInt).toSeq))
 
   def part1(input: Seq[String]): Long =
     val (rules, your, nearby) = parse(input)

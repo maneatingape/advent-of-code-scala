@@ -48,7 +48,7 @@ object Day20:
   end Tile
 
   def parse(input: String): Seq[Tile] = input
-    .trim.split("\n\n")
+    .trim.split("\n\n").toSeq
     .map(_.split("\n").map(_.trim))
     .map { tile =>
       val id = tile.head.slice(5, 9).toLong

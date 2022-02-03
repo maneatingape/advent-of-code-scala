@@ -11,7 +11,7 @@ object Day10:
     data.drop(index) ++ data.take(index)
 
   def part1(input: String): Int =
-    val lengths = input.split(",").map(_.toInt)
+    val lengths = input.split(",").map(_.toInt).toSeq
     knot(lengths).take(2).product
 
   def part2(input: String): String =
