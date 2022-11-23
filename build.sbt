@@ -1,7 +1,7 @@
 name := "Advent of Code"
 
-scalaVersion := "3.1.0"
+scalaVersion := "3.2.1"
 
 libraryDependencies ++= Seq(
-  "org.scalatest" %% "scalatest" % "3.2.10" % Test
+  "org.scalatest" %% "scalatest" % "3.2.14" % Test
 )
