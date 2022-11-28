@@ -5,7 +5,7 @@ object Day14:
   val three = "(.)\\1{2}".r.unanchored
   val five = "(.)\\1{4}".r.unanchored
 
-  def single(string: String): String = md5.digest(string.getBytes).map(_.formatted("%02x")).mkString
+  def single(string: String): String = md5.digest(string.getBytes).map("%02x".format(_)).mkString
 
   def stretched(string: String): String = Iterator.iterate(string)(single).drop(2017).next()
 

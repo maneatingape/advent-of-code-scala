@@ -9,7 +9,7 @@ object Day17:
     def delta(other: Point): Point = Point(x + other.x, y + other.y)
 
   case class State(location: Point, path: String):
-    def hash(string: String): String = md5.digest(string.getBytes).take(2).map(_.formatted("%02x")).mkString
+    def hash(string: String): String = md5.digest(string.getBytes).take(2).map("%02x".format(_)).mkString
     def neighbours(passcode: String): Set[State] = directions
       .map((next, move) => State(location.delta(move), path + next))
       .zip(hash(passcode + path))

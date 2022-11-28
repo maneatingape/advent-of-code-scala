@@ -19,7 +19,7 @@ object Day14:
     (data.drop(index) ++ data.take(index)).grouped(16).map(_.reduce(_ ^ _)).toSeq
 
   def binary(input: String): Seq[String] =
-    (0 to 127).map(index => knot(s"$input-$index").map(_.toBinaryString.toInt.formatted("%08d")).mkString)
+    (0 to 127).map(index => knot(s"$input-$index").map(s => "%08d".format(s.toBinaryString.toInt)).mkString)
 
   def part1(input: String): Int = binary(input).map(_.count(_ == '1')).sum
 

@@ -17,7 +17,7 @@ object Day10:
   def part2(input: String): String =
     val lengths = input.map(_.toInt) ++ Seq(17, 31, 73, 47, 23)
     val repeated = Seq.fill(64)(lengths).flatten
-    knot(repeated).grouped(16).map(_.reduce(_ ^ _)).map(_.formatted("%02x")).mkString
+    knot(repeated).grouped(16).map(_.reduce(_ ^ _)).map("%02x".format(_)).mkString
 
   def main(args: Array[String]): Unit =
     val data = io.Source.fromResource("AdventOfCode2017/Day10.txt").mkString.trim
