@@ -8,7 +8,7 @@ class Day08Suite extends AnyFunSuite:
       "abc"
       "abc\"aaa"
       "\x27"
-    """.split("\\s+").filter(_.nonEmpty)
+    """.split("\\s+").filter(_.nonEmpty).toSeq
 
   test("Part 1 should handle sample input correctly") {
     assert(Day08.part1(sample) == 12)
