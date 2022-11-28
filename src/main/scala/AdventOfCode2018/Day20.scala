@@ -16,10 +16,10 @@ object Day20:
     case '$' => distance.values.toSeq
     case '(' => walk(remaining.tail, distance, paths, Set() :: paths :: stack)
     case '|' =>
-      val accumulated :: previous :: tail = stack
+      val accumulated :: previous :: tail = stack: @unchecked
       walk(remaining.tail, distance, previous, (accumulated ++ paths) :: previous :: tail)
     case ')' =>
-      val accumulated :: previous :: tail = stack
+      val accumulated :: previous :: tail = stack: @unchecked
       walk(remaining.tail, distance, accumulated ++ paths, tail)
     case direction =>
       val (nextDistance, nextPaths) = paths.foldLeft((distance, Set.empty[Point])) { case ((distance, paths), point) =>

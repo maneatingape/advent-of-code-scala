@@ -11,7 +11,7 @@ object Day15:
   def move(point: Point, computer: IntCode)(delta: Point, command: Int): (Point, IntCode, Long) =
     val nextPoint = point + delta
     val nextComputer = computer.withInput(command).nextOutput
-    val IntCode.Output(status) = nextComputer.result
+    val IntCode.Output(status) = nextComputer.result: @unchecked
     (nextPoint, nextComputer, status)
 
   def dijkstra(initial: IntCode): (collection.mutable.Map[Point, Int], Option[(Point, IntCode)]) =
@@ -36,11 +36,11 @@ object Day15:
   end dijkstra
 
   def part1(memory: Seq[Long]): Int =
-    val (first, Some(target, _)) = dijkstra(IntCode(memory))
+    val (first, Some(target, _)) = dijkstra(IntCode(memory)): @unchecked
     first(target)
 
   def part2(memory: Seq[Long]): Int =
-    val (_, Some(_, computer)) = dijkstra(IntCode(memory))
+    val (_, Some(_, computer)) = dijkstra(IntCode(memory)): @unchecked
     val (second, _) = dijkstra(computer)
     second.values.max
 

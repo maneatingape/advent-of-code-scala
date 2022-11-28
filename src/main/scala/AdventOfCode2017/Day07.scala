@@ -7,7 +7,7 @@ object Day07:
     val regex = """(\w+) \((\d+)\).*""".r
     val weights = input.map { case regex(name, weight) => name -> weight.toInt }.toMap
     val edges = input.map { line =>
-      val Array(name, _, children*) = line.split("[^\\d\\w]+")
+      val Array(name, _, children*) = line.split("[^\\d\\w]+"): @unchecked
       name -> children
     }
     .toMap

@@ -4,7 +4,7 @@ object Day08:
   case class Node(children: Seq[Node], metadata: Seq[Int])
 
   def parse(input: Seq[Int]): (Node, Seq[Int]) =
-    val Seq(childCount, metadataCount, remaining1*) = input
+    val Seq(childCount, metadataCount, remaining1*) = input: @unchecked
 
     val (children, remaining2) = (0 until childCount).foldLeft((Seq.empty[Node], remaining1)) { case ((children, input), _) =>
       val (child, remaining) = parse(input)

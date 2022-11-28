@@ -14,9 +14,9 @@ object Day22:
       yield Cuboid(nextXs, nextYs, nextZs)
 
     def split(other: Cuboid): List[Cuboid] =
-      val (headX :: tailX) = xs.split(other.xs)
-      val (headY :: tailY) = ys.split(other.ys)
-      val (headZ :: tailZ) = zs.split(other.zs)
+      val (headX :: tailX) = xs.split(other.xs): @unchecked
+      val (headY :: tailY) = ys.split(other.ys): @unchecked
+      val (headZ :: tailZ) = zs.split(other.zs): @unchecked
       tailX.map(Cuboid(_, ys, zs)) ++ tailY.map(Cuboid(headX, _, zs)) ++ tailZ.map(Cuboid(headX, headY, _))
     end split
   end Cuboid

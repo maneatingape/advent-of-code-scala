@@ -14,7 +14,7 @@ object Day11:
     first.result match
       case Output(color) =>
         val second = first.nextOutput
-        val Output(turn) = second.result
+        val Output(turn) = second.result: @unchecked
         val nextDirection = if turn == 1 then direction.cw else direction.ccw
         paint(second, nextDirection, position + nextDirection, panels.updated(position, color))
       case _ => panels

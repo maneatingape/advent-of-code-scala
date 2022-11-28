@@ -18,7 +18,7 @@ object Day06:
     val points = for x <- left to right; y <- top to bottom; yield Point(x, y)
 
     points.flatMap { point =>
-      val Seq(first, second, rest*) = coordinates.sortBy(_.manhattan(point))
+      val Seq(first, second, rest*) = coordinates.sortBy(_.manhattan(point)): @unchecked
       val closest = first.manhattan(point) < second.manhattan(point)
       Option.when(closest)(first -> point)
     }
