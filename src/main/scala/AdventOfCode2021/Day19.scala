@@ -1,5 +1,7 @@
 package AdventOfCode2021
 
+import scala.util.control.NonLocalReturns.*
+
 object Day19:
   case class Beacon(x: Int, y: Int, z: Int):
     def +(other: Beacon): Beacon = Beacon(x + other.x, y + other.y, z + other.z)
@@ -22,7 +24,7 @@ object Day19:
     Scanner(block.trim.split("\n").tail.map(_.trim.split(",").map(_.toInt)).map(a => Beacon(a(0), a(1), a(2))).toSeq)
   }
 
-  def findMatch(firstScanner: Scanner, candidate: Scanner): Option[(Scanner, Beacon)] =
+  def findMatch(firstScanner: Scanner, candidate: Scanner): Option[(Scanner, Beacon)] = returning {
     for
       secondScanner <- candidate.permutations
       if secondScanner.deltas.intersect(firstScanner.deltas).size > 12 * 11
@@ -31,9 +33,9 @@ object Day19:
         firstBeacon <- firstScanner.beacons
         secondBeacon <- secondScanner.beacons
         if secondScanner.beacons.map(_ + firstBeacon - secondBeacon).toSet.intersect(firstScanner.beacons.toSet).size >= 12
-      do return Some((secondScanner, firstBeacon - secondBeacon))
+      do throwReturn(Some((secondScanner, firstBeacon - secondBeacon)))
     None
-  end findMatch
+  }
 
   def result(scanners: Seq[Scanner]): (Set[Beacon], Seq[Beacon]) =
     def helper(beacons: Set[Beacon], offsets: Seq[Beacon], todo: Map[Scanner, Beacon], remaining: Seq[Scanner]): (Set[Beacon], Seq[Beacon]) =
