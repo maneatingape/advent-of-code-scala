@@ -33,6 +33,7 @@ The minimal SBT project provides:
 | --- | --- | --- |
 | 1 | [Calorie Counting](https://adventofcode.com/2022/day/1) | [Source](src/main/scala/AdventOfCode2022/Day01.scala) |
 | 2 | [Rock Paper Scissors](https://adventofcode.com/2022/day/2) | [Source](src/main/scala/AdventOfCode2022/Day02.scala) |
+| 3 | [Rucksack Reorganization](https://adventofcode.com/2022/day/3) | [Source](src/main/scala/AdventOfCode2022/Day03.scala) |
 
 ## 2021
 
