@@ -1,26 +1,21 @@
 package AdventOfCode2022
 
 object Day05:
-  def parse(input: Seq[String]): (Seq[String], Seq[(Int, Int, Int)]) =
-    val (first, second) = input.splitAt(input.indexOf(""))
-
-    val stacks = first.init.map { line =>
-      (1 to line.length by 4).map(line)
-    }
+  def stacks(input: Seq[String]): Seq[String] = input
+    .take(input.indexOf("") - 1)
+    .map(line => (1 to line.length by 4).map(line))
     .transpose
     .map(_.mkString.trim)
 
-    val moves = second.tail.map { line =>
+  def moves(input: Seq[String]): Seq[(Int, Int, Int)] = input
+    .drop(input.indexOf("") + 1)
+    .map { line =>
       val Array(amount, from, to) = line.split("\\D+").tail.map(_.toInt)
       (amount, from - 1, to - 1)
     }
 
-    (stacks, moves)
-  end parse
-
   def play(input: Seq[String], reverse: Boolean): String =
-    val (stacks, moves) = parse(input)
-    moves.foldLeft(stacks) { case (state, (amount, from, to)) =>
+    moves(input).foldLeft(stacks(input)) { case (state, (amount, from, to)) =>
       val (prefix, suffix) = state(from).splitAt(amount)
       val result = if (reverse) prefix.reverse else prefix
       state.updated(from, suffix).updated(to, result + state(to))
