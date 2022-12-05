@@ -35,6 +35,7 @@ The minimal SBT project provides:
 | 2 | [Rock Paper Scissors](https://adventofcode.com/2022/day/2) | [Source](src/main/scala/AdventOfCode2022/Day02.scala) |
 | 3 | [Rucksack Reorganization](https://adventofcode.com/2022/day/3) | [Source](src/main/scala/AdventOfCode2022/Day03.scala) |
 | 4 | [Camp Cleanup](https://adventofcode.com/2022/day/4) | [Source](src/main/scala/AdventOfCode2022/Day04.scala) |
+| 5 | [Supply Stacks](https://adventofcode.com/2022/day/5) | [Source](src/main/scala/AdventOfCode2022/Day05.scala) |
 
 ## 2021
 
