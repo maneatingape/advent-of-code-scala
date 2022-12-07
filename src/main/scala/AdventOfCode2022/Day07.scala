@@ -1,23 +1,25 @@
 package AdventOfCode2022
 
 object Day07:
+  type Path = List[String]
+
   def build(input: Seq[String]): Seq[Int] =
     val root = List("/")
     val initial = Map(root -> 0)
     val (_, sizes) = input.foldLeft((root, initial)) { case ((path, sizes), line) =>
-      line.split(" ") match
-        case Array("$", "ls") => (path, update(path, sizes, -sizes(path)))
-        case Array("$", "cd", "\\") => (List(path.last), sizes)
-        case Array("$", "cd", "..") => (path.tail, sizes)
-        case Array("$", "cd", name) => (name :: path, sizes.updated(name :: path, 0))
-        case Array("dir", name) => (path, sizes)
-        case Array(size, name) => (path, update(path, sizes, size.toInt))
+      line match
+        case "$ ls" => (path, update(path, sizes, -sizes(path)))
+        case "$ cd \\" => (List(path.last), sizes)
+        case "$ cd .." => (path.tail, sizes)
+        case s"$$ cd $name" => (name :: path, sizes.updated(name :: path, 0))
+        case s"dir $name" => (path, sizes)
+        case s"$size $name" => (path, update(path, sizes, size.toInt))
     }
     sizes.values.toSeq
 
-  def update(path: List[String], sizes: Map[List[String], Int], delta: Int): Map[List[String], Int] = path match
+  def update(path: Path, sizes: Map[Path, Int], delta: Int): Map[Path, Int] = path match
     case Nil => sizes
-    case head :: tail => update(tail, sizes, delta).updated(path, sizes(path) + delta)
+    case _ :: tail => update(tail, sizes, delta).updated(path, sizes(path) + delta)
 
   def part1(input: Seq[String]): Int =
     val sizes = build(input)
