@@ -37,6 +37,7 @@ The minimal SBT project provides:
 | 4 | [Camp Cleanup](https://adventofcode.com/2022/day/4) | [Source](src/main/scala/AdventOfCode2022/Day04.scala) |
 | 5 | [Supply Stacks](https://adventofcode.com/2022/day/5) | [Source](src/main/scala/AdventOfCode2022/Day05.scala) |
 | 6 | [Tuning Trouble](https://adventofcode.com/2022/day/6) | [Source](src/main/scala/AdventOfCode2022/Day06.scala) |
+| 7 | [No Space Left On Device](https://adventofcode.com/2022/day/7) | [Source](src/main/scala/AdventOfCode2022/Day07.scala) |
 
 ## 2021
 
