@@ -8,8 +8,7 @@ object Day09:
 
   def parse(input: Seq[String]): Seq[Point] =
     val orthogonal = Map("R" -> Point(1, 0), "L" -> Point(-1, 0), "D" -> Point(0, 1), "U" -> Point(0, -1))
-    input.flatMap { line =>
-      val Array(direction, amount) = line.split(" ")
+    input.flatMap { case s"$direction $amount" =>
       Seq.fill(amount.toInt)(orthogonal(direction))
     }
 
