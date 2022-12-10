@@ -5,23 +5,21 @@ object Day10:
     val (_, signal) = input.foldLeft((1, Seq(-1))) { case ((x, xs), instruction) =>
       instruction match
         case "noop" => (x, xs ++ Seq(x))
-        case s"addx $value" => (x + value.toInt, xs ++ Seq(x, x))
+        case s"addx $delta" => (x + delta.toInt, xs ++ Seq(x, x))
     }
     signal
 
-  def part1(input: Seq[String]): Unit =
+  def part1(input: Seq[String]): Int =
     val signal = parse(input)
-    println(Seq(20, 60, 100, 140, 180, 220).map(cycle => cycle * signal(cycle)).sum)
+    Seq(20, 60, 100, 140, 180, 220).map(cycle => cycle * signal(cycle)).sum
 
-  def part2(input: Seq[String]): Unit =
-    val signal = parse(input)
-    for row <- 0 to 5 do
-      println()
-      for col <- 1 to 40 do
-        val x = signal(40 * row + col)
-        print(if (x - col + 1).abs <= 1 then '#' else ' ')
+  def part2(input: Seq[String]): String =
+    parse(input).tail.grouped(40).map { row =>
+      row.zipWithIndex.map((x, col) => if (x - col).abs <= 1 then '#' else '.')
+    }
+    .map(_.mkString).mkString("\n")
 
   def main(args: Array[String]): Unit =
     val data = io.Source.fromResource("AdventOfCode2022/Day10.txt").getLines().toSeq
-    part1(data)
-    part2(data)
+    println(part1(data))
+    println(part2(data))
