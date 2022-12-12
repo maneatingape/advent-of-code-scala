@@ -10,7 +10,8 @@ object Day12:
     val points = for y <- input.indices; x <- input.head.indices yield Point(x, y) -> input(y)(x)
     points.toMap
 
-  def bfs(grid: Map[Point, Char], start: Point): Option[Int] =
+  def bfs(grid: Map[Point, Char], end: Char): Int =
+    val (start, _) = grid.find((k, v) => v == 'E').get
     val todo = collection.mutable.Queue(start)
     val cost = collection.mutable.Map(start -> 0)
 
@@ -21,23 +22,19 @@ object Day12:
 
     while todo.nonEmpty do
       val point = todo.dequeue()
-      if grid(point) == 'E' then return Some(cost(point))
+      if grid(point) == end then return cost(point)
       orthogonal.map(point.delta).filter(grid.contains).foreach { next =>
-        if height(next) - height(point) <= 1 && !cost.contains(next) then
+        if height(point) - height(next) <= 1 && !cost.contains(next) then
           todo.enqueue(next)
           cost(next) = cost(point) + 1
       }
 
-    None
+    -1
   end bfs
 
-  def walk(input: Seq[String], starts: Set[Char]): Int =
-    val grid = parse(input)
-    grid.filter((k, v) => starts.contains(v)).flatMap((k, v) => bfs(grid, k)).min
+  def part1(input: Seq[String]): Int = bfs(parse(input), 'S')
 
-  def part1(input: Seq[String]): Int = walk(input, Set('S'))
-
-  def part2(input: Seq[String]): Int = walk(input, Set('S', 'a'))
+  def part2(input: Seq[String]): Int = bfs(parse(input), 'a')
 
   def main(args: Array[String]): Unit =
     val data = io.Source.fromResource("AdventOfCode2022/Day12.txt").getLines().toSeq
