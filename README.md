@@ -42,6 +42,7 @@ The minimal SBT project provides:
 | 9 | [Rope Bridge](https://adventofcode.com/2022/day/9) | [Source](src/main/scala/AdventOfCode2022/Day09.scala) |
 | 10 | [Cathode-Ray Tube](https://adventofcode.com/2022/day/10) | [Source](src/main/scala/AdventOfCode2022/Day10.scala) |
 | 11 | [Monkey in the Middle](https://adventofcode.com/2022/day/11) | [Source](src/main/scala/AdventOfCode2022/Day11.scala) |
+| 12 | [Hill Climbing Algorithm](https://adventofcode.com/2022/day/12) | [Source](src/main/scala/AdventOfCode2022/Day12.scala) |
 
 ## 2021
 
