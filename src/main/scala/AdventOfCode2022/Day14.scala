@@ -22,31 +22,21 @@ object Day14:
 
   @tailrec
   def fall(cave: Set[Sand], floor: Int, sand: Sand): Sand =
-    if sand.y == floor then sand else
-      val next = moves.map(sand.move).filterNot(cave.contains)
-      if next.isEmpty then sand else fall(cave, floor, next.head)
+    val next = moves.map(sand.move).filterNot(cave.contains)
+    if sand.y == floor || next.isEmpty then sand else fall(cave, floor, next.head)
+
+  @tailrec
+  def simulate(cave: Set[Sand], floor: Int, predicate: Sand => Boolean): Int =
+    val sand = fall(cave, floor, start)
+    if predicate(sand) then cave.size else simulate(cave + sand, floor, predicate)
 
   def part1(input: Seq[String]): Int =
-    val (initial, floor) = parse(input)
-
-    @tailrec
-    def helper(cave: Set[Sand]): Int =
-      val sand = fall(cave, floor, start)
-      if sand.y == floor then cave.size - initial.size else helper(cave + sand)
-
-    helper(initial)
-  end part1
+    val (rock, floor) = parse(input)
+    simulate(rock, floor, _.y == floor) - rock.size
 
   def part2(input: Seq[String]): Int =
-    val (initial, floor) = parse(input)
-
-    @tailrec
-    def helper(cave: Set[Sand], index: Int): Int =
-      val sand = fall(cave, floor, start)
-      if sand == start then index else helper(cave + sand, index + 1)
-
-    helper(initial, 1)
-  end part2
+    val (rock, floor) = parse(input)
+    simulate(rock, floor, _ == start) - rock.size + 1
 
   def main(args: Array[String]): Unit =
     val data = io.Source.fromResource("AdventOfCode2022/Day14.txt").getLines().toSeq
