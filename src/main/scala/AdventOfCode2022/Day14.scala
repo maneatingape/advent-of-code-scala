@@ -1,34 +1,38 @@
 package AdventOfCode2022
 
+import scala.annotation.tailrec
+
 object Day14:
-  val start = Point(500, 0)
-  val order = Seq((0, 1), (-1, 1), (1, 1))
+  val start = Sand(500, 0)
+  val moves = Seq((0, 1), (-1, 1), (1, 1))
 
-  case class Point(x: Int, y: Int):
-    def delta(dx: Int, dy: Int): Point = Point(x + dx, y + dy)
+  case class Sand(x: Int, y: Int):
+    def move(dx: Int, dy: Int): Sand = Sand(x + dx, y + dy)
 
-  def parse(input: Seq[String]): (Set[Point], Int) =
-    val grid = input.toSet.flatMap { line =>
+  def parse(input: Seq[String]): (Set[Sand], Int) =
+    val cave = input.toSet.flatMap { line =>
       line.split("\\D+").map(_.toInt).sliding(4, 2).flatMap { case Array(x1, y1, x2, y2) =>
         for
-          x <- x1 to x2 by (if x1 < x2 then 1 else -1)
-          y <- y1 to y2 by (if y1 < y2 then 1 else -1)
-        yield Point(x, y)
+          x <- x1.min(x2) to x1.max(x2)
+          y <- y1.min(y2) to y1.max(y2)
+        yield Sand(x, y)
       }
     }
-    (grid, grid.map(_.y).max + 1)
+    (cave, cave.map(_.y).max + 1)
 
-  def fall(grid: Set[Point], floor: Int, sand: Point): Point =
+  @tailrec
+  def fall(cave: Set[Sand], floor: Int, sand: Sand): Sand =
     if sand.y == floor then sand else
-      val next = order.map(sand.delta).filterNot(grid.contains)
-      if next.isEmpty then sand else fall(grid, floor, next.head)
+      val next = moves.map(sand.move).filterNot(cave.contains)
+      if next.isEmpty then sand else fall(cave, floor, next.head)
 
   def part1(input: Seq[String]): Int =
     val (initial, floor) = parse(input)
 
-    def helper(grid: Set[Point]): Int =
-      val sand = fall(grid, floor, start)
-      if sand.y == floor then grid.size - initial.size else helper(grid + sand)
+    @tailrec
+    def helper(cave: Set[Sand]): Int =
+      val sand = fall(cave, floor, start)
+      if sand.y == floor then cave.size - initial.size else helper(cave + sand)
 
     helper(initial)
   end part1
@@ -36,9 +40,10 @@ object Day14:
   def part2(input: Seq[String]): Int =
     val (initial, floor) = parse(input)
 
-    def helper(grid: Set[Point], index: Int): Int =
-      val sand = fall(grid, floor, start)
-      if sand == start then index else helper(grid + sand, index + 1)
+    @tailrec
+    def helper(cave: Set[Sand], index: Int): Int =
+      val sand = fall(cave, floor, start)
+      if sand == start then index else helper(cave + sand, index + 1)
 
     helper(initial, 1)
   end part2
