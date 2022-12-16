@@ -25,6 +25,7 @@ object Day22:
     def step(state: State): State = state.grid(state.location) match
       case Clean => state.next(Infected, state.direction.ccw, 1)
       case Infected => state.next(Clean, state.direction.cw, 0)
+      case _ => throw MatchError("Unreachable")
 
     Iterator.iterate(parse(input))(step).drop(10000).next().infected
   end part1

@@ -59,6 +59,7 @@ object Day16:
       case (5, List(first, second)) => if first > second then 1L else 0L
       case (6, List(first, second)) => if first < second then 1L else 0L
       case (7, List(first, second)) => if first == second then 1L else 0L
+      case _ => throw MatchError("Unreachable")
 
   def part1(input: Seq[String]): Long = input.map(parse).map(decode).map(_._2).map(versionSum).sum
 

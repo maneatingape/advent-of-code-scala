@@ -49,6 +49,7 @@ object Day18:
       case (operator :: tail) => (operator, stack) match
         case (Add, first :: second :: rest) => helper(tail, (first + second) :: rest)
         case (Multiply, first :: second :: rest) => helper(tail, (first * second) :: rest)
+        case _ => throw MatchError("Unreachable")
     helper(postfix, Nil)
 
   def part1(input: Seq[String]): Long =

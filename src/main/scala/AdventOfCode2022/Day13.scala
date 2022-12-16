@@ -7,8 +7,8 @@ object Day13:
     case (a, b) if a == b => compare(left.tail, right.tail)
     case (']', _) => true
     case (_, ']') => false
-    case ('[', b) => compare(left.tail, b + "]" + right.tail)
-    case (a, '[') => compare(a + "]" + left.tail, right.tail)
+    case ('[', b) => compare(left.tail, s"$b]" + right.tail)
+    case (a, '[') => compare(s"$a]" + left.tail, right.tail)
     case (a, b) => a < b
 
   def part1(input: Seq[String]): Int =

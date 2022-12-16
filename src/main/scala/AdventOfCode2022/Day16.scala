@@ -6,7 +6,7 @@ object Day16:
   def parse(input: Seq[String]): (Map[String, Valve], Map[String, Map[String, Int]], Set[String]) =
     val valves = input
       .map { line =>
-        val Array(_, name, flow, edges: _*) = line.split("[^A-Z0-9]+")
+        val Array(_, name, flow, edges: _*) = line.split("[^A-Z0-9]+"): @unchecked
         name -> Valve(flow.toInt, edges)
       }
       .toMap
