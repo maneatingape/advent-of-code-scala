@@ -28,48 +28,33 @@ object Day16:
     cost.toMap
   end bfs
 
-  def part1(input: Seq[String]): Int =
+  def explore(input: Seq[String], youInitial: Int, elephantInitial: Int): Int =
     val (valves, distance, todo) = parse(input)
+    val cache = collection.mutable.Map[Set[String], Int]().withDefaultValue(-1)
 
-    def explore(you: String, todo: Set[String], time: Int, pressure: Int): Int =
-      val result = for
-        next <- todo
-        remaining = time - distance(you)(next)
-        if remaining > 0
-        extra = remaining * valves(next).flow
-      yield explore(next, todo - next, remaining, pressure + extra)
-      result.foldLeft(pressure)(_ max _)
+    def step(todo: Set[String], you: String, elephant: String, youTime: Int, elephantTime: Int, pressure: Int): Unit =
+      if cache(todo) >= pressure then return else cache(todo) = pressure
 
-    explore("AA", todo, 30, 0)
-  end part1
+      for next <- todo do
+        val remaining = youTime - distance(you)(next)
+        if remaining > 0 then
+          val extra = remaining * valves(next).flow
+          step(todo - next, next, elephant, remaining, elephantTime, pressure + extra)
 
-  def part2(input: Seq[String]): Int =
-    val (valves, distance, todo) = parse(input)
-    val cache = collection.mutable.Map[(Set[String], Set[String]), Int]().withDefaultValue(-1)
+      for next <- todo do
+        val remaining = elephantTime - distance(elephant)(next)
+        if remaining > 0 then
+          val extra = remaining * valves(next).flow
+          step(todo - next, you, next, youTime, remaining, pressure + extra)
+    end step
 
-    def explore(you: String, elephant: String, todo: Set[String], youTime: Int, elephantTime: Int, pressure: Int): Int =
-      val key = (Set(you, elephant), todo)
-      if cache(key) >= pressure then return -1 else cache(key) = pressure
+    step(todo, "AA", "AA", youInitial, elephantInitial, 0)
+    cache.values.max
+  end explore
 
-      val first = for
-        next <- todo
-        remaining = youTime - distance(you)(next)
-        if remaining > 0
-        extra = remaining * valves(next).flow
-      yield explore(next, elephant, todo - next, remaining, elephantTime, pressure + extra)
+  def part1(input: Seq[String]): Int = explore(input, 30, 0)
 
-      val second = for
-        next <- todo
-        remaining = elephantTime - distance(elephant)(next)
-        if remaining > 0
-        extra = remaining * valves(next).flow
-      yield explore(you, next, todo - next, youTime, remaining, pressure + extra)
-
-      (first ++ second).foldLeft(pressure)(_ max _)
-    end explore
-
-    explore("AA", "AA", todo, 26, 26, 0)
-  end part2
+  def part2(input: Seq[String]): Int = explore(input, 26, 26)
 
   def main(args: Array[String]): Unit =
     val data = io.Source.fromResource("AdventOfCode2022/Day16.txt").getLines().toSeq
