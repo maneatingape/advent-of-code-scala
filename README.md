@@ -46,6 +46,7 @@ The minimal SBT project provides:
 | 13 | [Distress Signal](https://adventofcode.com/2022/day/13) | [Source](src/main/scala/AdventOfCode2022/Day13.scala) |
 | 14 | [Regolith Reservoir](https://adventofcode.com/2022/day/14) | [Source](src/main/scala/AdventOfCode2022/Day14.scala) |
 | 15 | [Beacon Exclusion Zone](https://adventofcode.com/2022/day/15) | [Source](src/main/scala/AdventOfCode2022/Day15.scala) |
+| 16 | [Proboscidea Volcanium](https://adventofcode.com/2022/day/16) | [Source](src/main/scala/AdventOfCode2022/Day16.scala) |
 
 ## 2021
 
