@@ -11,12 +11,12 @@ object Day16:
       }
       .toMap
     val distance = valves.map((k, v) => k -> bfs(valves, k))
-    val todo = valves.filter((k, v) => v.flow > 0).map(_._1).toSet
+    val todo = valves.filter((k, v) => v.flow > 0).keySet
     (valves, distance, todo)
 
   def bfs(graph: Map[String, Valve], start: String): Map[String, Int] =
     val todo = collection.mutable.Queue(start)
-    val cost = collection.mutable.Map(start -> 0)
+    val cost = collection.mutable.Map(start -> 1)
 
     while todo.nonEmpty do
       val current = todo.dequeue()
@@ -32,14 +32,15 @@ object Day16:
     val (valves, distance, todo) = parse(input)
 
     def explore(you: String, todo: Set[String], time: Int, pressure: Int): Int =
-      todo.flatMap { next =>
-        val arrival = time + 1 + distance(you)(next)
-        val extra = (30 - arrival) * valves(next).flow
-        Option.when(arrival < 30)(explore(next, todo - next, arrival, pressure + extra))
-      }
-      .foldLeft(pressure)(_ max _)
+      val result = for
+        next <- todo
+        remaining = time - distance(you)(next)
+        if remaining > 0
+        extra = remaining * valves(next).flow
+      yield explore(next, todo - next, remaining, pressure + extra)
+      result.foldLeft(pressure)(_ max _)
 
-    explore("AA", todo, 0, 0)
+    explore("AA", todo, 30, 0)
   end part1
 
   def part2(input: Seq[String]): Int =
@@ -50,22 +51,24 @@ object Day16:
       val key = (Set(you, elephant), todo)
       if cache(key) >= pressure then return -1 else cache(key) = pressure
 
-      val first = todo.flatMap { next =>
-        val arrival = youTime + 1 + distance(you)(next)
-        val extra = (30 - arrival) * valves(next).flow
-        Option.when(arrival < 30)(explore(next, elephant, todo - next, arrival, elephantTime, pressure + extra))
-      }
+      val first = for
+        next <- todo
+        remaining = youTime - distance(you)(next)
+        if remaining > 0
+        extra = remaining * valves(next).flow
+      yield explore(next, elephant, todo - next, remaining, elephantTime, pressure + extra)
 
-      val second = todo.flatMap { next =>
-        val arrival = elephantTime + 1 + distance(elephant)(next)
-        val extra = (30 - arrival) * valves(next).flow
-        Option.when(arrival < 30)(explore(you, next, todo - next, youTime, arrival, pressure + extra))
-      }
+      val second = for
+        next <- todo
+        remaining = elephantTime - distance(elephant)(next)
+        if remaining > 0
+        extra = remaining * valves(next).flow
+      yield explore(you, next, todo - next, youTime, remaining, pressure + extra)
 
       (first ++ second).foldLeft(pressure)(_ max _)
     end explore
 
-    explore("AA", "AA", todo, 4, 4, 0)
+    explore("AA", "AA", todo, 26, 26, 0)
   end part2
 
   def main(args: Array[String]): Unit =
