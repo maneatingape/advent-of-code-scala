@@ -30,10 +30,11 @@ object Day16:
 
   def explore(input: Seq[String], youInitial: Int, elephantInitial: Int): Int =
     val (valves, distance, todo) = parse(input)
-    val cache = collection.mutable.Map[Set[String], Int]().withDefaultValue(-1)
+    val cache = collection.mutable.Map[(Set[String], Set[String]), Int]().withDefaultValue(-1)
 
     def step(todo: Set[String], you: String, elephant: String, youTime: Int, elephantTime: Int, pressure: Int): Unit =
-      if cache(todo) >= pressure then return else cache(todo) = pressure
+      val key = (Set(you, elephant), todo)
+      if cache(key) >= pressure then return else cache(key) = pressure
 
       for next <- todo do
         val remaining = youTime - distance(you)(next)
