@@ -10,42 +10,36 @@ object Day17:
     Set(Point(0, 0), Point(0, 1), Point(0, 2), Point(0, 3)),
     Set(Point(0, 0), Point(1, 0), Point(0, 1), Point(1, 1)))
 
-  case class Point(x: Int, y: Int):
-    def +(other: Point): Point = Point(x + other.x, y + other.y)
+  extension (shape: Set[Point])
+    def move(dx: Int, dy: Int): Set[Point] = shape.map(p => Point(p.x + dx, p.y + dy))
+    def canMove(grid: Set[Point]): Boolean = shape.forall(p => p.x > 0 && p.x < 8 && !grid.contains(p))
 
-  case class State(grid: Set[Point], wind: String, shapeIndex: Int, windIndex: Int, height: Int)
+  case class Point(x: Int, y: Int)
+  case class State(grid: Set[Point], shapeIndex: Int, jetIndex: Int, height: Int)
 
   @tailrec
-  def fall(grid: Set[Point], shape: Set[Point], wind: String, windIndex: Int): (Int, Set[Point]) =
-    var next = shape
+  def fall(grid: Set[Point], shape: Set[Point], jets: String, jetIndex: Int): (Set[Point], Int) =
+    val jet = jets(jetIndex % jets.length)
+    val first = if jet == '>' then shape.move(1, 0) else shape.move(-1, 0)
+    val second = if first.canMove(grid) then first else shape
+    val third = second.move(0, -1)
+    if third.canMove(grid) then fall(grid, third, jets, jetIndex + 1) else (second, jetIndex + 1)
 
-    val gust = wind(windIndex % wind.size)
-    val shift = if gust == '>' then Point(1, 0) else Point(-1, 0)
-    var test = shape.map(_ + shift)
-    if test.forall(p => p.x > 0 && p.x < 8 && !grid.contains(p)) then next = test
+  def step(jets: String)(state: State): State =
+    val State(grid, shapeIndex, jetIndex, height) = state
+    val initialShape = shapes(shapeIndex % shapes.size).move(3, height + 4)
+    val (nextShape, nextJetIndex) = fall(grid, initialShape, jets, jetIndex)
+    State(grid ++ nextShape, shapeIndex + 1, nextJetIndex, height.max(nextShape.map(_.y).max))
 
-    test = next.map(_ + Point(0, -1))
-    if test.exists(grid.contains) then (windIndex + 1, next) else fall(grid, test, wind, windIndex + 1)
-  end fall
+  def simulate(jets: String): Iterator[Int] =
+    val initial = State(Set.tabulate(8)(Point(_, 0)), 0, 0, 0)
+    Iterator.iterate(initial)(step(jets)).map(_.height)
 
-  def step(state: State): State =
-    val State(grid, wind, shapeIndex, windIndex, height) = state
-    val initial = Point(3, height + 4)
-    val next = shapes(shapeIndex % shapes.size).map(_ + initial)
-    val (nextWindIndex, foo) = fall(grid, next, wind, windIndex)
-
-    State(grid ++ foo, wind, shapeIndex + 1, nextWindIndex, height.max(foo.map(_.y).max))
-  end step
-
-  def simulate(input: String): Iterator[State] =
-    val initial = State(Set.tabulate(8)(Point(_, 0)), input, 0, 0, 0)
-    Iterator.iterate(initial)(step)
-
-  def part1(input: String): Int = simulate(input).drop(2022).next().height
+  def part1(input: String): Int = simulate(input).drop(2022).next()
 
   def part2(input: String): Long =
     val guess = 1000
-    val height = simulate(input).drop(1).take(10 * guess).map(_.height).toSeq
+    val height = simulate(input).slice(1, 10 * guess).toSeq
     val delta = height.sliding(2).map { case Seq(a, b) => b - a }.toSeq
     val index = delta.lastIndexOfSlice(delta.takeRight(guess), delta.size - guess - 1)
     val cycleHeight = height(delta.size - guess) - height(index)
