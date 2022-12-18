@@ -28,9 +28,7 @@ object Day18:
     val visited = collection.mutable.Set(start)
 
     while todo.nonEmpty do
-      val cube = todo.dequeue()
-      visited += cube
-      cube.neighbours.filterNot(cubes.contains).filterNot(visited.contains).foreach { next =>
+      todo.dequeue().neighbours.filterNot(cubes.contains).filterNot(visited.contains).foreach { next =>
         if xs.contains(next.x) && ys.contains(next.y) && zs.contains(next.z) then
           todo.enqueue(next)
           visited += next
