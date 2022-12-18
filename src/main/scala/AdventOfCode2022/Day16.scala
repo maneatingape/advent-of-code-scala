@@ -28,34 +28,34 @@ object Day16:
     cost.toMap
   end bfs
 
-  def explore(input: Seq[String], youInitial: Int, elephantInitial: Int): Int =
+  def explore(input: Seq[String], initial: Int): Map[Set[String], Int] =
     val (valves, distance, todo) = parse(input)
-    val cache = collection.mutable.Map[(Set[String], Set[String]), Int]().withDefaultValue(-1)
+    val score = collection.mutable.Map[Set[String], Int]().withDefaultValue(0)
 
-    def step(todo: Set[String], you: String, elephant: String, youTime: Int, elephantTime: Int, pressure: Int): Unit =
-      val key = (Set(you, elephant), todo)
-      if cache(key) >= pressure then return else cache(key) = pressure
-
-      for next <- todo do
-        val remaining = youTime - distance(you)(next)
-        if remaining > 0 then
-          val extra = remaining * valves(next).flow
-          step(todo - next, next, elephant, remaining, elephantTime, pressure + extra)
-
-      for next <- todo do
-        val remaining = elephantTime - distance(elephant)(next)
-        if remaining > 0 then
-          val extra = remaining * valves(next).flow
-          step(todo - next, you, next, youTime, remaining, pressure + extra)
+    def step(todo: Set[String], done: Set[String], from: String, time: Int, pressure: Int): Unit =
+      score(done) = score(done).max(pressure)
+      for
+        next <- todo
+        remaining = time - distance(from)(next)
+        if remaining > 0
+        extra = remaining * valves(next).flow
+      do step(todo - next, done + next, next, remaining, pressure + extra)
     end step
 
-    step(todo, "AA", "AA", youInitial, elephantInitial, 0)
-    cache.values.max
+    step(todo, Set(), "AA", initial, 0)
+    score.toMap
   end explore
 
-  def part1(input: Seq[String]): Int = explore(input, 30, 0)
+  def part1(input: Seq[String]): Int = explore(input, 30).values.max
 
-  def part2(input: Seq[String]): Int = explore(input, 26, 26)
+  def part2(input: Seq[String]): Int =
+    val sets = explore(input, 26)
+    val disjoint = for
+      (you, score1) <- sets
+      (elephant, score2) <- sets
+      if you.intersect(elephant).size == 0
+    yield score1 + score2
+    disjoint.max
 
   def main(args: Array[String]): Unit =
     val data = io.Source.fromResource("AdventOfCode2022/Day16.txt").getLines().toSeq
