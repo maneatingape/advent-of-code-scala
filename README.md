@@ -49,6 +49,7 @@ The minimal SBT project provides:
 | 16 | [Proboscidea Volcanium](https://adventofcode.com/2022/day/16) | [Source](src/main/scala/AdventOfCode2022/Day16.scala) |
 | 17 | [Pyroclastic Flow](https://adventofcode.com/2022/day/17) | [Source](src/main/scala/AdventOfCode2022/Day17.scala) |
 | 18 | [Boiling Boulders](https://adventofcode.com/2022/day/18) | [Source](src/main/scala/AdventOfCode2022/Day18.scala) |
+| 19 | [Not Enough Minerals](https://adventofcode.com/2022/day/19) | [Source](src/main/scala/AdventOfCode2022/Day19.scala) |
 
 ## 2021
 
