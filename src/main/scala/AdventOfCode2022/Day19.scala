@@ -7,12 +7,12 @@ object Day19:
     def <=(r: Resources): Boolean = ore <= r.ore && clay <= r.clay && obsidian <= r.obsidian && geode <= r.geode
 
   def maximize(input: Seq[String], minutes: Int): Seq[Int] = input.map { line =>
-    val Seq(id, ore1, clay1, obsidian1, obsidian2, geode1, geode2) = line.split("\\D+").tail.map(_.toInt).toSeq
+    val Seq(id, ore1, ore2, ore3, clay, ore4, obsidian) = line.split("\\D+").tail.map(_.toInt).toSeq
 
     val oreBotCost = Resources(ore1, 0, 0, 0)
-    val clayBotCost = Resources(clay1, 0, 0, 0)
-    val obsidianBotCost = Resources(obsidian1, obsidian2, 0, 0)
-    val geodeBotCost = Resources(geode1, 0, geode2, 0)
+    val clayBotCost = Resources(ore2, 0, 0, 0)
+    val obsidianBotCost = Resources(ore3, clay, 0, 0)
+    val geodeBotCost = Resources(ore4, 0, obsidian, 0)
 
     val zero = Resources(0, 0, 0, 0)
     val oreBot = Resources(1, 0, 0, 0)
@@ -20,9 +20,9 @@ object Day19:
     val obsidianBot = Resources(0, 0, 1, 0)
     val geodeBot = Resources(0, 0, 0, 1)
 
-    val maxOre = ore1.max(clay1).max(obsidian1).max(geode1)
-    val maxClay = obsidian2
-    val maxObsidian = geode2
+    val maxOre = ore1.max(ore2).max(ore3).max(ore4)
+    val maxClay = clay
+    val maxObsidian = obsidian
 
     def helper(time: Int, bots: Resources, resources: Resources, prevCanOre: Boolean, prevCanClay: Boolean, prevCanObsidian: Boolean): Int =
       if time == 0 then
