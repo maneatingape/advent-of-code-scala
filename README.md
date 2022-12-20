@@ -50,6 +50,7 @@ The minimal SBT project provides:
 | 17 | [Pyroclastic Flow](https://adventofcode.com/2022/day/17) | [Source](src/main/scala/AdventOfCode2022/Day17.scala) |
 | 18 | [Boiling Boulders](https://adventofcode.com/2022/day/18) | [Source](src/main/scala/AdventOfCode2022/Day18.scala) |
 | 19 | [Not Enough Minerals](https://adventofcode.com/2022/day/19) | [Source](src/main/scala/AdventOfCode2022/Day19.scala) |
+| 20 | [Grove Positioning System](https://adventofcode.com/2022/day/20) | [Source](src/main/scala/AdventOfCode2022/Day20.scala) |
 
 ## 2021
 
