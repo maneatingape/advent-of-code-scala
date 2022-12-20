@@ -6,18 +6,17 @@ object Day20:
   def parse(input: Seq[Int], key: Long): Seq[Node] =
     val nodes = input.map(n => Node(n * key, null, null))
     nodes.zipWithIndex.foreach { (node, i) =>
-      node.prev = nodes(if i > 0 then i - 1 else input.size - 1)
-      node.next = nodes(if i + 1 < input.size then i + 1 else 0)
+      node.prev = nodes((i - 1 + nodes.size) % nodes.size)
+      node.next = nodes((i + 1) % nodes.size)
     }
     nodes
 
   def mix(nodes: Seq[Node]): Unit =
     for node <- nodes do
-      val move = (node.value % (nodes.size - 1)).toInt
-      for _ <- 1 to move.abs do
-        val (a, b, c, d) =
-          if (move > 0) (node.prev, node, node.next, node.next.next)
-          else (node.prev.prev, node.prev, node, node.next)
+      val remainder = (node.value % (nodes.size - 1)).toInt
+      val move = if remainder >= 0 then remainder else remainder + nodes.size - 1
+      for _ <- 1 to move do
+        val (a, b, c, d) = (node.prev, node, node.next, node.next.next)
         a.next = c
         b.prev = c
         b.next = d
@@ -27,12 +26,13 @@ object Day20:
       end for
     end for
 
+  def skip(start: Node): Node = Iterator.iterate(start)(_.next).drop(1000).next()
+
   def decrypt(input: Seq[Int], key: Long, rounds: Int): Long =
     val nodes = parse(input, key)
     for _ <- 1 to rounds do mix(nodes)
-    val zero = nodes.find(_.value == 0).get
-    def next(start: Node): Node = Iterator.iterate(start)(_.next).drop(1000).next()
-    Iterator.iterate(zero)(next).drop(1).take(3).map(_.value).sum
+    val start = nodes.find(_.value == 0).get
+    Iterator.iterate(start)(skip).drop(1).take(3).map(_.value).sum
 
   def part1(input: Seq[Int]): Long = decrypt(input, 1, 1)
 
