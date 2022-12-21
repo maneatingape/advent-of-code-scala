@@ -1,38 +1,61 @@
 package AdventOfCode2022
 
 object Day21:
-  def parse(input: Seq[String], part2: Boolean): collection.mutable.Map[String, () => Long] =
-    val monkeys = collection.mutable.Map[String, () => Long]()
-    input.foreach { line =>
-      val Array(name, rest: _*) = line.split("[: ]+"): @unchecked
-      monkeys(name) = rest match
-        case Seq(number) => () => number.toLong
-        case Seq(left, operation, right) => operation match
-          case _ if name == "root" && part2 => () => (monkeys(left)() - monkeys(right)()).abs
-          case "+" => () => monkeys(left)() + monkeys(right)()
-          case "-" => () => monkeys(left)() - monkeys(right)()
-          case "*" => () => monkeys(left)() * monkeys(right)()
-          case "/" => () => monkeys(left)() / monkeys(right)()
-    }
-    monkeys
+  sealed trait Monkey
+  case class Number(value: Long) extends Monkey
+  case class Operation(left: String, operation: String, right: String) extends Monkey
 
-  def part1(input: Seq[String]): Long = parse(input, false)("root")()
+  def parse(input: Seq[String]): Map[String, Monkey] =
+    input.map {
+      case s"$name: $left $operation $right" => name -> Operation(left, operation, right)
+      case s"$name: $value" => name -> Number(value.toLong)
+    }
+    .toMap
+
+  def calculate(monkeys: Map[String, Monkey]): Map[String, Long] =
+    val result = collection.mutable.Map[String, Long]()
+    def compute(name: String) = result.getOrElseUpdate(name, helper(name))
+    def helper(name: String): Long = monkeys(name) match
+      case Number(value) => value
+      case Operation(left, operation, right) => operation match
+        case "+" => compute(left) + compute(right)
+        case "-" => compute(left) - compute(right)
+        case "*" => compute(left) * compute(right)
+        case "/" => compute(left) / compute(right)
+
+    compute("root")
+    result.toMap
+  end calculate
+
+  def part1(input: Seq[String]): Long =
+    val monkeys = parse(input)
+    val results = calculate(monkeys)
+    results("root")
 
   def part2(input: Seq[String]): Long =
-    val monkeys = parse(input, true)
+    val monkeys = parse(input)
+    val results = calculate(monkeys)
 
-    def check(n: Long): Long =
-      monkeys("humn") = () => n
-      monkeys("root")()
+    def helper(name: String, value: Long): Option[Long] = monkeys(name) match
+      case Number(_) => Option.when(name == "humn")(value)
+      case Operation(left, _, right) if name == "root" =>
+        val first = helper(right, results(left))
+        val second = helper(left, results(right))
+        first.orElse(second)
+      case Operation(left, operation, right) =>
+        val first = operation match
+          case "+" => helper(right, value - results(left))
+          case "-" => helper(right, results(left) - value)
+          case "*" => if results(left) != 0 then helper(right, value / results(left)) else None
+          case "/" => if value != 0 then helper(right, results(left) / value) else None
+        val second = operation match
+          case "+" => helper(left, value - results(right))
+          case "-" => helper(left, value + results(right))
+          case "*" => if results(right) != 0 then helper(left, value / results(right)) else None
+          case "/" => helper(left, value * results(right))
+        first.orElse(second)
 
-    def helper(prev: Long, n: Long, step: Long): Long =
-      val next = n + step
-      val result = check(next)
-      if result == 0 then next
-      else if result < prev then helper(result, next, step)
-      else helper(result, next, step / -2)
-
-    helper(check(0), 0, 1 << 60)
+    helper("root", -1).get
   end part2
 
   def main(args: Array[String]): Unit =

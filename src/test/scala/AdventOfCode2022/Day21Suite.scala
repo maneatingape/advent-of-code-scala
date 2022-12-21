@@ -25,5 +25,5 @@ class Day21Suite extends AnyFunSuite:
   }
 
   test("Part 2 should handle sample input correctly") {
-    assert(Day21.part2(sample) == 302)
+    assert(Day21.part2(sample) == 301)
   }
