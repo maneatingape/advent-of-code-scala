@@ -1,45 +1,38 @@
 package AdventOfCode2022
 
 object Day21:
-  def parse(input: Seq[String]): collection.mutable.Map[String, () => Long] =
+  def parse(input: Seq[String], part2: Boolean): collection.mutable.Map[String, () => Long] =
     val monkeys = collection.mutable.Map[String, () => Long]()
-    def compute(name: String): Long = monkeys(name)()
-
     input.foreach { line =>
       val Array(name, rest: _*) = line.split("[: ]+"): @unchecked
       monkeys(name) = rest match
         case Seq(number) => () => number.toLong
-        case Seq(left, op, right) => op match
-          case "+" => () => compute(left) + compute(right)
-          case "-" => () => compute(left) - compute(right)
-          case "*" => () => compute(left) * compute(right)
-          case "/" => () => compute(left) / compute(right)
+        case Seq(left, operation, right) => operation match
+          case _ if name == "root" && part2 => () => (monkeys(left)() - monkeys(right)()).abs
+          case "+" => () => monkeys(left)() + monkeys(right)()
+          case "-" => () => monkeys(left)() - monkeys(right)()
+          case "*" => () => monkeys(left)() * monkeys(right)()
+          case "/" => () => monkeys(left)() / monkeys(right)()
     }
-
     monkeys
-  end parse
 
-  def part1(input: Seq[String]): Long = parse(input)("root")()
+  def part1(input: Seq[String]): Long = parse(input, false)("root")()
 
   def part2(input: Seq[String]): Long =
-    val monkeys = parse(input)
-    var start = 3_000_000_000_000L
-    var middle = 0L
-    var end = 4_000_000_000_000L
+    val monkeys = parse(input, true)
 
-    while (start < end) do {
-      val middle = (start + end) / 2
+    def check(n: Long): Long =
+      monkeys("humn") = () => n
+      monkeys("root")()
 
-      monkeys("humn") = () => middle
-      val result = monkeys("lzfc")()
-      val target = monkeys("qrgn")()
+    def helper(prev: Long, n: Long, step: Long): Long =
+      val next = n + step
+      val result = check(next)
+      if result == 0 then next
+      else if result < prev then helper(result, next, step)
+      else helper(result, next, step / -2)
 
-      if result < target then end = middle - 1
-      else if result > target then start = middle + 1
-      else return middle
-    }
-
-    -1
+    helper(check(0), 0, 1 << 60)
   end part2
 
   def main(args: Array[String]): Unit =
