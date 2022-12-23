@@ -53,6 +53,7 @@ The minimal SBT project provides:
 | 20 | [Grove Positioning System](https://adventofcode.com/2022/day/20) | [Source](src/main/scala/AdventOfCode2022/Day20.scala) |
 | 21 | [Monkey Math](https://adventofcode.com/2022/day/21) | [Source](src/main/scala/AdventOfCode2022/Day21.scala) |
 | 22 | [Monkey Map](https://adventofcode.com/2022/day/22) | [Source](src/main/scala/AdventOfCode2022/Day22.scala) |
+| 23 | [Unstable Diffusion](https://adventofcode.com/2022/day/23) | [Source](src/main/scala/AdventOfCode2022/Day23.scala) |
 
 ## 2021
 
