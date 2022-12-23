@@ -22,3 +22,7 @@ class Day22Suite extends AnyFunSuite:
   test("Part 1 should handle sample input correctly") {
     assert(Day22.part1(sample) == 6032)
   }
+
+  test("Part 2 should handle sample input correctly") {
+    assert(Day22.part2(sample, 4) == 5031)
+  }
