@@ -12,9 +12,9 @@ class Day24Suite extends AnyFunSuite:
     "######.#")
 
   test("Part 1 should handle sample input correctly") {
-    assert(Day24.part1(sample) == 123)
+    assert(Day24.part1(sample) == 18)
   }
 
   test("Part 2 should handle sample input correctly") {
-    assert(Day24.part2(sample) == 456)
+    assert(Day24.part2(sample) == 54)
   }
