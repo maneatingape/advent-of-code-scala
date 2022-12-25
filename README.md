@@ -1,6 +1,6 @@
 # Advent of Code
 
-In progress 2022 and complete 2021 to 2015 entries for the annual [Advent of Code](https://adventofcode.com/) challenge, written in concise idiomatic functional Scala.
+Complete 2022 to 2015 entries for the annual [Advent of Code](https://adventofcode.com/) challenge, written in concise idiomatic functional Scala.
 
 The coding style philosophy is [Readability](https://www.lihaoyi.com/post/StrategicScalaStylePrincipleofLeastPower.html) > [Simplicity](https://en.wikipedia.org/wiki/KISS_principle) > [Performance](https://www.laws-of-software.com/laws/knuth/).
 
@@ -55,6 +55,7 @@ The minimal SBT project provides:
 | 22 | [Monkey Map](https://adventofcode.com/2022/day/22) | [Source](src/main/scala/AdventOfCode2022/Day22.scala) |
 | 23 | [Unstable Diffusion](https://adventofcode.com/2022/day/23) | [Source](src/main/scala/AdventOfCode2022/Day23.scala) |
 | 24 | [Blizzard Basin](https://adventofcode.com/2022/day/24) | [Source](src/main/scala/AdventOfCode2022/Day24.scala) |
+| 25 | [Full of Hot Air](https://adventofcode.com/2022/day/25) | [Source](src/main/scala/AdventOfCode2022/Day25.scala) |
 
 ## 2021
 
