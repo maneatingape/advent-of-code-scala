@@ -11,14 +11,14 @@ object Day25:
     5 * total + digit
   }
 
-  def toSnafu(i: Long, s: String = ""): String = if i == 0 then s else
-    val (digit, prefix) = i % 5 match
-      case 0 => (0, "0")
-      case 1 => (1, "1")
-      case 2 => (2, "2")
-      case 3 => (-2, "=")
-      case 4 => (-1, "-")
-    toSnafu((i - digit) / 5, prefix + s)
+  def toSnafu(i: Long): String = if i == 0 then "" else
+    val suffix = i % 5 match
+      case 0 => "0"
+      case 1 => "1"
+      case 2 => "2"
+      case 3 => "="
+      case 4 => "-"
+    toSnafu((i + 2) / 5) + suffix
 
   def part1(input: Seq[String]): String = toSnafu(input.map(fromSnafu).sum)
 
