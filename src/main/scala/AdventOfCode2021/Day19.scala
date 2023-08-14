@@ -1,6 +1,7 @@
 package AdventOfCode2021
 
-import scala.util.control.NonLocalReturns.*
+import scala.util.boundary
+import scala.util.boundary.break
 
 object Day19:
   case class Beacon(x: Int, y: Int, z: Int):
@@ -24,7 +25,7 @@ object Day19:
     Scanner(block.trim.split("\n").tail.map(_.trim.split(",").map(_.toInt)).map(a => Beacon(a(0), a(1), a(2))).toSeq)
   }
 
-  def findMatch(firstScanner: Scanner, candidate: Scanner): Option[(Scanner, Beacon)] = returning {
+  def findMatch(firstScanner: Scanner, candidate: Scanner): Option[(Scanner, Beacon)] = boundary {
     for
       secondScanner <- candidate.permutations
       if secondScanner.deltas.intersect(firstScanner.deltas).size > 12 * 11
@@ -33,7 +34,7 @@ object Day19:
         firstBeacon <- firstScanner.beacons
         secondBeacon <- secondScanner.beacons
         if secondScanner.beacons.map(_ + firstBeacon - secondBeacon).toSet.intersect(firstScanner.beacons.toSet).size >= 12
-      do throwReturn(Some((secondScanner, firstBeacon - secondBeacon)))
+      do break(Some((secondScanner, firstBeacon - secondBeacon)))
     None
   }
 
