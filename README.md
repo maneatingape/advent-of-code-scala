@@ -1,4 +1,4 @@
-# Advent of Code
+# Advent of Code [![Scala CI](https://github.com/maneatingape/advent-of-code/actions/workflows/scala.yml/badge.svg)](https://github.com/maneatingape/advent-of-code/actions)
 
 Complete 2022 to 2015 entries for the annual [Advent of Code](https://adventofcode.com/) challenge, written in concise idiomatic functional Scala.
 
@@ -13,8 +13,6 @@ The minimal SBT project provides:
 * Straightforward consistent layout of code, resources and tests.
 * Unit test coverage based on the sample input.
 * Continuous integration using [GitHub Actions](https://docs.github.com/en/actions).
-
-[![Scala CI](https://github.com/maneatingape/advent-of-code/actions/workflows/scala.yml/badge.svg)](https://github.com/maneatingape/advent-of-code/actions)
 
 ## Years
 
