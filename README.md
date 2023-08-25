@@ -1,8 +1,8 @@
-# Advent of Code [![Scala CI](https://github.com/maneatingape/advent-of-code/actions/workflows/scala.yml/badge.svg)](https://github.com/maneatingape/advent-of-code/actions)
+# Advent of Code [![tests](https://github.com/maneatingape/advent-of-code/actions/workflows/tests.yml/badge.svg)](https://github.com/maneatingape/advent-of-code/actions)
 
 Complete 2022 to 2015 entries for the annual [Advent of Code](https://adventofcode.com/) challenge, written in concise idiomatic functional Scala.
 
-The coding style philosophy is [Readability](https://www.lihaoyi.com/post/StrategicScalaStylePrincipleofLeastPower.html) > [Simplicity](https://en.wikipedia.org/wiki/KISS_principle) > [Performance](https://www.laws-of-software.com/laws/knuth/).
+## Features
 
 As far as possible, each day's solution embraces the following approaches:
 * Self-contained within a single file, depending only on the standard Scala library.
