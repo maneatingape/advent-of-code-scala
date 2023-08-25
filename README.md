@@ -1,4 +1,4 @@
-# Advent of Code [![tests](https://github.com/maneatingape/advent-of-code/actions/workflows/tests.yml/badge.svg)](https://github.com/maneatingape/advent-of-code/actions)
+# Advent of Code [![Tests](https://img.shields.io/github/actions/workflow/status/maneatingape/advent-of-code-scala/tests.yml?label=tests)](https://github.com/maneatingape/advent-of-code-scala/actions)
 
 Complete 2022 to 2015 entries for the annual [Advent of Code](https://adventofcode.com/) challenge, written in concise idiomatic functional Scala.
 
