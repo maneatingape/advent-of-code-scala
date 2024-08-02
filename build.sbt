@@ -1,6 +1,6 @@
 name := "Advent of Code"
 
-scalaVersion := "3.3.0"
+scalaVersion := "3.3.3"
 
 scalacOptions ++= Seq(
   "-deprecation",
@@ -10,5 +10,5 @@ scalacOptions ++= Seq(
   "-unchecked")
 
 libraryDependencies ++= Seq(
-  "org.scalatest" %% "scalatest" % "3.2.16" % Test
+  "org.scalatest" %% "scalatest" % "3.2.19" % Test
 )
