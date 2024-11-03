@@ -5,5 +5,13 @@
 # macOS
 .DS_Store
 
+# Metals
+.metals/
+.bloop/
+metals.sbt
+
 # SBT
 target/
+
+# Visual Studio Code
+.vscode
